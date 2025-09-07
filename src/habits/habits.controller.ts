@@ -10,7 +10,6 @@ export class HabitsController {
     return this.habitsService.findAll();
   }
 
-  //* Added
   @Post()
   create(@Body() createHabitInput) {
     return this.habitsService.create(createHabitInput);

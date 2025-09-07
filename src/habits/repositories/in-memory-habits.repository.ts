@@ -5,7 +5,6 @@ import { Injectable } from '@nestjs/common';
 export class InMemoryHabitsRepository {
   private habits: any[] = [];
 
-  //* Added
   createHabit(createHabitInput) {
     const newHabit = {
       ...createHabitInput,
