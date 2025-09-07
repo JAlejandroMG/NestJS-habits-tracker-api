@@ -1,5 +1,4 @@
 import { Controller, Get } from '@nestjs/common';
-//* Added
 import { HabitsService } from './habits.service';
 
 @Controller('habits')
