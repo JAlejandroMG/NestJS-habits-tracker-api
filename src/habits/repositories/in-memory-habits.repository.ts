@@ -6,9 +6,6 @@ const HABITS = 'habits';
 
 @Injectable()
 export class InMemoryHabitsRepository {
-  // private habits: any[] = [];
-
-  //* Added
   constructor(private readonly db: InMemoryDbService) {}
 
   createHabit(createHabitInput) {
@@ -17,14 +14,10 @@ export class InMemoryHabitsRepository {
       id: ulid(),
     };
 
-    // this.habits.push(newHabit);
-
-    //return newHabit;
     return this.db.create(HABITS, newHabit);
   }
 
   findAllHabits() {
-    // return this.habits;
     return this.db.findAll(HABITS);
   }
 }

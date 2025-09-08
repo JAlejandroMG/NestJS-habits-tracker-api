@@ -6,7 +6,7 @@ import { InMemoryDbModule } from 'src/in-memory-db/in-memory-db.module';
 
 @Module({
   controllers: [HabitsController],
-  imports: [InMemoryDbModule], //* Added
+  imports: [InMemoryDbModule],
   providers: [HabitsService, InMemoryHabitsRepository],
 })
 export class HabitsModule {}
