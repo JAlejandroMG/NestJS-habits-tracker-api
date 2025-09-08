@@ -21,4 +21,17 @@ export class InMemoryDbService {
   findAll(entityName: string) {
     return this.getEntityStoreByName(entityName);
   }
+
+  //* Added
+  findOneBy(entityName: string, filter: { [key: string]: any }) {
+    const entities = this.getEntityStoreByName(entityName);
+
+    return entities.find((entity) => {
+      const isMatchingFilter = Object.keys(filter).every(
+        (key) => entity[key] === filter[key],
+      );
+
+      return isMatchingFilter;
+    });
+  }
 }

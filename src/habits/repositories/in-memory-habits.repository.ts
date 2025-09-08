@@ -20,4 +20,9 @@ export class InMemoryHabitsRepository {
   findAllHabits() {
     return this.db.findAll(HABITS);
   }
+
+  //* Added
+  findOneById(id: string) {
+    return this.db.findOneBy(HABITS, { id });
+  }
 }
