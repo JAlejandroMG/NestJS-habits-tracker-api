@@ -13,7 +13,6 @@ export class HabitsService {
     return this.habitsRepository.findAllHabits();
   }
 
-  //* Added
   findOne(id: string) {
     return this.habitsRepository.findOneById(id);
   }

@@ -17,7 +17,6 @@ export class HabitsController {
     return this.habitsService.findAll();
   }
 
-  //* Added
   @Get(':id')
   findOne(@Param('id') id: string) {
     const habit = this.habitsService.findOne(id);

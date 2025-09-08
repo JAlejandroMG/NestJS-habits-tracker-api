@@ -21,7 +21,6 @@ export class InMemoryHabitsRepository {
     return this.db.findAll(HABITS);
   }
 
-  //* Added
   findOneById(id: string) {
     return this.db.findOneBy(HABITS, { id });
   }

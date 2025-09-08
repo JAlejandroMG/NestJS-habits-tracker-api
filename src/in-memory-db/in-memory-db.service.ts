@@ -22,7 +22,6 @@ export class InMemoryDbService {
     return this.getEntityStoreByName(entityName);
   }
 
-  //* Added
   findOneBy(entityName: string, filter: { [key: string]: any }) {
     const entities = this.getEntityStoreByName(entityName);
 
