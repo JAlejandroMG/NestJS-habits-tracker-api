@@ -21,7 +21,17 @@ export class InMemoryHabitsRepository {
     return this.db.findAll(HABITS);
   }
 
-  findOneById(id: string) {
+  findHabitById(id: string) {
     return this.db.findOneBy(HABITS, { id });
+  }
+
+  //* Added
+  removeHabit(id: string) {
+    return this.db.deleteOneBy(HABITS, { id });
+  }
+
+  //* Added
+  updateHabit(id: string, updatedInput) {
+    return this.db.updateOneBy(HABITS, { id }, updatedInput);
   }
 }

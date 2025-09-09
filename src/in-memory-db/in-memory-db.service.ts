@@ -18,6 +18,24 @@ export class InMemoryDbService {
     return input;
   }
 
+  //* Added
+  deleteOneBy(entityName: string, filter: { [key: string]: any }) {
+    const entities = this.getEntityStoreByName(entityName);
+
+    const entityIndex = entities.findIndex((entity) => {
+      return Object.keys(filter).every((key) => entity[key] === filter[key]);
+    });
+
+    if (entityIndex === -1) {
+      return undefined;
+    }
+
+    const deletedEntity = entities[entityIndex];
+    entities.splice(entityIndex, 1);
+
+    return deletedEntity;
+  }
+
   findAll(entityName: string) {
     return this.getEntityStoreByName(entityName);
   }
@@ -32,5 +50,29 @@ export class InMemoryDbService {
 
       return isMatchingFilter;
     });
+  }
+
+  //* Added
+  updateOneBy(
+    entityName: string,
+    filter: { [key: string]: any },
+    updatedInput,
+  ) {
+    const entities = this.getEntityStoreByName(entityName);
+
+    const entityIndex = entities.findIndex((entity) => {
+      return Object.keys(filter).every((key) => entity[key] === filter[key]);
+    });
+
+    console.log('entityIndex: ', entityIndex);
+
+    if (entityIndex === -1) {
+      return undefined;
+    }
+
+    const updatedEntity = { ...entities[entityIndex], ...updatedInput };
+    entities[entityIndex] = updatedEntity;
+
+    return updatedEntity;
   }
 }

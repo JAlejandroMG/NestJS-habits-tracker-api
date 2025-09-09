@@ -14,6 +14,16 @@ export class HabitsService {
   }
 
   findOne(id: string) {
-    return this.habitsRepository.findOneById(id);
+    return this.habitsRepository.findHabitById(id);
+  }
+
+  //* Added
+  remove(id: string) {
+    return this.habitsRepository.removeHabit(id);
+  }
+
+  //* Added
+  update(id: string, updatedInput) {
+    return this.habitsRepository.updateHabit(id, updatedInput);
   }
 }
