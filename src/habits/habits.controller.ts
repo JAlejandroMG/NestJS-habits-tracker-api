@@ -16,20 +16,10 @@ import { HabitsService } from './habits.service';
 export class HabitsController {
   constructor(private readonly habitsService: HabitsService) {}
 
-  //* Added
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    // const habit = this.habitsService.remove(id);
     this.habitsService.remove(id);
-
-    //* With HTTP Code this is not necessary
-    /* if (!habit) {
-      throw new NotFoundException(`Habit with id: '${id}' has not been found`);
-    } */
-
-    //* With HTTP Code this is not necessary
-    // return habit;
   }
 
   @Get()
@@ -48,7 +38,6 @@ export class HabitsController {
     return habit;
   }
 
-  //* Added
   @Patch(':id')
   update(@Param('id') id: string, @Body() input) {
     const habit = this.habitsService.update(id, input);

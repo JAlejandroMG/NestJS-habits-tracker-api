@@ -18,7 +18,6 @@ export class InMemoryDbService {
     return input;
   }
 
-  //* Added
   deleteOneBy(entityName: string, filter: { [key: string]: any }) {
     const entities = this.getEntityStoreByName(entityName);
 
@@ -52,7 +51,6 @@ export class InMemoryDbService {
     });
   }
 
-  //* Added
   updateOneBy(
     entityName: string,
     filter: { [key: string]: any },
