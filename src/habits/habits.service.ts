@@ -9,8 +9,12 @@ export class HabitsService {
     return this.habitsRepository.createHabit(createHabitInput);
   }
 
-  findAll() {
-    return this.habitsRepository.findAllHabits();
+  //* Modified
+  findAll(query: { limit?: number; sortBy?: string }) {
+    const limit = query.limit ?? 10;
+    const sortBy = query.sortBy ?? 'name';
+
+    return this.habitsRepository.findAllHabits({ limit, sortBy });
   }
 
   findOne(id: string) {

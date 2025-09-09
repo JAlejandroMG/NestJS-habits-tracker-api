@@ -1,8 +1,8 @@
 import { ulid } from 'ulid';
+
 import { Injectable } from '@nestjs/common';
 import { InMemoryDbService } from 'src/in-memory-db/in-memory-db.service';
-
-const HABITS = 'habits';
+import { HABITS } from 'src/utils/constants';
 
 @Injectable()
 export class InMemoryHabitsRepository {
@@ -17,8 +17,9 @@ export class InMemoryHabitsRepository {
     return this.db.create(HABITS, newHabit);
   }
 
-  findAllHabits() {
-    return this.db.findAll(HABITS);
+  //* Modified
+  findAllHabits(query: { limit?: number; sortBy?: string }) {
+    return this.db.findAll(HABITS, query);
   }
 
   findHabitById(id: string) {

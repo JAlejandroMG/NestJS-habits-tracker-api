@@ -35,8 +35,28 @@ export class InMemoryDbService {
     return deletedEntity;
   }
 
-  findAll(entityName: string) {
-    return this.getEntityStoreByName(entityName);
+  //* Modified
+  findAll(entityName: string, query: { limit?: number; sortBy?: string } = {}) {
+    const { limit, sortBy } = query;
+    const results = this.getEntityStoreByName(entityName);
+
+    if (sortBy) {
+      results.sort((a, b) => {
+        if (a[sortBy] < b[sortBy]) {
+          return -1;
+        }
+        if (a[sortBy] > b[sortBy]) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+
+    if (limit) {
+      return results.slice(0, limit);
+    }
+
+    return results;
   }
 
   findOneBy(entityName: string, filter: { [key: string]: any }) {
