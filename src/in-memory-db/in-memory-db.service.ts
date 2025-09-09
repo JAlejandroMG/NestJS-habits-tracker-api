@@ -35,7 +35,6 @@ export class InMemoryDbService {
     return deletedEntity;
   }
 
-  //* Modified
   findAll(entityName: string, query: { limit?: number; sortBy?: string } = {}) {
     const { limit, sortBy } = query;
     const results = this.getEntityStoreByName(entityName);

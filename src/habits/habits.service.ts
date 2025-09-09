@@ -9,7 +9,6 @@ export class HabitsService {
     return this.habitsRepository.createHabit(createHabitInput);
   }
 
-  //* Modified
   findAll(query: { limit?: number; sortBy?: string }) {
     const limit = query.limit ?? 10;
     const sortBy = query.sortBy ?? 'name';

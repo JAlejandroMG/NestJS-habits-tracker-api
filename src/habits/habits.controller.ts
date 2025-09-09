@@ -24,7 +24,6 @@ export class HabitsController {
     this.habitsService.remove(id);
   }
 
-  //* Modified
   @Get()
   //   findAll(@Query('limit') limit: string, @Query('sortBy') sortBy: string) {
   findAll(@Query() query) {

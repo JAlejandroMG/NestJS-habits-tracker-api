@@ -17,7 +17,6 @@ export class InMemoryHabitsRepository {
     return this.db.create(HABITS, newHabit);
   }
 
-  //* Modified
   findAllHabits(query: { limit?: number; sortBy?: string }) {
     return this.db.findAll(HABITS, query);
   }
