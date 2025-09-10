@@ -12,7 +12,6 @@ export class InMemoryDbService {
     return this.store.get(entityName) as any[];
   }
 
-  //* Modified
   create(entityName: string, input) {
     this.getEntityStoreByName(entityName).push({
       ...input,

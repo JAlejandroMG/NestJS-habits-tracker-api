@@ -6,7 +6,6 @@ import { HABITS } from 'src/utils/constants';
 import { HabitDto } from '../dto/habit.dto';
 import { HabitEntity } from './entities/habit.entity';
 
-//* Modified
 @Injectable()
 export class InMemoryHabitsRepository {
   constructor(private readonly db: InMemoryDbService) {}

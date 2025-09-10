@@ -15,7 +15,6 @@ import { HabitsService } from './habits.service';
 import { HABITS } from 'src/utils/constants';
 import { HabitDto } from './dto/habit.dto';
 
-//* Modified
 @Controller(HABITS)
 export class HabitsController {
   constructor(private readonly habitsService: HabitsService) {}

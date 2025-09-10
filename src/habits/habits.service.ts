@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InMemoryHabitsRepository } from './repositories/in-memory-habits.repository';
 import { HabitDto } from './dto/habit.dto';
 
-//* Modified
 @Injectable()
 export class HabitsService {
   constructor(private readonly habitsRepository: InMemoryHabitsRepository) {}
