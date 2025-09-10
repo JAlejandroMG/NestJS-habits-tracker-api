@@ -7,7 +7,6 @@ import { HabitDto } from '../dto/habit.dto';
 import { HabitEntity } from './entities/habit.entity';
 import { mapHabitEntityToHabitDto } from './mappers/map-habit-entity-to-habit-dto';
 
-//* Modified
 @Injectable()
 export class InMemoryHabitsRepository {
   constructor(private readonly db: InMemoryDbService) {}
@@ -29,12 +28,6 @@ export class InMemoryHabitsRepository {
   findAllHabits(query: { limit?: number; sortBy?: string }): HabitDto[] {
     const habitEntities = this.db.findAll<HabitEntity>(HABITS, query);
 
-    // return this.db.findAll(HABITS, query);
-    /* return habitEntities.map((habitEntity) => ({
-      description: habitEntity.description,
-      id: habitEntity.habitId,
-      name: habitEntity.name,
-    })); */
     return habitEntities.map(
       (habitEntity) => mapHabitEntityToHabitDto(habitEntity)!, //* This ! at the end avoids undefined
     );

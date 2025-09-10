@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { StoreItemEntity } from './models/store-item.entity';
 
-//* Modified
 @Injectable()
 export class InMemoryDbService {
   private store: Map<string, any[]> = new Map();
