@@ -1,30 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { InMemoryHabitsRepository } from './repositories/in-memory-habits.repository';
+import { HabitDto } from './dto/habit.dto';
 
+//* Modified
 @Injectable()
 export class HabitsService {
   constructor(private readonly habitsRepository: InMemoryHabitsRepository) {}
 
-  create(createHabitInput) {
+  create(createHabitInput): HabitDto | Promise<HabitDto> {
     return this.habitsRepository.createHabit(createHabitInput);
   }
 
-  findAll(query: { limit?: number; sortBy?: string }) {
+  findAll(query: {
+    limit?: number;
+    sortBy?: string;
+  }): HabitDto[] | Promise<HabitDto[]> {
     const limit = query.limit ?? 10;
     const sortBy = query.sortBy ?? 'name';
 
     return this.habitsRepository.findAllHabits({ limit, sortBy });
   }
 
-  findOne(id: string) {
+  findOne(id: string): HabitDto | undefined | Promise<HabitDto | undefined> {
     return this.habitsRepository.findHabitById(id);
   }
 
-  remove(id: string) {
+  remove(id: string): HabitDto | undefined | Promise<HabitDto | undefined> {
     return this.habitsRepository.removeHabit(id);
   }
 
-  update(id: string, updatedInput) {
+  update(
+    id: string,
+    updatedInput,
+  ): HabitDto | undefined | Promise<HabitDto | undefined> {
     return this.habitsRepository.updateHabit(id, updatedInput);
   }
 }

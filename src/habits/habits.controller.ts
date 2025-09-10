@@ -13,20 +13,22 @@ import {
 } from '@nestjs/common';
 import { HabitsService } from './habits.service';
 import { HABITS } from 'src/utils/constants';
+import { HabitDto } from './dto/habit.dto';
 
+//* Modified
 @Controller(HABITS)
 export class HabitsController {
   constructor(private readonly habitsService: HabitsService) {}
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): void | Promise<void> {
     this.habitsService.remove(id);
   }
 
   @Get()
-  //   findAll(@Query('limit') limit: string, @Query('sortBy') sortBy: string) {
-  findAll(@Query() query) {
+  //   findAll(@Query('limit') limit: string, @Query('sortBy') sortBy: string): HabitDto[] |Promise<HabitDto[]> {
+  findAll(@Query() query): HabitDto[] | Promise<HabitDto[]> {
     const { limit, sortBy } = query;
     const limitNumber = limit ? +limit : undefined;
 
@@ -34,7 +36,9 @@ export class HabitsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(
+    @Param('id') id: string,
+  ): HabitDto | undefined | Promise<HabitDto | undefined> {
     const habit = this.habitsService.findOne(id);
 
     if (!habit) {
@@ -45,7 +49,10 @@ export class HabitsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() input) {
+  update(
+    @Param('id') id: string,
+    @Body() input,
+  ): HabitDto | undefined | Promise<HabitDto | undefined> {
     const habit = this.habitsService.update(id, input);
 
     if (!habit) {
@@ -56,7 +63,7 @@ export class HabitsController {
   }
 
   @Post()
-  create(@Body() createHabitInput) {
+  create(@Body() createHabitInput): HabitDto | Promise<HabitDto> {
     return this.habitsService.create(createHabitInput);
   }
 }
