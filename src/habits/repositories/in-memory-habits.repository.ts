@@ -5,7 +5,9 @@ import { InMemoryDbService } from 'src/in-memory-db/in-memory-db.service';
 import { HABITS } from 'src/utils/constants';
 import { HabitDto } from '../dto/habit.dto';
 import { HabitEntity } from './entities/habit.entity';
+import { mapHabitEntityToHabitDto } from './mappers/map-habit-entity-to-habit-dto';
 
+//* Modified
 @Injectable()
 export class InMemoryHabitsRepository {
   constructor(private readonly db: InMemoryDbService) {}
@@ -19,27 +21,44 @@ export class InMemoryHabitsRepository {
       habitId: ulid(),
       updatedAt: now,
     };
+    const habitEntity = this.db.create<HabitEntity>(HABITS, newHabit);
 
-    return this.db.create(HABITS, newHabit);
+    return mapHabitEntityToHabitDto(habitEntity)!;
   }
 
   findAllHabits(query: { limit?: number; sortBy?: string }): HabitDto[] {
-    return this.db.findAll(HABITS, query);
+    const habitEntities = this.db.findAll<HabitEntity>(HABITS, query);
+
+    // return this.db.findAll(HABITS, query);
+    /* return habitEntities.map((habitEntity) => ({
+      description: habitEntity.description,
+      id: habitEntity.habitId,
+      name: habitEntity.name,
+    })); */
+    return habitEntities.map(
+      (habitEntity) => mapHabitEntityToHabitDto(habitEntity)!, //* This ! at the end avoids undefined
+    );
   }
 
   findHabitById(id: string): HabitDto | undefined {
-    return this.db.findOneBy(HABITS, { id });
+    const habitEntity = this.db.findOneBy<HabitEntity>(HABITS, { id });
+
+    return mapHabitEntityToHabitDto(habitEntity);
   }
 
   removeHabit(id: string): HabitDto | undefined {
-    return this.db.deleteOneBy(HABITS, { id });
+    const habitEntity = this.db.deleteOneBy<HabitEntity>(HABITS, { id });
+
+    return mapHabitEntityToHabitDto(habitEntity);
   }
 
   updateHabit(id: string, updatedInput): HabitDto | undefined {
-    return this.db.updateOneBy(
+    const habitEntity = this.db.updateOneBy<HabitEntity>(
       HABITS,
       { id },
       { ...updatedInput, updatedAt: new Date() },
     );
+
+    return mapHabitEntityToHabitDto(habitEntity);
   }
 }
