@@ -10,7 +10,6 @@ import { CreateHabitDto } from '../dto/create-habit.dto';
 import { UpdateHabitDto } from '../dto/update-habit.dto';
 import { CreateEntityInput } from 'src/in-memory-db/models/create-entity-input.type';
 
-//* Modified
 @Injectable()
 export class InMemoryHabitsRepository {
   constructor(private readonly db: InMemoryDbService) {}
@@ -20,7 +19,6 @@ export class InMemoryHabitsRepository {
     const newHabit: CreateEntityInput<HabitEntity> = {
       ...createHabitInput,
       createdAt: now,
-      //* id: ulid(),
       habitId: ulid(),
       updatedAt: now,
     };

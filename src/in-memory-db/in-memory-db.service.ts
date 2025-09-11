@@ -5,7 +5,6 @@ import { UpdateEntityInput } from './models/update-entity-input.type';
 import { findAllQuery } from './models/find-all-query.type';
 import { findOneQuery } from './models/find-one-query.type';
 
-//* Modified
 @Injectable()
 export class InMemoryDbService {
   private store: Map<string, any[]> = new Map();
@@ -36,7 +35,6 @@ export class InMemoryDbService {
 
   deleteOneBy<EntityModel extends StoreItemEntity>(
     entityName: string,
-    //* filter: { [key: string]: any },
     query: findOneQuery<EntityModel>,
   ): EntityModel | undefined {
     const entities = this.getEntityStoreByName<EntityModel>(entityName);
@@ -57,7 +55,6 @@ export class InMemoryDbService {
 
   findAll<EntityModel extends StoreItemEntity>(
     entityName: string,
-    //* query: { limit?: number; sortBy?: string } = {},
     query: findAllQuery<EntityModel>,
   ): EntityModel[] {
     const { limit, sortBy } = query;
@@ -84,7 +81,6 @@ export class InMemoryDbService {
 
   findOneBy<EntityModel extends StoreItemEntity>(
     entityName: string,
-    //* filter: { [key: string]: any },
     query: findOneQuery<EntityModel>,
   ): EntityModel | undefined {
     const entities = this.getEntityStoreByName<EntityModel>(entityName);
@@ -100,7 +96,6 @@ export class InMemoryDbService {
 
   updateOneBy<EntityModel extends StoreItemEntity>(
     entityName: string,
-    //* filter: { [key: string]: any },
     query: findOneQuery<EntityModel>,
     updatedInput: UpdateEntityInput<EntityModel>,
   ): EntityModel | undefined {
