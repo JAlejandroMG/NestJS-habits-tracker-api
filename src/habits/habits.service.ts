@@ -12,7 +12,7 @@ export class HabitsService {
 
   findAll(query: {
     limit?: number;
-    sortBy?: string;
+    sortBy?: 'name' | 'habitId'; //* Modified
   }): HabitDto[] | Promise<HabitDto[]> {
     const limit = query.limit ?? 10;
     const sortBy = query.sortBy ?? 'name';

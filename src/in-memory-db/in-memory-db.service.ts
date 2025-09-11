@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { StoreItemEntity } from './models/store-item.entity';
+import { CreateEntityInput } from './models/create-entity-input.type';
+import { UpdateEntityInput } from './models/update-entity-input.type';
+import { findAllQuery } from './models/find-all-query.type';
+import { findOneQuery } from './models/find-one-query.type';
 
+//* Modified
 @Injectable()
 export class InMemoryDbService {
   private store: Map<string, any[]> = new Map();
@@ -17,24 +22,27 @@ export class InMemoryDbService {
 
   create<EntityModel extends StoreItemEntity>(
     entityName: string,
-    input,
+    input: CreateEntityInput<EntityModel>,
   ): EntityModel {
-    this.getEntityStoreByName<EntityModel>(entityName).push({
+    const entityModel = {
       ...input,
       id: new Date().getTime(),
-    });
+    } as EntityModel;
 
-    return input;
+    this.getEntityStoreByName<EntityModel>(entityName).push(entityModel);
+
+    return entityModel;
   }
 
   deleteOneBy<EntityModel extends StoreItemEntity>(
     entityName: string,
-    filter: { [key: string]: any },
+    //* filter: { [key: string]: any },
+    query: findOneQuery<EntityModel>,
   ): EntityModel | undefined {
     const entities = this.getEntityStoreByName<EntityModel>(entityName);
 
     const entityIndex = entities.findIndex((entity) => {
-      return Object.keys(filter).every((key) => entity[key] === filter[key]);
+      return Object.keys(query).every((key) => entity[key] === query[key]);
     });
 
     if (entityIndex === -1) {
@@ -49,7 +57,8 @@ export class InMemoryDbService {
 
   findAll<EntityModel extends StoreItemEntity>(
     entityName: string,
-    query: { limit?: number; sortBy?: string } = {},
+    //* query: { limit?: number; sortBy?: string } = {},
+    query: findAllQuery<EntityModel>,
   ): EntityModel[] {
     const { limit, sortBy } = query;
     const results = this.getEntityStoreByName<EntityModel>(entityName);
@@ -75,13 +84,14 @@ export class InMemoryDbService {
 
   findOneBy<EntityModel extends StoreItemEntity>(
     entityName: string,
-    filter: { [key: string]: any },
+    //* filter: { [key: string]: any },
+    query: findOneQuery<EntityModel>,
   ): EntityModel | undefined {
     const entities = this.getEntityStoreByName<EntityModel>(entityName);
 
     return entities.find((entity) => {
-      const isMatchingFilter = Object.keys(filter).every(
-        (key) => entity[key] === filter[key],
+      const isMatchingFilter = Object.keys(query).every(
+        (key) => entity[key] === query[key],
       );
 
       return isMatchingFilter;
@@ -90,13 +100,14 @@ export class InMemoryDbService {
 
   updateOneBy<EntityModel extends StoreItemEntity>(
     entityName: string,
-    filter: { [key: string]: any },
-    updatedInput,
+    //* filter: { [key: string]: any },
+    query: findOneQuery<EntityModel>,
+    updatedInput: UpdateEntityInput<EntityModel>,
   ): EntityModel | undefined {
     const entities = this.getEntityStoreByName<EntityModel>(entityName);
 
     const entityIndex = entities.findIndex((entity) => {
-      return Object.keys(filter).every((key) => entity[key] === filter[key]);
+      return Object.keys(query).every((key) => entity[key] === query[key]);
     });
 
     console.log('entityIndex: ', entityIndex);

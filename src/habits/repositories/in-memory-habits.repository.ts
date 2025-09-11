@@ -6,17 +6,21 @@ import { HABITS } from 'src/utils/constants';
 import { HabitDto } from '../dto/habit.dto';
 import { HabitEntity } from './entities/habit.entity';
 import { mapHabitEntityToHabitDto } from './mappers/map-habit-entity-to-habit-dto';
+import { CreateHabitDto } from '../dto/create-habit.dto';
+import { UpdateHabitDto } from '../dto/update-habit.dto';
+import { CreateEntityInput } from 'src/in-memory-db/models/create-entity-input.type';
 
+//* Modified
 @Injectable()
 export class InMemoryHabitsRepository {
   constructor(private readonly db: InMemoryDbService) {}
 
-  createHabit(createHabitInput): HabitDto {
+  createHabit(createHabitInput: CreateHabitDto): HabitDto {
     const now = new Date();
-    const newHabit: HabitEntity = {
+    const newHabit: CreateEntityInput<HabitEntity> = {
       ...createHabitInput,
       createdAt: now,
-      //id: ulid(),
+      //* id: ulid(),
       habitId: ulid(),
       updatedAt: now,
     };
@@ -25,7 +29,10 @@ export class InMemoryHabitsRepository {
     return mapHabitEntityToHabitDto(habitEntity)!;
   }
 
-  findAllHabits(query: { limit?: number; sortBy?: string }): HabitDto[] {
+  findAllHabits(query: {
+    limit?: number;
+    sortBy?: 'name' | 'habitId';
+  }): HabitDto[] {
     const habitEntities = this.db.findAll<HabitEntity>(HABITS, query);
 
     return habitEntities.map(
@@ -34,21 +41,23 @@ export class InMemoryHabitsRepository {
   }
 
   findHabitById(id: string): HabitDto | undefined {
-    const habitEntity = this.db.findOneBy<HabitEntity>(HABITS, { id });
+    const habitEntity = this.db.findOneBy<HabitEntity>(HABITS, { habitId: id });
 
     return mapHabitEntityToHabitDto(habitEntity);
   }
 
   removeHabit(id: string): HabitDto | undefined {
-    const habitEntity = this.db.deleteOneBy<HabitEntity>(HABITS, { id });
+    const habitEntity = this.db.deleteOneBy<HabitEntity>(HABITS, {
+      habitId: id,
+    });
 
     return mapHabitEntityToHabitDto(habitEntity);
   }
 
-  updateHabit(id: string, updatedInput): HabitDto | undefined {
+  updateHabit(id: string, updatedInput: UpdateHabitDto): HabitDto | undefined {
     const habitEntity = this.db.updateOneBy<HabitEntity>(
       HABITS,
-      { id },
+      { habitId: id },
       { ...updatedInput, updatedAt: new Date() },
     );
 
