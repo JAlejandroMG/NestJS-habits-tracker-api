@@ -14,6 +14,8 @@ import {
 import { HabitsService } from './habits.service';
 import { HABITS } from 'src/utils/constants';
 import { HabitDto } from './dto/habit.dto';
+import { CreateHabitDto } from './dto/create-habit.dto';
+import { UpdateHabitDto } from './dto/update-habit.dto';
 
 @Controller(HABITS)
 export class HabitsController {
@@ -25,10 +27,14 @@ export class HabitsController {
     this.habitsService.remove(id);
   }
 
+  //* Modified
   @Get()
-  //   findAll(@Query('limit') limit: string, @Query('sortBy') sortBy: string): HabitDto[] |Promise<HabitDto[]> {
-  findAll(@Query() query): HabitDto[] | Promise<HabitDto[]> {
-    const { limit, sortBy } = query;
+  findAll(
+    @Query('limit') limit: string,
+    @Query('sortBy') sortBy: 'name' | 'habitId',
+  ): HabitDto[] | Promise<HabitDto[]> {
+    //   findAll(@Query() query): HabitDto[] | Promise<HabitDto[]> {
+    // const { limit, sortBy } = query;
     const limitNumber = limit ? +limit : undefined;
 
     return this.habitsService.findAll({ sortBy, limit: limitNumber });
@@ -47,10 +53,11 @@ export class HabitsController {
     return habit;
   }
 
+  //* Modified
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() input,
+    @Body() input: UpdateHabitDto,
   ): HabitDto | undefined | Promise<HabitDto | undefined> {
     const habit = this.habitsService.update(id, input);
 
@@ -61,8 +68,11 @@ export class HabitsController {
     return habit;
   }
 
+  //* Modified
   @Post()
-  create(@Body() createHabitInput): HabitDto | Promise<HabitDto> {
+  create(
+    @Body() createHabitInput: CreateHabitDto,
+  ): HabitDto | Promise<HabitDto> {
     return this.habitsService.create(createHabitInput);
   }
 }

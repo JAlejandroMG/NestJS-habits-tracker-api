@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InMemoryHabitsRepository } from './repositories/in-memory-habits.repository';
 import { HabitDto } from './dto/habit.dto';
+import { CreateHabitDto } from './dto/create-habit.dto';
+import { UpdateHabitDto } from './dto/update-habit.dto';
 
 @Injectable()
 export class HabitsService {
   constructor(private readonly habitsRepository: InMemoryHabitsRepository) {}
 
-  create(createHabitInput): HabitDto | Promise<HabitDto> {
+  //* Modified
+  create(createHabitInput: CreateHabitDto): HabitDto | Promise<HabitDto> {
     return this.habitsRepository.createHabit(createHabitInput);
   }
 
@@ -28,9 +31,10 @@ export class HabitsService {
     return this.habitsRepository.removeHabit(id);
   }
 
+  //* Modified
   update(
     id: string,
-    updatedInput,
+    updatedInput: UpdateHabitDto,
   ): HabitDto | undefined | Promise<HabitDto | undefined> {
     return this.habitsRepository.updateHabit(id, updatedInput);
   }
