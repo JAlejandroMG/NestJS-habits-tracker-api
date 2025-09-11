@@ -27,7 +27,6 @@ export class HabitsController {
     this.habitsService.remove(id);
   }
 
-  //* Modified
   @Get()
   findAll(
     @Query('limit') limit: string,
@@ -53,7 +52,6 @@ export class HabitsController {
     return habit;
   }
 
-  //* Modified
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -68,7 +66,6 @@ export class HabitsController {
     return habit;
   }
 
-  //* Modified
   @Post()
   create(
     @Body() createHabitInput: CreateHabitDto,

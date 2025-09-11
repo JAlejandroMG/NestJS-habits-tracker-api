@@ -1,5 +1,3 @@
-// import { ulid } from 'ulid';
-
 import { Injectable } from '@nestjs/common';
 import { InMemoryDbService } from 'src/in-memory-db/in-memory-db.service';
 import { HABITS } from 'src/utils/constants';
@@ -10,22 +8,12 @@ import { mapHabitEntityToHabitDto } from './mappers/map-habit-entity-to-habit-dt
 import { mapUpdateHabitDtoToUpdateEntityInput } from './mappers/map-update-habit-dto-to-update-entity-input';
 import { CreateHabitDto } from '../dto/create-habit.dto';
 import { UpdateHabitDto } from '../dto/update-habit.dto';
-// import { CreateEntityInput } from 'src/in-memory-db/models/create-entity-input.type';
 
 @Injectable()
 export class InMemoryHabitsRepository {
   constructor(private readonly db: InMemoryDbService) {}
 
-  //* Modified
   createHabit(createHabitInput: CreateHabitDto): HabitDto {
-    // const now = new Date();
-    /* const newHabit: CreateEntityInput<HabitEntity> = {
-      ...createHabitInput,
-      createdAt: now,
-      habitId: ulid(),
-      updatedAt: now,
-    }; */
-    // const habitEntity = this.db.create<HabitEntity>(HABITS, newHabit);
     const habitEntity = this.db.create<HabitEntity>(
       HABITS,
       mapCreateHabitDtoToCreateEntityInput(createHabitInput),
@@ -59,12 +47,10 @@ export class InMemoryHabitsRepository {
     return mapHabitEntityToHabitDto(habitEntity);
   }
 
-  //* Modified
   updateHabit(id: string, updatedInput: UpdateHabitDto): HabitDto | undefined {
     const habitEntity = this.db.updateOneBy<HabitEntity>(
       HABITS,
       { habitId: id },
-      //   { ...updatedInput, updatedAt: new Date() },
       mapUpdateHabitDtoToUpdateEntityInput(updatedInput),
     );
 

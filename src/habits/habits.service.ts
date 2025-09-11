@@ -8,7 +8,6 @@ import { UpdateHabitDto } from './dto/update-habit.dto';
 export class HabitsService {
   constructor(private readonly habitsRepository: InMemoryHabitsRepository) {}
 
-  //* Modified
   create(createHabitInput: CreateHabitDto): HabitDto | Promise<HabitDto> {
     return this.habitsRepository.createHabit(createHabitInput);
   }
@@ -31,7 +30,6 @@ export class HabitsService {
     return this.habitsRepository.removeHabit(id);
   }
 
-  //* Modified
   update(
     id: string,
     updatedInput: UpdateHabitDto,
