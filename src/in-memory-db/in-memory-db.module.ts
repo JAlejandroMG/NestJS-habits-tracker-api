@@ -4,7 +4,6 @@ import { SeedDataProvider } from './models/providers/seed-data.provider';
 
 @Module({
   exports: [InMemoryDbService],
-  //* Modified
   providers: [InMemoryDbService, SeedDataProvider],
 })
 export class InMemoryDbModule {}

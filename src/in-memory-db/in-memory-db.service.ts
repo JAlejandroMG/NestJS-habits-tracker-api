@@ -10,7 +10,6 @@ import { DB_SEED_DATA_TOKEN } from 'src/utils/constants';
 export class InMemoryDbService {
   private store: Map<string, any[]> = new Map();
 
-  //* Modified
   constructor(
     @Inject(DB_SEED_DATA_TOKEN)
     private readonly seedData: Record<string, StoreItemEntity[]>,
