@@ -1,59 +1,67 @@
 import { Injectable } from '@nestjs/common';
 import { InMemoryDbService } from 'src/in-memory-db/in-memory-db.service';
 import { HABITS } from 'src/utils/constants';
-import { HabitDto } from '../dto/habit.dto';
+// import { HabitDto } from '../controllers/dto/habit.dto';
 import { HabitEntity } from './entities/habit.entity';
-import { mapCreateHabitDtoToCreateEntityInput } from './mappers/map-create-dto-to-create-entity-input.mapper';
-import { mapHabitEntityToHabitDto } from './mappers/map-habit-entity-to-habit-dto';
-import { mapUpdateHabitDtoToUpdateEntityInput } from './mappers/map-update-habit-dto-to-update-entity-input';
-import { CreateHabitDto } from '../dto/create-habit.dto';
-import { UpdateHabitDto } from '../dto/update-habit.dto';
+import { mapCreateHabitDomainToCreateEntityInput } from './mappers/map-create-input-to-create-entity-input.mapper';
+import { mapHabitEntityToHabitDomain } from './mappers/map-habit-entity-to-habit-domain';
+import { mapUpdateHabitDomainToUpdateEntityInput } from './mappers/map-update-habit-input-to-update-entity-input';
+// import { CreateHabitDto } from '../controllers/dto/create-habit.dto';
+// import { UpdateHabitDto } from '../controllers/dto/update-habit.dto';
+import { HabitDomain } from '../services/models/habit.domain';
+import { CreateHabitInputDomain } from '../services/models/create-habit-input.domain';
+import { UpdateHabitInputDomain } from '../services/models/update-habit-input.domain';
 
+//* Modified
 @Injectable()
 export class InMemoryHabitsRepository {
   constructor(private readonly db: InMemoryDbService) {}
 
-  createHabit(createHabitInput: CreateHabitDto): HabitDto {
+  createHabit(createHabitInput: CreateHabitInputDomain): HabitDomain {
     const habitEntity = this.db.create<HabitEntity>(
       HABITS,
-      mapCreateHabitDtoToCreateEntityInput(createHabitInput),
+      mapCreateHabitDomainToCreateEntityInput(createHabitInput),
     );
 
-    return mapHabitEntityToHabitDto(habitEntity)!;
+    return mapHabitEntityToHabitDomain(habitEntity)!;
   }
 
   findAllHabits(query: {
     limit?: number;
     sortBy?: 'name' | 'habitId';
-  }): HabitDto[] {
+  }): HabitDomain[] {
     const habitEntities = this.db.findAll<HabitEntity>(HABITS, query);
 
     return habitEntities.map(
-      (habitEntity) => mapHabitEntityToHabitDto(habitEntity)!, //* This ! at the end avoids undefined
+      (habitEntity) => mapHabitEntityToHabitDomain(habitEntity)!, //* This ! at the end avoids undefined
     );
   }
 
-  findHabitById(id: string): HabitDto | undefined {
+  findHabitById(id: string): HabitDomain | undefined {
     const habitEntity = this.db.findOneBy<HabitEntity>(HABITS, { habitId: id });
 
-    return mapHabitEntityToHabitDto(habitEntity);
+    return mapHabitEntityToHabitDomain(habitEntity);
   }
 
-  removeHabit(id: string): HabitDto | undefined {
+  removeHabit(id: string): HabitDomain | undefined {
     const habitEntity = this.db.deleteOneBy<HabitEntity>(HABITS, {
       habitId: id,
     });
 
-    return mapHabitEntityToHabitDto(habitEntity);
+    return mapHabitEntityToHabitDomain(habitEntity);
   }
 
-  updateHabit(id: string, updatedInput: UpdateHabitDto): HabitDto | undefined {
+  updateHabit(
+    // id: string,
+    updatedInput: UpdateHabitInputDomain,
+  ): HabitDomain | undefined {
     const habitEntity = this.db.updateOneBy<HabitEntity>(
       HABITS,
-      { habitId: id },
-      mapUpdateHabitDtoToUpdateEntityInput(updatedInput),
+      //   { habitId: id },
+      { habitId: updatedInput.habitId },
+      mapUpdateHabitDomainToUpdateEntityInput(updatedInput),
     );
 
-    return mapHabitEntityToHabitDto(habitEntity);
+    return mapHabitEntityToHabitDomain(habitEntity);
   }
 }

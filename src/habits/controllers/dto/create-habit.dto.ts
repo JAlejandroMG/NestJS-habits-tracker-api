@@ -1,4 +1,4 @@
 export class CreateHabitDto {
-  name: string;
   description?: string;
+  name: string;
 }
