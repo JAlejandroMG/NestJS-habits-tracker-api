@@ -1,13 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { StoreItemEntity } from './models/store-item.entity';
 import { CreateEntityInput } from './models/create-entity-input.type';
 import { UpdateEntityInput } from './models/update-entity-input.type';
 import { findAllQuery } from './models/find-all-query.type';
 import { findOneQuery } from './models/find-one-query.type';
+import { DB_SEED_DATA_TOKEN } from 'src/utils/constants';
 
 @Injectable()
 export class InMemoryDbService {
   private store: Map<string, any[]> = new Map();
+
+  //* Modified
+  constructor(
+    @Inject(DB_SEED_DATA_TOKEN)
+    private readonly seedData: Record<string, StoreItemEntity[]>,
+  ) {
+    this.store = new Map(Object.entries(this.seedData));
+  }
 
   private getEntityStoreByName<EntityModel extends StoreItemEntity>(
     entityName: string,

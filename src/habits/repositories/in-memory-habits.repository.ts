@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InMemoryDbService } from 'src/in-memory-db/in-memory-db.service';
-import { HABITS } from 'src/utils/constants';
+import { HABITS_STORE } from 'src/utils/constants';
 import { HabitEntity } from './entities/habit.entity';
 import { mapCreateHabitDomainToCreateEntityInput } from './mappers/map-create-input-to-create-entity-input.mapper';
 import { mapHabitEntityToHabitDomain } from './mappers/map-habit-entity-to-habit-domain';
@@ -15,7 +15,7 @@ export class InMemoryHabitsRepository {
 
   createHabit(createHabitInput: CreateHabitInputDomain): HabitDomain {
     const habitEntity = this.db.create<HabitEntity>(
-      HABITS,
+      HABITS_STORE,
       mapCreateHabitDomainToCreateEntityInput(createHabitInput),
     );
 
@@ -26,7 +26,7 @@ export class InMemoryHabitsRepository {
     limit?: number;
     sortBy?: 'name' | 'habitId';
   }): HabitDomain[] {
-    const habitEntities = this.db.findAll<HabitEntity>(HABITS, query);
+    const habitEntities = this.db.findAll<HabitEntity>(HABITS_STORE, query);
 
     return habitEntities.map(
       (habitEntity) => mapHabitEntityToHabitDomain(habitEntity)!, //* This ! at the end avoids undefined
@@ -34,13 +34,15 @@ export class InMemoryHabitsRepository {
   }
 
   findHabitById(id: string): HabitDomain | undefined {
-    const habitEntity = this.db.findOneBy<HabitEntity>(HABITS, { habitId: id });
+    const habitEntity = this.db.findOneBy<HabitEntity>(HABITS_STORE, {
+      habitId: id,
+    });
 
     return mapHabitEntityToHabitDomain(habitEntity);
   }
 
   removeHabit(id: string): HabitDomain | undefined {
-    const habitEntity = this.db.deleteOneBy<HabitEntity>(HABITS, {
+    const habitEntity = this.db.deleteOneBy<HabitEntity>(HABITS_STORE, {
       habitId: id,
     });
 
@@ -49,7 +51,7 @@ export class InMemoryHabitsRepository {
 
   updateHabit(updatedInput: UpdateHabitInputDomain): HabitDomain | undefined {
     const habitEntity = this.db.updateOneBy<HabitEntity>(
-      HABITS,
+      HABITS_STORE,
       { habitId: updatedInput.habitId },
       mapUpdateHabitDomainToUpdateEntityInput(updatedInput),
     );

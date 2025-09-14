@@ -12,7 +12,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { HabitsService } from '../services/habits.service';
-import { HABITS } from 'src/utils/constants';
+import { HABITS_STORE } from 'src/utils/constants';
 import { HabitDto } from './dto/habit.dto';
 import { CreateHabitDto } from './dto/create-habit.dto';
 import { UpdateHabitDto } from './dto/update-habit.dto';
@@ -20,7 +20,7 @@ import { mapHabitDomainToHabitDto } from './mappers/map-habit-domain-to-habit-dt
 import { mapUpdateHabitDtoToUpdateHabitInput } from './mappers/map-update-habit-dto-to-update-habit-input';
 import { mapCreateHabitDtoToCreateHabitInput } from './mappers/map-create-habit-dto-create-to-habit-input';
 
-@Controller(HABITS)
+@Controller(HABITS_STORE)
 export class HabitsController {
   constructor(private readonly habitsService: HabitsService) {}
 
