@@ -1,13 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InMemoryHabitsRepository } from '../repositories/in-memory-habits.repository';
-// import { HabitDto } from './dto/habit.dto';
-// import { CreateHabitDto } from './dto/create-habit.dto';
-// import { UpdateHabitDto } from './dto/update-habit.dto';
 import { HabitDomain } from './models/habit.domain';
 import { CreateHabitInputDomain } from './models/create-habit-input.domain';
 import { UpdateHabitInputDomain } from './models/update-habit-input.domain';
 
-//* Modified
 @Injectable()
 export class HabitsService {
   constructor(private readonly habitsRepository: InMemoryHabitsRepository) {}
@@ -41,12 +37,8 @@ export class HabitsService {
   }
 
   update(
-    // id: string,
     updatedInput: UpdateHabitInputDomain,
   ): HabitDomain | undefined | Promise<HabitDomain | undefined> {
-    return this.habitsRepository.updateHabit(
-      /*id,*/ // updatedInput.habitId,
-      updatedInput,
-    );
+    return this.habitsRepository.updateHabit(updatedInput);
   }
 }

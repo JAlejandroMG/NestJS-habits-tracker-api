@@ -1,18 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InMemoryDbService } from 'src/in-memory-db/in-memory-db.service';
 import { HABITS } from 'src/utils/constants';
-// import { HabitDto } from '../controllers/dto/habit.dto';
 import { HabitEntity } from './entities/habit.entity';
 import { mapCreateHabitDomainToCreateEntityInput } from './mappers/map-create-input-to-create-entity-input.mapper';
 import { mapHabitEntityToHabitDomain } from './mappers/map-habit-entity-to-habit-domain';
 import { mapUpdateHabitDomainToUpdateEntityInput } from './mappers/map-update-habit-input-to-update-entity-input';
-// import { CreateHabitDto } from '../controllers/dto/create-habit.dto';
-// import { UpdateHabitDto } from '../controllers/dto/update-habit.dto';
 import { HabitDomain } from '../services/models/habit.domain';
 import { CreateHabitInputDomain } from '../services/models/create-habit-input.domain';
 import { UpdateHabitInputDomain } from '../services/models/update-habit-input.domain';
 
-//* Modified
 @Injectable()
 export class InMemoryHabitsRepository {
   constructor(private readonly db: InMemoryDbService) {}
@@ -51,13 +47,9 @@ export class InMemoryHabitsRepository {
     return mapHabitEntityToHabitDomain(habitEntity);
   }
 
-  updateHabit(
-    // id: string,
-    updatedInput: UpdateHabitInputDomain,
-  ): HabitDomain | undefined {
+  updateHabit(updatedInput: UpdateHabitInputDomain): HabitDomain | undefined {
     const habitEntity = this.db.updateOneBy<HabitEntity>(
       HABITS,
-      //   { habitId: id },
       { habitId: updatedInput.habitId },
       mapUpdateHabitDomainToUpdateEntityInput(updatedInput),
     );
