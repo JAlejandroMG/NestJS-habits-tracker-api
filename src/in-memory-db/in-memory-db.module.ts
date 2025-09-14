@@ -8,7 +8,6 @@ import { SEED_DATA_PATH_TOKEN } from 'src/utils/constants';
   providers: [
     InMemoryDbService,
     SeedDataProvider,
-    //* Added
     {
       provide: SEED_DATA_PATH_TOKEN,
       useValue: 'fixtures/seed-data.json',
