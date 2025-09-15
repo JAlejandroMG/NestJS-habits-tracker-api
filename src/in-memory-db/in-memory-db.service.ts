@@ -11,7 +11,6 @@ import {
   PERSIST_DATA_PATH_TOKEN,
 } from 'src/utils/constants';
 
-//* Modified
 @Injectable()
 export class InMemoryDbService {
   private store: Map<string, any[]> = new Map();
@@ -19,7 +18,6 @@ export class InMemoryDbService {
   constructor(
     @Inject(DB_SEED_DATA_TOKEN)
     private readonly seedData: Record<string, StoreItemEntity[]>,
-    //* Added
     @Optional()
     @Inject(PERSIST_DATA_PATH_TOKEN)
     private readonly persistDataPath: string,
@@ -37,7 +35,6 @@ export class InMemoryDbService {
     return this.store.get(entityName) as EntityModel[];
   }
 
-  //* Added
   private saveStore() {
     if (this.persistDataPath) {
       fs.writeFileSync(
@@ -57,7 +54,6 @@ export class InMemoryDbService {
     } as EntityModel;
 
     this.getEntityStoreByName<EntityModel>(entityName).push(entityModel);
-    //* Added
     this.saveStore();
 
     return entityModel;
@@ -79,7 +75,6 @@ export class InMemoryDbService {
 
     const deletedEntity = entities[entityIndex];
     entities.splice(entityIndex, 1);
-    //* Added
     this.saveStore();
 
     return deletedEntity;
@@ -145,7 +140,6 @@ export class InMemoryDbService {
 
     const updatedEntity = { ...entities[entityIndex], ...updatedInput };
     entities[entityIndex] = updatedEntity;
-    //* Added
     this.saveStore();
 
     return updatedEntity;

@@ -15,7 +15,6 @@ import {
       provide: SEED_DATA_PATH_TOKEN,
       useValue: 'fixtures/seed-data.json',
     },
-    //* Added
     {
       provide: PERSIST_DATA_PATH_TOKEN,
       //   useValue: 'fixtures/backup.json',
