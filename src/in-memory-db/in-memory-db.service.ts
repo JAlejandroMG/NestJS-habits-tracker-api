@@ -1,11 +1,17 @@
-import { Inject, Injectable } from '@nestjs/common';
+import * as fs from 'fs';
+
+import { Inject, Injectable, Optional } from '@nestjs/common';
 import { StoreItemEntity } from './models/store-item.entity';
 import { CreateEntityInput } from './models/create-entity-input.type';
 import { UpdateEntityInput } from './models/update-entity-input.type';
 import { findAllQuery } from './models/find-all-query.type';
 import { findOneQuery } from './models/find-one-query.type';
-import { DB_SEED_DATA_TOKEN } from 'src/utils/constants';
+import {
+  DB_SEED_DATA_TOKEN,
+  PERSIST_DATA_PATH_TOKEN,
+} from 'src/utils/constants';
 
+//* Modified
 @Injectable()
 export class InMemoryDbService {
   private store: Map<string, any[]> = new Map();
@@ -13,6 +19,10 @@ export class InMemoryDbService {
   constructor(
     @Inject(DB_SEED_DATA_TOKEN)
     private readonly seedData: Record<string, StoreItemEntity[]>,
+    //* Added
+    @Optional()
+    @Inject(PERSIST_DATA_PATH_TOKEN)
+    private readonly persistDataPath: string,
   ) {
     this.store = new Map(Object.entries(this.seedData));
   }
@@ -27,6 +37,16 @@ export class InMemoryDbService {
     return this.store.get(entityName) as EntityModel[];
   }
 
+  //* Added
+  private saveStore() {
+    if (this.persistDataPath) {
+      fs.writeFileSync(
+        this.persistDataPath,
+        JSON.stringify(Object.fromEntries(this.store.entries()), null, 2),
+      );
+    }
+  }
+
   create<EntityModel extends StoreItemEntity>(
     entityName: string,
     input: CreateEntityInput<EntityModel>,
@@ -37,6 +57,8 @@ export class InMemoryDbService {
     } as EntityModel;
 
     this.getEntityStoreByName<EntityModel>(entityName).push(entityModel);
+    //* Added
+    this.saveStore();
 
     return entityModel;
   }
@@ -57,6 +79,8 @@ export class InMemoryDbService {
 
     const deletedEntity = entities[entityIndex];
     entities.splice(entityIndex, 1);
+    //* Added
+    this.saveStore();
 
     return deletedEntity;
   }
@@ -121,6 +145,8 @@ export class InMemoryDbService {
 
     const updatedEntity = { ...entities[entityIndex], ...updatedInput };
     entities[entityIndex] = updatedEntity;
+    //* Added
+    this.saveStore();
 
     return updatedEntity;
   }
