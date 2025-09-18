@@ -1,0 +1,28 @@
+{
+  "analytics": [
+    {
+      "message": "Hello from the AppController ",
+      "timestamp": "2025-09-18T03:31:53.677Z",
+      "id": 1758166313677
+    },
+    {
+      "message": "Hello from the AppController ",
+      "timestamp": "2025-09-18T03:36:09.683Z",
+      "id": 1758166569683
+    },
+    {
+      "message": "Hello from the AppController 2",
+      "timestamp": "2025-09-18T03:36:43.948Z",
+      "id": 1758166603948
+    }
+  ],
+  "habits": [
+    {
+      "name": "Test 101",
+      "createdAt": "2025-09-18T03:37:27.734Z",
+      "habitId": "01K5DEC0XPZP7KJM61D0ZGRY33",
+      "updatedAt": "2025-09-18T03:37:27.734Z",
+      "id": 1758166647735
+    }
+  ]
+}

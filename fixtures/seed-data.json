@@ -28,6 +28,20 @@
       "habitId": "01K55HE98QWW8X73EVZ1YCE7FM",
       "updatedAt": "2025-09-15T01:57:12.087Z",
       "id": 1757901432087
+    },
+    {
+      "name": "Test 301",
+      "createdAt": "2025-09-18T04:19:09.418Z",
+      "habitId": "01K5DGRBZAMTJPE41X8NY3YRYG",
+      "updatedAt": "2025-09-18T04:19:09.418Z",
+      "id": 1758169149420
+    }
+  ],
+  "analytics": [
+    {
+      "message": "Hello from the AppController",
+      "timestamp": "2025-09-18T04:18:51.182Z",
+      "id": 1758169131182
     }
   ]
 }

@@ -1,12 +1,21 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { AnalyticsService } from './analytics/analytics.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly analyticsService: AnalyticsService,
+    private readonly appService: AppService,
+  ) {}
 
   @Get()
   getHello(): string {
+    //* Added
+    this.analyticsService.saveAnalytics({
+      message: 'Hello from the AppController',
+    });
+
     return this.appService.getHello();
   }
 }
