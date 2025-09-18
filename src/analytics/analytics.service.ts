@@ -7,6 +7,7 @@ import { AnalyticsEntity } from './analytics.entity';
 export class AnalyticsService {
   constructor(private readonly db: InMemoryDbService) {}
 
+  //+ TO DO - Add mappers for input data and returned models
   saveAnalytics(data: any) {
     this.db.create<AnalyticsEntity>(ANALYTICS_STORE, {
       ...data,

@@ -7,9 +7,6 @@ import { InMemoryDbModule } from './in-memory-db/in-memory-db.module';
 import { seedDataFilePath } from './utils/constants';
 
 @Module({
-  //* Modified
-  //~ DB Module will be registered here to make it global
-  //~ instead of doing it in each child module
   imports: [
     HabitsModule,
     AnalyticsModule,
