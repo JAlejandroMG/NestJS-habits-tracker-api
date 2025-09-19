@@ -5,7 +5,6 @@ import { ANALYTICS_STORE } from 'src/utils/constants';
 
 @Module({
   exports: [AnalyticsService],
-  //* Added
   imports: [
     InMemoryDbModule.forFeature({
       entityName: ANALYTICS_STORE,

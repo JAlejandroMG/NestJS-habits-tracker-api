@@ -31,7 +31,6 @@ export class InMemoryDbModule {
     };
   }
 
-  //* Added
   static forFeature(options: { entityName: string }): DynamicModule {
     return {
       exports: [InMemoryDbRepository],

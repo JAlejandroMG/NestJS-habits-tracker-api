@@ -7,7 +7,6 @@ import { InMemoryDbModule } from 'src/in-memory-db/in-memory-db.module';
 
 @Module({
   controllers: [HabitsController],
-  //* Added
   imports: [
     InMemoryDbModule.forFeature({
       entityName: HABITS_STORE,
