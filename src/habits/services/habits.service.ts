@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+// import { ConfigService } from '@nestjs/config';
 
 import { InMemoryHabitsRepository } from '../repositories/in-memory-habits.repository';
 import { HabitDomain } from './models/habit.domain';
 import { CreateHabitInputDomain } from './models/create-habit-input.domain';
 import { UpdateHabitInputDomain } from './models/update-habit-input.domain';
+import { AppConfigService } from 'src/app-config/app-config.service';
 
 @Injectable()
 export class HabitsService {
   constructor(
-    private readonly configService: ConfigService,
+    // private readonly configService: ConfigService,
+    //* Modified
+    private readonly appConfigService: AppConfigService,
     private readonly habitsRepository: InMemoryHabitsRepository,
   ) {}
 
@@ -23,9 +26,12 @@ export class HabitsService {
     limit?: number;
     sortBy?: 'name' | 'habitId';
   }): HabitDomain[] | Promise<HabitDomain[]> {
-    const defaultLimit: string | undefined =
-      this.configService.get('DEFAULT_LIMIT');
-    const limit = query.limit ?? parseInt(defaultLimit ?? '4');
+    //* Dismissed
+    // const defaultLimit: string | undefined =
+    //   this.configService.get('DEFAULT_LIMIT');
+    // const limit = query.limit ?? parseInt(defaultLimit ?? '4');
+    //* Modified
+    const limit = query.limit ?? this.appConfigService.defaultLimit;
     const sortBy = query.sortBy ?? 'name';
 
     return this.habitsRepository.findAllHabits({ limit, sortBy });
