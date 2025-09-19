@@ -1,5 +1,8 @@
 export class AnalyticsEntity {
-  data: any;
+  //* Modified
+  data: number;
   id: number;
+  //*Added
+  message?: string;
   timestamp: Date;
 }

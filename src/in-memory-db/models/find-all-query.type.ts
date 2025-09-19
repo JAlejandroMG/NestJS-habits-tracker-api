@@ -1,4 +1,4 @@
-export type findAllQuery<EntityModel> = {
+export type FindAllQuery<EntityModel> = {
   limit?: number;
   sortBy?: keyof EntityModel;
 };

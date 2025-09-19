@@ -4,8 +4,8 @@ import { Inject, Injectable, Optional } from '@nestjs/common';
 import { StoreItemEntity } from './models/store-item.entity';
 import { CreateEntityInput } from './models/create-entity-input.type';
 import { UpdateEntityInput } from './models/update-entity-input.type';
-import { findAllQuery } from './models/find-all-query.type';
-import { findOneQuery } from './models/find-one-query.type';
+import { FindAllQuery } from './models/find-all-query.type';
+import { FindOneQuery } from './models/find-one-query.type';
 import {
   DB_SEED_DATA_TOKEN,
   PERSIST_DATA_PATH_TOKEN,
@@ -61,7 +61,7 @@ export class InMemoryDbService {
 
   deleteOneBy<EntityModel extends StoreItemEntity>(
     entityName: string,
-    query: findOneQuery<EntityModel>,
+    query: FindOneQuery<EntityModel>,
   ): EntityModel | undefined {
     const entities = this.getEntityStoreByName<EntityModel>(entityName);
 
@@ -82,7 +82,7 @@ export class InMemoryDbService {
 
   findAll<EntityModel extends StoreItemEntity>(
     entityName: string,
-    query: findAllQuery<EntityModel>,
+    query: FindAllQuery<EntityModel>,
   ): EntityModel[] {
     const { limit, sortBy } = query;
     const results = this.getEntityStoreByName<EntityModel>(entityName);
@@ -108,7 +108,7 @@ export class InMemoryDbService {
 
   findOneBy<EntityModel extends StoreItemEntity>(
     entityName: string,
-    query: findOneQuery<EntityModel>,
+    query: FindOneQuery<EntityModel>,
   ): EntityModel | undefined {
     const entities = this.getEntityStoreByName<EntityModel>(entityName);
 
@@ -123,7 +123,7 @@ export class InMemoryDbService {
 
   updateOneBy<EntityModel extends StoreItemEntity>(
     entityName: string,
-    query: findOneQuery<EntityModel>,
+    query: FindOneQuery<EntityModel>,
     updatedInput: UpdateEntityInput<EntityModel>,
   ): EntityModel | undefined {
     const entities = this.getEntityStoreByName<EntityModel>(entityName);

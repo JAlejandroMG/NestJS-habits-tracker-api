@@ -11,7 +11,9 @@ export class AppController {
 
   @Get()
   getHello(): string {
+    //* Added
     this.analyticsService.saveAnalytics({
+      data: 15.35,
       message: 'Hello from the AppController',
     });
 

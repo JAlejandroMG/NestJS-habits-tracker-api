@@ -1,8 +1,11 @@
 import { DynamicModule, Module } from '@nestjs/common';
+
+import { InMemoryDbRepository } from './in-memory-db.repository';
 import { InMemoryDbService } from './in-memory-db.service';
 import { SeedDataProvider } from './seed-data.provider';
 import {
   PERSIST_DATA_PATH_TOKEN,
+  REPOSITORY_ENTITY_NAME_TOKEN,
   SEED_DATA_PATH_TOKEN,
 } from 'src/utils/constants';
 
@@ -23,6 +26,21 @@ export class InMemoryDbModule {
         {
           provide: PERSIST_DATA_PATH_TOKEN,
           useExisting: SEED_DATA_PATH_TOKEN,
+        },
+      ],
+    };
+  }
+
+  //* Added
+  static forFeature(options: { entityName: string }): DynamicModule {
+    return {
+      exports: [InMemoryDbRepository],
+      module: InMemoryDbModule,
+      providers: [
+        InMemoryDbRepository,
+        {
+          provide: REPOSITORY_ENTITY_NAME_TOKEN,
+          useValue: options.entityName,
         },
       ],
     };

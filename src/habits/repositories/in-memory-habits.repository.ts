@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InMemoryDbService } from 'src/in-memory-db/in-memory-db.service';
+// import { InMemoryDbService } from 'src/in-memory-db/in-memory-db.service';
 import { HABITS_STORE } from 'src/utils/constants';
 import { HabitEntity } from './entities/habit.entity';
 import { mapCreateHabitDomainToCreateEntityInput } from './mappers/map-create-input-to-create-entity-input.mapper';
@@ -8,14 +8,19 @@ import { mapUpdateHabitDomainToUpdateEntityInput } from './mappers/map-update-ha
 import { HabitDomain } from '../services/models/habit.domain';
 import { CreateHabitInputDomain } from '../services/models/create-habit-input.domain';
 import { UpdateHabitInputDomain } from '../services/models/update-habit-input.domain';
+import { InMemoryDbRepository } from 'src/in-memory-db/in-memory-db.repository';
 
 @Injectable()
 export class InMemoryHabitsRepository {
-  constructor(private readonly db: InMemoryDbService) {}
+  //* Modified
+  //   constructor(private readonly db: InMemoryDbService) {}
+  constructor(private readonly db: InMemoryDbRepository<HabitEntity>) {}
 
   createHabit(createHabitInput: CreateHabitInputDomain): HabitDomain {
-    const habitEntity = this.db.create<HabitEntity>(
-      HABITS_STORE,
+    //* Modified
+    // const habitEntity = this.db.create<HabitEntity>(
+    const habitEntity = this.db.create(
+      //   HABITS_STORE,
       mapCreateHabitDomainToCreateEntityInput(createHabitInput),
     );
 
@@ -26,7 +31,9 @@ export class InMemoryHabitsRepository {
     limit?: number;
     sortBy?: 'name' | 'habitId';
   }): HabitDomain[] {
-    const habitEntities = this.db.findAll<HabitEntity>(HABITS_STORE, query);
+    //* Modified
+    // const habitEntities = this.db.findAll<HabitEntity>(HABITS_STORE, query);
+    const habitEntities = this.db.findAll(query);
 
     return habitEntities.map(
       (habitEntity) => mapHabitEntityToHabitDomain(habitEntity)!, //* This ! at the end avoids undefined
@@ -34,7 +41,9 @@ export class InMemoryHabitsRepository {
   }
 
   findHabitById(id: string): HabitDomain | undefined {
-    const habitEntity = this.db.findOneBy<HabitEntity>(HABITS_STORE, {
+    //* Modified
+    // const habitEntity = this.db.findOneBy<HabitEntity>(HABITS_STORE, {
+    const habitEntity = this.db.findOneBy({
       habitId: id,
     });
 
@@ -42,7 +51,9 @@ export class InMemoryHabitsRepository {
   }
 
   removeHabit(id: string): HabitDomain | undefined {
-    const habitEntity = this.db.deleteOneBy<HabitEntity>(HABITS_STORE, {
+    //* Modified
+    // const habitEntity = this.db.deleteOneBy<HabitEntity>(HABITS_STORE, {
+    const habitEntity = this.db.deleteOneBy({
       habitId: id,
     });
 
@@ -50,8 +61,10 @@ export class InMemoryHabitsRepository {
   }
 
   updateHabit(updatedInput: UpdateHabitInputDomain): HabitDomain | undefined {
-    const habitEntity = this.db.updateOneBy<HabitEntity>(
-      HABITS_STORE,
+    //* Modified
+    // const habitEntity = this.db.updateOneBy<HabitEntity>(
+    const habitEntity = this.db.updateOneBy(
+      //   HABITS_STORE,
       { habitId: updatedInput.habitId },
       mapUpdateHabitDomainToUpdateEntityInput(updatedInput),
     );
