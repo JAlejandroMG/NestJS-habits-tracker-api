@@ -1,4 +1,6 @@
+import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
+
 import { HabitsController } from './controllers/habits.controller';
 import { HabitsService } from './services/habits.service';
 import { InMemoryHabitsRepository } from './repositories/in-memory-habits.repository';
@@ -8,6 +10,8 @@ import { InMemoryDbModule } from 'src/in-memory-db/in-memory-db.module';
 @Module({
   controllers: [HabitsController],
   imports: [
+    //* Added, and different than DynamicModule in app.mmodule.ts
+    ConfigModule,
     InMemoryDbModule.forFeature({
       entityName: HABITS_STORE,
     }),
