@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   exports: [AppConfigService],
-  //* Modified to centralize all configuration in this module
+  //* Centralize all configuration in this module
   imports: [ConfigModule.forRoot()],
   providers: [AppConfigService],
 })

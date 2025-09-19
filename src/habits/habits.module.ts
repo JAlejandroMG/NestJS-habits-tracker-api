@@ -1,4 +1,3 @@
-// import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 
 import { HabitsController } from './controllers/habits.controller';
@@ -11,8 +10,6 @@ import { AppConfigModule } from 'src/app-config/app-config.module';
 @Module({
   controllers: [HabitsController],
   imports: [
-    // ConfigModule,
-    //* Modified
     AppConfigModule,
     InMemoryDbModule.forFeature({
       entityName: HABITS_STORE,

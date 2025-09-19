@@ -10,7 +10,6 @@ export class AppConfigService {
   }
 
   get seedDataFilePath(): string {
-    // return this.configService.get('SEED_DATA_FILE_PATH')!;
     return this.configService.get(
       'SEED_DATA_FILE_PATH',
       'fixtures/seed-data.json',
