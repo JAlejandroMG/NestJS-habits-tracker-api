@@ -9,7 +9,6 @@ import { UpdateHabitInputDomain } from './models/update-habit-input.domain';
 @Injectable()
 export class HabitsService {
   constructor(
-    //* Added
     private readonly configService: ConfigService,
     private readonly habitsRepository: InMemoryHabitsRepository,
   ) {}
@@ -24,10 +23,8 @@ export class HabitsService {
     limit?: number;
     sortBy?: 'name' | 'habitId';
   }): HabitDomain[] | Promise<HabitDomain[]> {
-    //* Modified
     const defaultLimit: string | undefined =
       this.configService.get('DEFAULT_LIMIT');
-    // const limit = query.limit ?? parseInt(process.env.DEFAULT_LIMIT ?? '4');
     const limit = query.limit ?? parseInt(defaultLimit ?? '4');
     const sortBy = query.sortBy ?? 'name';
 

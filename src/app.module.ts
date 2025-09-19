@@ -12,7 +12,6 @@ const getInMemoryDbModule = async () => {
   await ConfigModule.envVariablesLoaded;
 
   return InMemoryDbModule.forRoot({
-    //* Modified
     seedDataFilePath: process.env.SEED_DATA_FILE_PATH!,
   });
 };
@@ -21,14 +20,8 @@ const getInMemoryDbModule = async () => {
   imports: [
     getInMemoryDbModule(),
     AnalyticsModule,
-    //* Added
     ConfigModule.forRoot(),
     HabitsModule,
-    /*InMemoryDbModule.forRoot({
-      //   seedDataFilePath,
-      //* Modified
-      seedDataFilePath: process.env.SEED_DATA_FILE_PATH!,
-    }),*/
   ],
   controllers: [AppController],
   providers: [AppService],
