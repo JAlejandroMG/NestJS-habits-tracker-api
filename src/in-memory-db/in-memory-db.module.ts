@@ -36,7 +36,6 @@ export class InMemoryDbModule {
     };
   }
 
-  //* Added
   static forRootAsync(options: {
     useFactory: (...args: any) => Promise<string> | string;
     imports?: ModuleMetadata['imports'];
