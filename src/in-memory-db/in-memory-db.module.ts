@@ -1,4 +1,9 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import {
+  DynamicModule,
+  FactoryProvider,
+  Module,
+  ModuleMetadata,
+} from '@nestjs/common';
 
 import { InMemoryDbRepository } from './in-memory-db.repository';
 import { InMemoryDbService } from './in-memory-db.service';
@@ -22,6 +27,33 @@ export class InMemoryDbModule {
         {
           provide: SEED_DATA_PATH_TOKEN,
           useValue: options.seedDataFilePath,
+        },
+        {
+          provide: PERSIST_DATA_PATH_TOKEN,
+          useExisting: SEED_DATA_PATH_TOKEN,
+        },
+      ],
+    };
+  }
+
+  //* Added
+  static forRootAsync(options: {
+    useFactory: (...args: any) => Promise<string> | string;
+    imports?: ModuleMetadata['imports'];
+    inject?: FactoryProvider['inject'];
+  }): DynamicModule {
+    return {
+      exports: [InMemoryDbService],
+      global: true,
+      imports: options.imports ?? [],
+      module: InMemoryDbModule,
+      providers: [
+        InMemoryDbService,
+        SeedDataProvider,
+        {
+          provide: SEED_DATA_PATH_TOKEN,
+          useFactory: options.useFactory,
+          inject: options.inject ?? [],
         },
         {
           provide: PERSIST_DATA_PATH_TOKEN,
