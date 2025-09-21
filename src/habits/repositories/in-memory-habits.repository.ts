@@ -10,8 +10,6 @@ import { InMemoryDbRepository } from 'src/in-memory-db/in-memory-db.repository';
 import { AbstractHabitsRepository } from '../services/habits.repository';
 
 @Injectable()
-// export class InMemoryHabitsRepository {
-//* Modified
 export class InMemoryHabitsRepository implements AbstractHabitsRepository {
   constructor(private readonly db: InMemoryDbRepository<HabitEntity>) {}
 

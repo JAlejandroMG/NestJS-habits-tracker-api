@@ -11,8 +11,6 @@ import { AbstractHabitsRepository } from './habits.repository';
 export class HabitsService {
   constructor(
     private readonly appConfigService: AppConfigService,
-    // private readonly habitsRepository: InMemoryHabitsRepository,
-    //* Modified
     private readonly habitsRepository: AbstractHabitsRepository,
   ) {}
 

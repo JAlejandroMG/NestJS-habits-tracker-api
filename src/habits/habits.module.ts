@@ -16,8 +16,6 @@ import { AbstractHabitsRepository } from './services/habits.repository';
       entityName: HABITS_STORE,
     }),
   ],
-  //   providers: [HabitsService, InMemoryHabitsRepository],
-  //* Modified
   providers: [
     HabitsService,
     {
