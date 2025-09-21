@@ -6,16 +6,12 @@ import { HABITS_STORE } from 'src/utils/constants';
 import { AbstractHabitsRepository } from 'src/habits/services/habits.repository';
 
 @Module({
-  //   exports: [InMemoryHabitsRepository],
-  //* Modified
   exports: [AbstractHabitsRepository],
   imports: [
     InMemoryDbModule.forFeature({
       entityName: HABITS_STORE,
     }),
   ],
-  //   providers: [InMemoryHabitsRepository],
-  //* Modified
   providers: [
     {
       provide: AbstractHabitsRepository,
