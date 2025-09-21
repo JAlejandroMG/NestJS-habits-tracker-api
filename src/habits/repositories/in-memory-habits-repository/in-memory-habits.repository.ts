@@ -3,11 +3,11 @@ import { HabitEntity } from './entities/habit.entity';
 import { mapCreateHabitDomainToCreateEntityInput } from './mappers/map-create-input-to-create-entity-input.mapper';
 import { mapHabitEntityToHabitDomain } from './mappers/map-habit-entity-to-habit-domain';
 import { mapUpdateHabitDomainToUpdateEntityInput } from './mappers/map-update-habit-input-to-update-entity-input';
-import { HabitDomain } from '../services/models/habit.domain';
-import { CreateHabitInputDomain } from '../services/models/create-habit-input.domain';
-import { UpdateHabitInputDomain } from '../services/models/update-habit-input.domain';
+import { HabitDomain } from '../../services/models/habit.domain';
+import { CreateHabitInputDomain } from '../../services/models/create-habit-input.domain';
+import { UpdateHabitInputDomain } from '../../services/models/update-habit-input.domain';
 import { InMemoryDbRepository } from 'src/in-memory-db/in-memory-db.repository';
-import { AbstractHabitsRepository } from '../services/habits.repository';
+import { AbstractHabitsRepository } from '../../services/habits.repository';
 
 @Injectable()
 export class InMemoryHabitsRepository implements AbstractHabitsRepository {

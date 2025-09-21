@@ -1,6 +1,6 @@
 import { ulid } from 'ulid';
 
-import { CreateEntityInput } from '../../../../dist/in-memory-db/models/create-entity-input.type';
+import { CreateEntityInput } from 'src/in-memory-db/models/create-entity-input.type';
 import { HabitEntity } from '../entities/habit.entity';
 import { CreateHabitInputDomain } from 'src/habits/services/models/create-habit-input.domain';
 

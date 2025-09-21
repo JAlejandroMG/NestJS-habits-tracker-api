@@ -1,0 +1,26 @@
+import { Module } from '@nestjs/common';
+
+import { InMemoryHabitsRepository } from './in-memory-habits.repository';
+import { InMemoryDbModule } from 'src/in-memory-db/in-memory-db.module';
+import { HABITS_STORE } from 'src/utils/constants';
+import { AbstractHabitsRepository } from 'src/habits/services/habits.repository';
+
+@Module({
+  //   exports: [InMemoryHabitsRepository],
+  //* Modified
+  exports: [AbstractHabitsRepository],
+  imports: [
+    InMemoryDbModule.forFeature({
+      entityName: HABITS_STORE,
+    }),
+  ],
+  //   providers: [InMemoryHabitsRepository],
+  //* Modified
+  providers: [
+    {
+      provide: AbstractHabitsRepository,
+      useClass: InMemoryHabitsRepository,
+    },
+  ],
+})
+export class InMemoryHabitsRepositoryModule {}
