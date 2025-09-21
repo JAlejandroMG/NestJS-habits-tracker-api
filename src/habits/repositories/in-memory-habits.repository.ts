@@ -7,9 +7,12 @@ import { HabitDomain } from '../services/models/habit.domain';
 import { CreateHabitInputDomain } from '../services/models/create-habit-input.domain';
 import { UpdateHabitInputDomain } from '../services/models/update-habit-input.domain';
 import { InMemoryDbRepository } from 'src/in-memory-db/in-memory-db.repository';
+import { AbstractHabitsRepository } from '../services/habits.repository';
 
 @Injectable()
-export class InMemoryHabitsRepository {
+// export class InMemoryHabitsRepository {
+//* Modified
+export class InMemoryHabitsRepository implements AbstractHabitsRepository {
   constructor(private readonly db: InMemoryDbRepository<HabitEntity>) {}
 
   createHabit(createHabitInput: CreateHabitInputDomain): HabitDomain {

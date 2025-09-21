@@ -6,6 +6,7 @@ import { InMemoryHabitsRepository } from './repositories/in-memory-habits.reposi
 import { HABITS_STORE } from 'src/utils/constants';
 import { InMemoryDbModule } from 'src/in-memory-db/in-memory-db.module';
 import { AppConfigModule } from 'src/app-config/app-config.module';
+import { AbstractHabitsRepository } from './services/habits.repository';
 
 @Module({
   controllers: [HabitsController],
@@ -15,6 +16,14 @@ import { AppConfigModule } from 'src/app-config/app-config.module';
       entityName: HABITS_STORE,
     }),
   ],
-  providers: [HabitsService, InMemoryHabitsRepository],
+  //   providers: [HabitsService, InMemoryHabitsRepository],
+  //* Modified
+  providers: [
+    HabitsService,
+    {
+      provide: AbstractHabitsRepository,
+      useClass: InMemoryHabitsRepository,
+    },
+  ],
 })
 export class HabitsModule {}

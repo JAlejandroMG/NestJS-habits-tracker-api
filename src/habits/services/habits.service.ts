@@ -1,16 +1,19 @@
 import { Injectable } from '@nestjs/common';
 
-import { InMemoryHabitsRepository } from '../repositories/in-memory-habits.repository';
+// import { InMemoryHabitsRepository } from '../repositories/in-memory-habits.repository';
 import { HabitDomain } from './models/habit.domain';
 import { CreateHabitInputDomain } from './models/create-habit-input.domain';
 import { UpdateHabitInputDomain } from './models/update-habit-input.domain';
 import { AppConfigService } from 'src/app-config/app-config.service';
+import { AbstractHabitsRepository } from './habits.repository';
 
 @Injectable()
 export class HabitsService {
   constructor(
     private readonly appConfigService: AppConfigService,
-    private readonly habitsRepository: InMemoryHabitsRepository,
+    // private readonly habitsRepository: InMemoryHabitsRepository,
+    //* Modified
+    private readonly habitsRepository: AbstractHabitsRepository,
   ) {}
 
   create(
