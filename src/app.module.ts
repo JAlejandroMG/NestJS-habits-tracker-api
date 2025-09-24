@@ -7,9 +7,13 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { InMemoryDbModule } from './in-memory-db/in-memory-db.module';
 import { AppConfigModule } from './app-config/app-config.module';
 import { AppConfigService } from './app-config/app-config.service';
+import { MongoConnectionModule } from './mongo-connection/mongo-connection.module';
 
 @Module({
   imports: [
+    AnalyticsModule,
+    AppConfigModule,
+    HabitsModule,
     InMemoryDbModule.forRootAsync({
       imports: [AppConfigModule],
       inject: [AppConfigService],
@@ -17,9 +21,8 @@ import { AppConfigService } from './app-config/app-config.service';
         return config.seedDataFilePath;
       },
     }),
-    AnalyticsModule,
-    HabitsModule,
-    AppConfigModule,
+    //* Added
+    MongoConnectionModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],

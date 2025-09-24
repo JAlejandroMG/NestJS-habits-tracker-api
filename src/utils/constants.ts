@@ -1,6 +1,4 @@
-export const ANALYTICS_STORE: string = 'analytics';
-export const HABITS_STORE: string = 'habits';
-
+//~ DB - InMemoryDb
 export const DB_SEED_DATA_TOKEN: symbol = Symbol('SEED_DATA');
 export const PERSIST_DATA_PATH_TOKEN: symbol = Symbol('PERSIST_DATA_PATH');
 export const REPOSITORY_ENTITY_NAME_TOKEN: symbol = Symbol(
@@ -9,3 +7,12 @@ export const REPOSITORY_ENTITY_NAME_TOKEN: symbol = Symbol(
 export const SEED_DATA_PATH_TOKEN: symbol = Symbol('SEED_DATA_PATH');
 export const seedDataFilePath = 'fixtures/seed-data.json';
 // export const seedDataFilePath = 'fixtures/test.json';
+
+//* Added
+//~ DB - MongoDb
+export const MONGO_CLIENT_TOKEN: symbol = Symbol('MONGO_CLIENT');
+export const MONGO_DB_TOKEN: symbol = Symbol('MONGO_DB');
+
+//~ Stores
+export const ANALYTICS_STORE: string = 'analytics';
+export const HABITS_STORE: string = 'habits';

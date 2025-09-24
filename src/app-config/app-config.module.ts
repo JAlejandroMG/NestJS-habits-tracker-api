@@ -12,6 +12,10 @@ import { AppConfigService } from './app-config.service';
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         DEFAULT_LIMIT: Joi.number().optional().integer().positive().default(10),
+        //* Added
+        MONGO_URI: Joi.string() /*.required(),*/
+          .optional()
+          .default('mongodb://localhost:27017/habit-tracker'),
         SEED_DATA_FILE_PATH: Joi.string()
           .optional()
           .default('fixtures/seed-data.json')

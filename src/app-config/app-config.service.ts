@@ -9,6 +9,11 @@ export class AppConfigService {
     return this.configService.get<number>('DEFAULT_LIMIT')!;
   }
 
+  //* Added
+  get mongoUri(): string {
+    return this.configService.get<string>('MONGO_URI')!;
+  }
+
   get seedDataFilePath(): string {
     return this.configService.get<string>('SEED_DATA_FILE_PATH')!;
   }
