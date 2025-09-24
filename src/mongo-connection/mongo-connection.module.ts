@@ -14,7 +14,6 @@ export class MongoConnectionModule {
     };
   }
 
-  //* Added
   static forFeature(options: { collectionName: string }): DynamicModule {
     return {
       exports: [MongoDbRepository],

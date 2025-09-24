@@ -11,7 +11,6 @@ export const seedDataFilePath = 'fixtures/seed-data.json';
 //~ DB - MongoDb
 export const MONGO_CLIENT_TOKEN: symbol = Symbol('MONGO_CLIENT');
 export const MONGO_DB_TOKEN: symbol = Symbol('MONGO_DB');
-//* Added
 export const REPOSITORY_COLLECTION_NAME_TOKEN: symbol = Symbol(
   'REPOSITORY_COLLECTION_NAME',
 );
