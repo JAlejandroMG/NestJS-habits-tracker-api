@@ -8,7 +8,6 @@ export const SEED_DATA_PATH_TOKEN: symbol = Symbol('SEED_DATA_PATH');
 export const seedDataFilePath = 'fixtures/seed-data.json';
 // export const seedDataFilePath = 'fixtures/test.json';
 
-//* Added
 //~ DB - MongoDb
 export const MONGO_CLIENT_TOKEN: symbol = Symbol('MONGO_CLIENT');
 export const MONGO_DB_TOKEN: symbol = Symbol('MONGO_DB');

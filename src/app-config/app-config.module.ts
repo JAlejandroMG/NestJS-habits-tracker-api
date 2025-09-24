@@ -12,7 +12,6 @@ import { AppConfigService } from './app-config.service';
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         DEFAULT_LIMIT: Joi.number().optional().integer().positive().default(10),
-        //* Added
         MONGO_URI: Joi.string() /*.required(),*/
           .optional()
           .default('mongodb://localhost:27017/habit-tracker'),

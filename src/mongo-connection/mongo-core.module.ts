@@ -12,7 +12,6 @@ import { AppConfigService } from 'src/app-config/app-config.service';
     {
       inject: [AppConfigService],
       provide: MONGO_CLIENT_TOKEN,
-      //* useValue: new MongoClient('mongodb://localhost:27017/habit-tracker'),
       useFactory: (appConfigService: AppConfigService) =>
         new MongoClient(appConfigService.mongoUri),
     },
@@ -21,7 +20,6 @@ import { AppConfigService } from 'src/app-config/app-config.service';
       provide: MONGO_DB_TOKEN,
       useFactory: async (mongoClient: MongoClient) => {
         await mongoClient.connect();
-        console.log('Opening mongo connection...');
         return mongoClient.db();
       },
     },
@@ -35,7 +33,6 @@ export class MongoCoreModule implements OnApplicationShutdown {
   ) {}
 
   onApplicationShutdown(/*signal?: string*/) {
-    console.log('Closing mongo connection...');
     this.mongoClient.close();
   }
 }

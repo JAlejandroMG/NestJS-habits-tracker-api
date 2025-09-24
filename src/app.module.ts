@@ -21,7 +21,6 @@ import { MongoConnectionModule } from './mongo-connection/mongo-connection.modul
         return config.seedDataFilePath;
       },
     }),
-    //* Added
     MongoConnectionModule.forRoot(),
   ],
   controllers: [AppController],

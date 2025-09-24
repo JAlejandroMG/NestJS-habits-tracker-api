@@ -9,7 +9,6 @@ export class AppConfigService {
     return this.configService.get<number>('DEFAULT_LIMIT')!;
   }
 
-  //* Added
   get mongoUri(): string {
     return this.configService.get<string>('MONGO_URI')!;
   }
