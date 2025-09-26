@@ -1,10 +1,35 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
 
 import { InMemoryHabitsRepositoryModule } from './in-memory-habits-repository/in-memory-habits-repository.module';
 import { MongoHabitsRepositoryModule } from './mongo-habits-repository/mongo-habits-repository.module';
+import { DbType } from 'src/utils/constants';
 
 @Module({
-  exports: [InMemoryHabitsRepositoryModule],
-  imports: [InMemoryHabitsRepositoryModule, MongoHabitsRepositoryModule],
+  //* Not needed anymore
+  //   exports: [InMemoryHabitsRepositoryModule],
+  //   imports: [InMemoryHabitsRepositoryModule, MongoHabitsRepositoryModule],
 })
-export class HabitsRepositoryModule {}
+export class HabitsRepositoryModule {
+  static register(options: { dbType: DbType }): DynamicModule {
+    let repositoryModule;
+
+    switch (options.dbType) {
+      case DbType.IN_MEMORY:
+        repositoryModule = InMemoryHabitsRepositoryModule;
+        break;
+      case DbType.MONGO:
+        repositoryModule = MongoHabitsRepositoryModule;
+        break;
+      default:
+        throw new Error(
+          `HabitsRepositoryModule does not support ${options.dbType}`,
+        );
+    }
+
+    return {
+      exports: [repositoryModule],
+      imports: [repositoryModule],
+      module: HabitsRepositoryModule,
+    };
+  }
+}

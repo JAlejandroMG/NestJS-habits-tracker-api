@@ -1,3 +1,12 @@
+//* Added
+//~ DB
+export enum DbType {
+  IN_MEMORY = 'IN_MEMORY',
+  MONGO = 'MONGO',
+  MONGOOSE = 'MONGOOSE',
+  ORM = 'ORM',
+}
+
 //~ DB - InMemoryDb
 export const DB_SEED_DATA_TOKEN: symbol = Symbol('SEED_DATA');
 export const PERSIST_DATA_PATH_TOKEN: symbol = Symbol('PERSIST_DATA_PATH');
