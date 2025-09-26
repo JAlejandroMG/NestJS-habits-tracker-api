@@ -19,7 +19,6 @@ export class MongoDbRepository<EntityModel extends { _id: ObjectId }> {
     this.collection = this.db.collection(this.collectionName);
   }
 
-  //* Modified
   async create(entity: Omit<EntityModel, '_id'>): Promise<EntityModel> {
     const insertResult = await this.collection.insertOne(entity);
     const insertedDoc = await this.collection.findOne<EntityModel>({

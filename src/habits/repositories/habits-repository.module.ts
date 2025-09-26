@@ -5,7 +5,6 @@ import { MongoHabitsRepositoryModule } from './mongo-habits-repository/mongo-hab
 
 @Module({
   exports: [InMemoryHabitsRepositoryModule],
-  //* Modified
   imports: [InMemoryHabitsRepositoryModule, MongoHabitsRepositoryModule],
 })
 export class HabitsRepositoryModule {}
