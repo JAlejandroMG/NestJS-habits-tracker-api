@@ -8,17 +8,7 @@ import { DbType } from 'src/utils/constants';
 
 @Module({
   controllers: [HabitsController],
-  //* Import HabitRepositoryModule dinamically
-  //   imports: [AppConfigModule, HabitsRepositoryModule],
-  imports: [
-    AppConfigModule,
-    //* Not needed anymore
-    // HabitsRepositoryModule
-    //* Not needed anymore
-    // HabitsRepositoryModule.register({
-    //   dbType: DbType.IN_MEMORY,
-    // }),
-  ],
+  imports: [AppConfigModule],
   providers: [HabitsService],
 })
 export class HabitsModule {

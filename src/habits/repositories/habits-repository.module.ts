@@ -4,11 +4,7 @@ import { InMemoryHabitsRepositoryModule } from './in-memory-habits-repository/in
 import { MongoHabitsRepositoryModule } from './mongo-habits-repository/mongo-habits-repository.module';
 import { DbType } from 'src/utils/constants';
 
-@Module({
-  //* Not needed anymore
-  //   exports: [InMemoryHabitsRepositoryModule],
-  //   imports: [InMemoryHabitsRepositoryModule, MongoHabitsRepositoryModule],
-})
+@Module({})
 export class HabitsRepositoryModule {
   static register(options: { dbType: DbType }): DynamicModule {
     let repositoryModule;

@@ -14,12 +14,6 @@ import { DbType } from './utils/constants';
   imports: [
     AnalyticsModule,
     AppConfigModule,
-    //* Not needed anymore
-    // HabitsModule
-    //* Not needed anymore
-    // HabitsModule.register({
-    //   dbType: DbType.MONGO,
-    // }),
     InMemoryDbModule.forRootAsync({
       imports: [AppConfigModule],
       inject: [AppConfigService],
@@ -33,8 +27,6 @@ import { DbType } from './utils/constants';
   providers: [AppService],
 })
 export class AppModule {
-  //* As InMemoryDbModule and MongoConnectionModule are delared here
-  //* then we need a core module where the DB can be defined in this case
   static register(options: { appDataDb: DbType }): DynamicModule {
     const { appDataDb } = options;
 

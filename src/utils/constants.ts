@@ -1,4 +1,3 @@
-//* Added
 //~ DB
 export enum DbType {
   IN_MEMORY = 'IN_MEMORY',
