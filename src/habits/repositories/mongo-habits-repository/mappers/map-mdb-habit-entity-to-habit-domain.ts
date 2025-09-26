@@ -1,8 +1,8 @@
 import { HabitDomain } from 'src/habits/services/models/habit.domain';
-import { HabitEntity } from '../entities/habit.entity';
+import { HabitEntity } from '../entities/mdb-habit.entity';
 
 export const mapHabitEntityToHabitDomain = (
-  entity?: HabitEntity,
+  entity?: HabitEntity | null,
 ): HabitDomain | undefined => {
   if (!entity) {
     return undefined;
