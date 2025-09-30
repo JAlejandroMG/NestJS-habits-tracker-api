@@ -2,14 +2,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HABITS_STORE } from 'src/utils/constants';
 
-//* Added
 @Schema({
   collection: HABITS_STORE,
   //~ This tells Mongoose to add createdAt and updatedAt properties
   //   timestamps: true
 })
 export class MongooseHabitEntity {
-  //* Removed
   //* Mongoose already knows these properties
   //   createdAt: Date;
   //~ Indicates this property will be saved in the DB

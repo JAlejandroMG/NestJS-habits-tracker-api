@@ -5,10 +5,7 @@ import { MongoHabitsRepositoryModule } from './mongo-habits-repository/mongo-hab
 import { DbType } from 'src/utils/constants';
 import { MongooseHabitsRepositoryModule } from './mongoose-habits-repository/mongoose-habits-repository.module';
 
-@Module({
-  //* Moved down to DynamicModule
-  //   imports: [MongooseHabitsRepositoryModule],
-})
+@Module({})
 export class HabitsRepositoryModule {
   static register(options: { dbType: DbType }): DynamicModule {
     let repositoryModule;
@@ -20,7 +17,6 @@ export class HabitsRepositoryModule {
       case DbType.MONGO:
         repositoryModule = MongoHabitsRepositoryModule;
         break;
-      //* Added
       case DbType.MONGOOSE:
         repositoryModule = MongooseHabitsRepositoryModule;
         break;

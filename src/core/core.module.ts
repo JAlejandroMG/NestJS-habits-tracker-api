@@ -21,7 +21,6 @@ export class CoreModule {
           });
         case DbType.MONGO:
           return MongoConnectionModule.forRoot();
-        //* Added
         case DbType.MONGOOSE:
           return MongooseModule.forRootAsync({
             imports: [AppConfigModule],
