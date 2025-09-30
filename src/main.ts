@@ -3,11 +3,8 @@ import { AppModule } from './app.module';
 import { DbType } from './utils/constants';
 
 async function bootstrap() {
-  //* Added
   const appDataDb = (process.env.APP_DATA_DB as DbType) ?? DbType.IN_MEMORY;
 
-  //   const app = await NestFactory.create(AppModule);
-  //* Modified
   const app = await NestFactory.create(
     AppModule.register({
       analyticsDataDb: DbType.IN_MEMORY,
