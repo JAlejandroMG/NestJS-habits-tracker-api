@@ -4,34 +4,48 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HabitsModule } from './habits/habits.module';
 import { AnalyticsModule } from './analytics/analytics.module';
-import { InMemoryDbModule } from './in-memory-db/in-memory-db.module';
-import { AppConfigModule } from './app-config/app-config.module';
-import { AppConfigService } from './app-config/app-config.service';
-import { MongoConnectionModule } from './mongo-connection/mongo-connection.module';
+// import { InMemoryDbModule } from './in-memory-db/in-memory-db.module';
+// import { AppConfigService } from './app-config/app-config.service';
+// import { MongoConnectionModule } from './mongo-connection/mongo-connection.module';
 import { DbType } from './utils/constants';
+import { CoreModule } from './core/core.module';
 
 @Module({
   imports: [
     AnalyticsModule,
-    AppConfigModule,
-    InMemoryDbModule.forRootAsync({
-      imports: [AppConfigModule],
-      inject: [AppConfigService],
-      useFactory: (config: AppConfigService) => {
-        return config.seedDataFilePath;
-      },
-    }),
-    MongoConnectionModule.forRoot(),
+    //* Moved to DynamicModule
+    // CoreModule,
+    //* Moved to core.module.ts
+    // InMemoryDbModule.forRootAsync({
+    //   imports: [AppConfigModule],
+    //   inject: [AppConfigService],
+    //   useFactory: (config: AppConfigService) => {
+    //     return config.seedDataFilePath;
+    //   },
+    // }),
+    //* Moved to core.module.ts
+    // MongoConnectionModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  static register(options: { appDataDb: DbType }): DynamicModule {
-    const { appDataDb } = options;
+  //* Added
+  static register(options: {
+    analyticsDataDb: DbType;
+    appDataDb: DbType;
+  }): DynamicModule {
+    const { analyticsDataDb, appDataDb } = options;
+    const dbTypes = Array.from(new Set([analyticsDataDb, appDataDb]));
 
     return {
-      imports: [HabitsModule.register({ dbType: appDataDb })],
+      imports: [
+        //* Added
+        // CoreModule.forRoot({ dbTypes: [appDataDb] }),
+        //*Modified
+        CoreModule.forRoot({ dbTypes }),
+        HabitsModule.register({ dbType: appDataDb }),
+      ],
       module: AppModule,
     };
   }
