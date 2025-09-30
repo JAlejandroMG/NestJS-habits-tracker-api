@@ -3,8 +3,12 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { InMemoryHabitsRepositoryModule } from './in-memory-habits-repository/in-memory-habits-repository.module';
 import { MongoHabitsRepositoryModule } from './mongo-habits-repository/mongo-habits-repository.module';
 import { DbType } from 'src/utils/constants';
+import { MongooseHabitsRepositoryModule } from './mongoose-habits-repository/mongoose-habits-repository.module';
 
-@Module({})
+@Module({
+  //* Moved down to DynamicModule
+  //   imports: [MongooseHabitsRepositoryModule],
+})
 export class HabitsRepositoryModule {
   static register(options: { dbType: DbType }): DynamicModule {
     let repositoryModule;
@@ -15,6 +19,10 @@ export class HabitsRepositoryModule {
         break;
       case DbType.MONGO:
         repositoryModule = MongoHabitsRepositoryModule;
+        break;
+      //* Added
+      case DbType.MONGOOSE:
+        repositoryModule = MongooseHabitsRepositoryModule;
         break;
       default:
         throw new Error(

@@ -1,4 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppConfigModule } from 'src/app-config/app-config.module';
 import { AppConfigService } from 'src/app-config/app-config.service';
 import { InMemoryDbModule } from 'src/in-memory-db/in-memory-db.module';
@@ -20,6 +21,17 @@ export class CoreModule {
           });
         case DbType.MONGO:
           return MongoConnectionModule.forRoot();
+        //* Added
+        case DbType.MONGOOSE:
+          return MongooseModule.forRootAsync({
+            imports: [AppConfigModule],
+            inject: [AppConfigService],
+            useFactory: (appConfigService: AppConfigService) => {
+              return {
+                uri: appConfigService.mongoUri,
+              };
+            },
+          });
         default:
           throw new Error(`Unsopported db type: ${dbType}`);
       }
