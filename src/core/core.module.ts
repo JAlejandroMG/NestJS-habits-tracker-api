@@ -1,5 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppConfigModule } from 'src/app-config/app-config.module';
 import { AppConfigService } from 'src/app-config/app-config.service';
 import { InMemoryDbModule } from 'src/in-memory-db/in-memory-db.module';
@@ -31,7 +32,24 @@ export class CoreModule {
               };
             },
           });
+        //* Added
+        case DbType.TYPE_ORM:
+          return TypeOrmModule.forRootAsync({
+            imports: [AppConfigModule],
+            inject: [AppConfigService],
+            /*useFactory: (appConfigService: AppConfigService) => {
+              return {
+                ...appConfigService.ormOptions,
+                //~ This would be needed without autoLoadEntities
+                //~ in app-config.service.ts
+                entities: [TOrmHabitEntity],
+              };
+            },*/
+            useFactory: (appConfigService: AppConfigService) =>
+              appConfigService.ormOptions,
+          });
         default:
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           throw new Error(`Unsopported db type: ${dbType}`);
       }
     });

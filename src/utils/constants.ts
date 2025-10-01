@@ -3,7 +3,7 @@ export enum DbType {
   IN_MEMORY = 'IN_MEMORY',
   MONGO = 'MONGO',
   MONGOOSE = 'MONGOOSE',
-  ORM = 'ORM',
+  TYPE_ORM = 'TYPE_ORM',
 }
 
 //~ DB - InMemoryDb

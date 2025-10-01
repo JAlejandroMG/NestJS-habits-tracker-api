@@ -4,6 +4,7 @@ import { InMemoryHabitsRepositoryModule } from './in-memory-habits-repository/in
 import { MongoHabitsRepositoryModule } from './mongo-habits-repository/mongo-habits-repository.module';
 import { DbType } from 'src/utils/constants';
 import { MongooseHabitsRepositoryModule } from './mongoose-habits-repository/mongoose-habits-repository.module';
+import { TypeormHabitsRepositoryModule } from './typeorm-habits-repository/typeorm-habits-repository.module';
 
 @Module({})
 export class HabitsRepositoryModule {
@@ -19,6 +20,10 @@ export class HabitsRepositoryModule {
         break;
       case DbType.MONGOOSE:
         repositoryModule = MongooseHabitsRepositoryModule;
+        break;
+      //* Added
+      case DbType.TYPE_ORM:
+        repositoryModule = TypeormHabitsRepositoryModule;
         break;
       default:
         throw new Error(

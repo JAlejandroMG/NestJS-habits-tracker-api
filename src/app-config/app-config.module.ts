@@ -19,6 +19,16 @@ import { AppConfigService } from './app-config.service';
           .optional()
           .default('fixtures/seed-data.json')
           .regex(/\.json$/),
+        //*Added
+        //~ TypeORM
+        ORM_HOST: Joi.string(),
+        ORM_PASSWORD: Joi.string(),
+        ORM_PORT: Joi.number().positive().default(5432),
+        //* True will automatically update the schema with code changes
+        //* This better be done through migrations
+        ORM_SYNCHRONIZE: Joi.boolean().default(false),
+        ORM_TYPE: Joi.string().valid('postgres', 'mysql').default('postgres'),
+        ORM_USERNAME: Joi.string(),
       }),
     }),
   ],
