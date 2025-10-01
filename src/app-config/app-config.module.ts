@@ -19,7 +19,6 @@ import { AppConfigService } from './app-config.service';
           .optional()
           .default('fixtures/seed-data.json')
           .regex(/\.json$/),
-        //*Added
         //~ TypeORM
         ORM_HOST: Joi.string(),
         ORM_PASSWORD: Joi.string(),

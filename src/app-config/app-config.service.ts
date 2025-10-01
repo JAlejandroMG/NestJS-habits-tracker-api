@@ -14,7 +14,6 @@ export class AppConfigService {
     return this.configService.get<string>('MONGO_URI')!;
   }
 
-  //* Added
   get ormOptions(): TypeOrmModuleOptions {
     return {
       //* When a new TypeORM entity is declared,

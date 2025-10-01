@@ -21,7 +21,6 @@ export class HabitsRepositoryModule {
       case DbType.MONGOOSE:
         repositoryModule = MongooseHabitsRepositoryModule;
         break;
-      //* Added
       case DbType.TYPE_ORM:
         repositoryModule = TypeormHabitsRepositoryModule;
         break;

@@ -32,7 +32,6 @@ export class CoreModule {
               };
             },
           });
-        //* Added
         case DbType.TYPE_ORM:
           return TypeOrmModule.forRootAsync({
             imports: [AppConfigModule],
