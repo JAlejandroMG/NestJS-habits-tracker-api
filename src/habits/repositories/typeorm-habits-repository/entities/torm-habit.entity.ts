@@ -1,4 +1,4 @@
-import { HABITS_STORE } from 'src/utils/constants';
+import { HABITS } from 'src/utils/constants';
 import {
   Column,
   CreateDateColumn,
@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 //* If the name is not passed, it will assign the class name.
-@Entity(HABITS_STORE)
+@Entity(HABITS)
 export class TOrmHabitEntity {
   @CreateDateColumn()
   created_at: Date;

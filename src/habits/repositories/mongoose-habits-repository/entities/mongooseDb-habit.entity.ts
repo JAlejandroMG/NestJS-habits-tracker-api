@@ -1,9 +1,9 @@
 // import { ObjectId } from 'mongodb';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HABITS_STORE } from 'src/utils/constants';
+import { HABITS } from 'src/utils/constants';
 
 @Schema({
-  collection: HABITS_STORE,
+  collection: HABITS,
   //~ This tells Mongoose to add createdAt and updatedAt properties
   //   timestamps: true
 })

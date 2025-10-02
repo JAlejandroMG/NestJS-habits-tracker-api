@@ -24,5 +24,5 @@ export const REPOSITORY_COLLECTION_NAME_TOKEN: symbol = Symbol(
 );
 
 //~ Stores
-export const ANALYTICS_STORE: string = 'analytics';
-export const HABITS_STORE: string = 'habits';
+export const ANALYTICS: string = 'analytics';
+export const HABITS: string = 'habits';

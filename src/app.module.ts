@@ -6,9 +6,10 @@ import { HabitsModule } from './habits/habits.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { DbType } from './utils/constants';
 import { CoreModule } from './core/core.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [AnalyticsModule],
+  imports: [AnalyticsModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
