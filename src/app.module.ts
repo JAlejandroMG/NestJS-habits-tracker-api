@@ -9,7 +9,7 @@ import { CoreModule } from './core/core.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [AnalyticsModule, UsersModule],
+  imports: [AnalyticsModule],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -25,6 +25,8 @@ export class AppModule {
       imports: [
         CoreModule.forRoot({ dbTypes }),
         HabitsModule.register({ dbType: appDataDb }),
+        //* Added
+        UsersModule.register({ dbType: appDataDb }),
       ],
       module: AppModule,
     };

@@ -23,6 +23,9 @@ export const REPOSITORY_COLLECTION_NAME_TOKEN: symbol = Symbol(
   'REPOSITORY_COLLECTION_NAME',
 );
 
-//~ Stores
+//* Modified
+//~ Modules
 export const ANALYTICS: string = 'analytics';
 export const HABITS: string = 'habits';
+//* Added
+export const USERS: string = 'users';
