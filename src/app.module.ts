@@ -25,7 +25,6 @@ export class AppModule {
       imports: [
         CoreModule.forRoot({ dbTypes }),
         HabitsModule.register({ dbType: appDataDb }),
-        //* Added
         UsersModule.register({ dbType: appDataDb }),
       ],
       module: AppModule,
