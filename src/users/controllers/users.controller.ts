@@ -81,9 +81,10 @@ export class UsersController {
   ): Promise<UserDto | undefined> {
     const user = await this.usersService.removeUser(id);
 
-    if (!user) {
-      throw new NotFoundException(`User with id: '${id}' has not been found`);
-    }
+    //* Not needed because ValidationUlidPipe user existance validation
+    // if (!user) {
+    //   throw new NotFoundException(`User with id: '${id}' has not been found`);
+    // }
 
     return mapUserDomainToUserDto(user);
   }
@@ -97,9 +98,10 @@ export class UsersController {
       mapUpdateUserInputDtoToInputDomain(id, updateUserInput),
     );
 
-    if (!user) {
-      throw new NotFoundException(`User with id: '${id}' has not been found`);
-    }
+    //* Not needed because ValidationUlidPipe user existance validation
+    // if (!user) {
+    //   throw new NotFoundException(`User with id: '${id}' has not been found`);
+    // }
 
     return mapUserDomainToUserDto(user);
   }
