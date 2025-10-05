@@ -43,5 +43,16 @@
       "timestamp": "2025-09-18T04:18:51.182Z",
       "id": 1758169131182
     }
+  ],
+  "users": [
+    {
+      "firstName": "José",
+      "lastName": "Martínez Garza",
+      "middleName": "Alejandro",
+      "createdAt": "2025-10-04T14:10:32.689Z",
+      "updatedAt": "2025-10-04T14:10:32.689Z",
+      "userId": "01K6QRYQKHVFK77TCMEG2MBNBA",
+      "id": 1759587032698
+    }
   ]
 }

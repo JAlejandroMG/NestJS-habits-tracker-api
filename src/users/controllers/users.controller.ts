@@ -1,4 +1,7 @@
+//* Added
+import { isValid } from 'ulid';
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -21,6 +24,7 @@ import { UpdateUserInputDto } from './dto/update-user-input.dto';
 import { mapUserDomainToUserDto } from './mappers/map-user-domain-to-user-dto';
 import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-input-dto-to-input-domain';
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
+import { ValidationUlidPipe } from 'src/utils/pipes/validation-ulid.pipe';
 
 @Controller(USERS)
 export class UsersController {
@@ -52,7 +56,20 @@ export class UsersController {
   }
 
   @Get(':id')
-  async findOneUser(@Param('id') id: string): Promise<UserDto | undefined> {
+  async findOneUser(
+    //~ This Pipe will return the value processed.
+    //~ (Validated and/or Transformed)
+    @Param(
+      'id',
+      new ValidationUlidPipe('This is a custom validated error messsage.'),
+    )
+    id: string,
+  ): Promise<UserDto | undefined> {
+    //* Add validation
+    /*if (!isValid(id)) {
+      throw new BadRequestException();
+    }*/
+
     const user = await this.usersService.findOneUser(id);
 
     if (!user) {
@@ -64,7 +81,9 @@ export class UsersController {
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  async removeUser(@Param('id') id: string): Promise<UserDto | undefined> {
+  async removeUser(
+    @Param('id', ValidationUlidPipe) id: string,
+  ): Promise<UserDto | undefined> {
     const user = await this.usersService.removeUser(id);
 
     if (!user) {
@@ -76,7 +95,7 @@ export class UsersController {
 
   @Patch(':id')
   async updateUser(
-    @Param('id') id: string,
+    @Param('id', ValidationUlidPipe) id: string,
     @Body() updateUserInput: UpdateUserInputDto,
   ): Promise<UserDto | undefined> {
     const user = await this.usersService.updateUser(
