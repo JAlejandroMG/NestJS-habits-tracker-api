@@ -1,7 +1,4 @@
-//* Added
-import { isValid } from 'ulid';
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -81,10 +78,9 @@ export class UsersController {
   ): Promise<UserDto | undefined> {
     const user = await this.usersService.removeUser(id);
 
-    //* Not needed because ValidationUlidPipe user existance validation
-    // if (!user) {
-    //   throw new NotFoundException(`User with id: '${id}' has not been found`);
-    // }
+    if (!user) {
+      throw new NotFoundException(`User with id: '${id}' has not been found`);
+    }
 
     return mapUserDomainToUserDto(user);
   }
@@ -98,10 +94,9 @@ export class UsersController {
       mapUpdateUserInputDtoToInputDomain(id, updateUserInput),
     );
 
-    //* Not needed because ValidationUlidPipe user existance validation
-    // if (!user) {
-    //   throw new NotFoundException(`User with id: '${id}' has not been found`);
-    // }
+    if (!user) {
+      throw new NotFoundException(`User with id: '${id}' has not been found`);
+    }
 
     return mapUserDomainToUserDto(user);
   }
