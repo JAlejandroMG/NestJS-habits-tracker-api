@@ -65,11 +65,6 @@ export class UsersController {
     )
     id: string,
   ): Promise<UserDto | undefined> {
-    //* Add validation
-    /*if (!isValid(id)) {
-      throw new BadRequestException();
-    }*/
-
     const user = await this.usersService.findOneUser(id);
 
     if (!user) {
