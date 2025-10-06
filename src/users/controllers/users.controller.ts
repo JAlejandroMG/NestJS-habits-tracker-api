@@ -34,7 +34,6 @@ import {
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  //* Added
   //* This could also be used for updateUser
   private validateCreateUserInput(createUserInput: CreateUserInputDto) {
     isRequired(createUserInput.email, User.EMAIL);

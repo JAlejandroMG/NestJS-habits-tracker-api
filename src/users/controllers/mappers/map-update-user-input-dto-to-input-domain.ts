@@ -6,9 +6,7 @@ export const mapUpdateUserInputDtoToInputDomain = (
   id: string,
   updateUserInputDto: UpdateUserInputDto,
 ): UpdatedUserInputDomain => {
-  //* Added
   const cleanData = removeUndefinedValues<Partial<UpdateUserInputDto>>({
-    //* Added
     dateOfBirth: updateUserInputDto.dateOfBirth,
     email: updateUserInputDto.email,
     firstName: updateUserInputDto.firstName,
@@ -19,8 +17,6 @@ export const mapUpdateUserInputDtoToInputDomain = (
   });
 
   return {
-    //* Modified
-    // ...updateUserInputDto,
     ...cleanData,
     userId: id,
   };

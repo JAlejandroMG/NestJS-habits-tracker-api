@@ -1,6 +1,5 @@
 export interface UserEntity {
   createdAt: Date;
-  //* Added
   dateOfBirth: Date;
   email: string;
   firstName: string;

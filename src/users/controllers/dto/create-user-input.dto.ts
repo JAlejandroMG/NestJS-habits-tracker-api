@@ -1,5 +1,4 @@
 export interface CreateUserInputDto {
-  //* Added
   dateOfBirth: Date;
   email: string;
   firstName: string;

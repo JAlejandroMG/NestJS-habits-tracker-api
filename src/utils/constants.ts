@@ -28,7 +28,6 @@ export const ANALYTICS: string = 'analytics';
 export const HABITS: string = 'habits';
 export const USERS: string = 'users';
 
-//* Added
 //~ Users
 export enum User {
   EMAIL = 'email',

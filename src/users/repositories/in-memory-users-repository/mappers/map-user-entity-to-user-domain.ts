@@ -9,7 +9,6 @@ export const mapUserEntityToUserDomain = (
   }
 
   return {
-    //* Added
     dateOfBirth: entity.dateOfBirth,
     email: entity.email,
     firstName: entity.firstName,

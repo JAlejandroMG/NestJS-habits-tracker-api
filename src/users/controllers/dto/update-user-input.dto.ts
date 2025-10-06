@@ -1,5 +1,4 @@
 export interface UpdateUserInputDto {
-  //* Added
   dateOfBirth: Date;
   email?: string;
   firstName?: string;
