@@ -27,3 +27,14 @@ export const REPOSITORY_COLLECTION_NAME_TOKEN: symbol = Symbol(
 export const ANALYTICS: string = 'analytics';
 export const HABITS: string = 'habits';
 export const USERS: string = 'users';
+
+//* Added
+//~ Users
+export enum User {
+  EMAIL = 'email',
+  FIRST_NAME = 'firstName',
+  LAST_NAME = 'lastName',
+  MIDDLE_NAME = 'middleName',
+  PASSWORD = 'password',
+  USER_NAME = 'userName',
+}

@@ -53,6 +53,30 @@
       "updatedAt": "2025-10-04T14:10:32.689Z",
       "userId": "01K6QRYQKHVFK77TCMEG2MBNBA",
       "id": 1759587032698
+    },
+    {
+      "email": "jaletsmg@test.com",
+      "firstName": "José",
+      "lastName": "Martínez Garza",
+      "middleName": "Alejandro",
+      "password": "abc123",
+      "userName": "JAletsMG",
+      "createdAt": "2025-10-06T02:53:52.291Z",
+      "updatedAt": "2025-10-06T02:53:52.291Z",
+      "userId": "01K6VQ14S4E046YPTW3R1EN2PK",
+      "id": 1759719232308
+    },
+    {
+      "email": "rorrog@test.com",
+      "firstName": "José",
+      "lastName": "Canales Escalante",
+      "middleName": "Rodrigo",
+      "password": "abcd1234",
+      "userName": "Rorro",
+      "createdAt": "2025-10-06T04:14:04.473Z",
+      "updatedAt": "2025-10-06T04:14:04.473Z",
+      "userId": "01K6VVM05S2MH3X0BPXX4GK4FY",
+      "id": 1759724044474
     }
   ]
 }

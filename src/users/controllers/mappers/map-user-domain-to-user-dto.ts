@@ -9,6 +9,8 @@ export const mapUserDomainToUserDto = (
   }
 
   return {
+    //* Added
+    dateOfBirth: userDomain.dateOfBirth,
     email: userDomain.email,
     firstName: userDomain.firstName,
     id: userDomain.userId,

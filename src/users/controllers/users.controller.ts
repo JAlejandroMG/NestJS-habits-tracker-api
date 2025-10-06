@@ -12,7 +12,7 @@ import {
   Query,
 } from '@nestjs/common';
 
-import { USERS } from 'src/utils/constants';
+import { User, USERS } from 'src/utils/constants';
 
 import { UsersService } from '../services/users.service';
 import { UserDto } from './dto/user.dto';
@@ -22,15 +22,46 @@ import { mapUserDomainToUserDto } from './mappers/map-user-domain-to-user-dto';
 import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-input-dto-to-input-domain';
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
 import { ValidationUlidPipe } from 'src/utils/pipes/validation-ulid.pipe';
+// eslint-disable-next-line prettier/prettier
+import {
+  isMinLength,
+  isNotEmptyString,
+  isRequired,
+  isString,
+} from 'src/utils/http-input-validation';
 
 @Controller(USERS)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  //* Added
+  //* This could also be used for updateUser
+  private validateCreateUserInput(createUserInput: CreateUserInputDto) {
+    isRequired(createUserInput.email, User.EMAIL);
+    isString(createUserInput.email, User.EMAIL);
+    isNotEmptyString(createUserInput.email, User.EMAIL);
+
+    isString(createUserInput.firstName, User.FIRST_NAME);
+
+    isString(createUserInput.lastName, User.LAST_NAME);
+
+    if (createUserInput.middleName) {
+      isString(createUserInput.middleName, User.MIDDLE_NAME);
+    }
+
+    isRequired(createUserInput.password, User.PASSWORD);
+    isString(createUserInput.password, User.PASSWORD);
+    isNotEmptyString(createUserInput.password, User.PASSWORD);
+    isMinLength(createUserInput.password, User.PASSWORD, 8);
+
+    isString(createUserInput.userName, User.USER_NAME);
+  }
+
   @Post()
   async createUser(
     @Body() createUserInputDto: CreateUserInputDto,
   ): Promise<UserDto> {
+    this.validateCreateUserInput(createUserInputDto);
     const user = await this.usersService.createUser(
       mapCreateUserInputDtoToInputDomain(createUserInputDto),
     );

@@ -1,5 +1,7 @@
 export interface UserEntity {
   createdAt: Date;
+  //* Added
+  dateOfBirth: Date;
   email: string;
   firstName: string;
   id: number; //* This comes from the DB
