@@ -9,9 +9,12 @@ export const mapUserEntityToUserDomain = (
   }
 
   return {
+    email: entity.email,
     firstName: entity.firstName,
     lastName: entity.lastName,
     middleName: entity.middleName,
+    password: entity.password,
     userId: entity.userId,
+    userName: entity.userName,
   };
 };

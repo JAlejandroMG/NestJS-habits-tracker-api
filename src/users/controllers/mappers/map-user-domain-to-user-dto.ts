@@ -9,9 +9,12 @@ export const mapUserDomainToUserDto = (
   }
 
   return {
+    email: userDomain.email,
     firstName: userDomain.firstName,
     id: userDomain.userId,
     lastName: userDomain.lastName,
     middleName: userDomain.middleName,
+    password: userDomain.password,
+    userName: userDomain.userName,
   };
 };
