@@ -10,7 +10,7 @@ import {
 
 @Injectable()
 // export class ValidateUlidIdPipe implements PipeTransform {
-export class ValidationUlidPipe implements PipeTransform<string, string> {
+export class ValidateUlidPipe implements PipeTransform<string, string> {
   //~ For an optional custom validation error message
   //~ there should be a constructor.
   constructor(

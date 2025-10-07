@@ -30,6 +30,8 @@ export const USERS: string = 'users';
 
 //~ Users
 export enum User {
+  //* Added
+  DATE_OF_BIRTH = 'dateOfBirth',
   EMAIL = 'email',
   FIRST_NAME = 'firstName',
   LAST_NAME = 'lastName',

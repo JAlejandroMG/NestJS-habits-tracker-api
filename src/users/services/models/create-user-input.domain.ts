@@ -1,5 +1,6 @@
 export interface CreateUserInputDomain {
-  dateOfBirth: Date;
+  //* Added
+  dateOfBirth?: string | Date;
   email: string;
   firstName: string;
   lastName: string;

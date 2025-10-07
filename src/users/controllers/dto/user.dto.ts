@@ -1,5 +1,6 @@
 export interface UserDto {
-  dateOfBirth: Date;
+  //* Added
+  dateOfBirth?: string | Date;
   email: string;
   firstName: string;
   id: string;
