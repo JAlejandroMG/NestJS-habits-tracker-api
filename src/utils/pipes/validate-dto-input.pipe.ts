@@ -1,6 +1,7 @@
 import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
 import { DtoInput } from '../dto/dto-input';
 
+//* NOT CURRENTLY IMPLEMENTED
 @Injectable()
 export class ValidateDtoInputPipe implements PipeTransform {
   //~ Leave transform type as any, cause we need the pipe as general as possible

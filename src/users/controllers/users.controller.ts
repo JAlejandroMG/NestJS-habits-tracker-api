@@ -34,8 +34,6 @@ export class UsersController {
 
   @Post()
   async createUser(
-    // @Body(ValidateDtoInputPipe) createUserInputDto: CreateUserInputDto,
-    //* Modified
     @Body(new ValidateZodSchemaPipe(createUserSchema))
     createUserInputDto: CreateUserInputDto,
   ): Promise<UserDto> {
