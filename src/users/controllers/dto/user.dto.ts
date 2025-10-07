@@ -1,5 +1,4 @@
 export interface UserDto {
-  //* Added
   dateOfBirth?: string | Date;
   email: string;
   firstName: string;

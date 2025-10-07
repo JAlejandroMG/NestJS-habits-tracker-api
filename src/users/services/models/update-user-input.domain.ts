@@ -1,5 +1,4 @@
 export interface UpdatedUserInputDomain {
-  //* Added
   dateOfBirth?: string | Date;
   email?: string;
   firstName?: string;

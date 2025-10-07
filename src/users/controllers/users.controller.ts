@@ -23,49 +23,16 @@ import { UpdateUserInputDto } from './dto/update-user-input.dto';
 import { mapUserDomainToUserDto } from './mappers/map-user-domain-to-user-dto';
 import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-input-dto-to-input-domain';
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
-/*import {
-  isMinLength,
-  isNotEmptyString,
-  isRequired,
-  isString,
-} from 'src/utils/http-input-validation';*/
 
 @Controller(USERS)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  //* Move this to CreateUserInputDto
-  //* This could also be used for updateUser
-  /*private validateCreateUserInput(createUserInput: CreateUserInputDto) {
-    isRequired(createUserInput.email, User.EMAIL);
-    isString(createUserInput.email, User.EMAIL);
-    isNotEmptyString(createUserInput.email, User.EMAIL);
-
-    isString(createUserInput.firstName, User.FIRST_NAME);
-
-    isString(createUserInput.lastName, User.LAST_NAME);
-
-    if (createUserInput.middleName) {
-      isString(createUserInput.middleName, User.MIDDLE_NAME);
-    }
-
-    isRequired(createUserInput.password, User.PASSWORD);
-    isString(createUserInput.password, User.PASSWORD);
-    isNotEmptyString(createUserInput.password, User.PASSWORD);
-    isMinLength(createUserInput.password, User.PASSWORD, 8);
-
-    isString(createUserInput.userName, User.USER_NAME);
-  }*/
-
   @Post()
   async createUser(
-    // @Body() createUserInputDto: CreateUserInputDto,
-    //* Modified
     @Body(ValidateDtoInputPipe) createUserInputDto: CreateUserInputDto,
   ): Promise<UserDto> {
     console.log('controller create input dto', createUserInputDto);
-    //* Method validateCreateUserInput has been removed
-    // this.validateCreateUserInput(createUserInputDto);
     const user = await this.usersService.createUser(
       mapCreateUserInputDtoToInputDomain(createUserInputDto),
     );

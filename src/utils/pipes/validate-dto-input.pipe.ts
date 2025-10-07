@@ -13,8 +13,8 @@ export class ValidateDtoInputPipe implements PipeTransform {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       dto.validate(value);
 
-      //* Because it's been validated, its safe to instance the values.
-      //* So a string Date can be instantiated to a JS Date object.
+      //~ Because it's been validated, its safe to instance the values.
+      //~ So a string Date can be instantiated to a JS Date object.
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       return dto.toInstance(value);
     }

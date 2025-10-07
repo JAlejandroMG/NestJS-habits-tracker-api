@@ -8,8 +8,8 @@ import {
   isString,
 } from 'src/utils/http-input-validation';
 
-//* Modified made it Class
-//* To extend abstract DtoInput and implement method
+//~ Made it Class
+//~ to extend abstract DtoInput and implement method
 export class CreateUserInputDto extends DtoInput {
   dateOfBirth?: string | Date;
   email: string;
@@ -19,7 +19,6 @@ export class CreateUserInputDto extends DtoInput {
   password: string;
   userName: string;
 
-  //* Added
   validate(createUserInput: CreateUserInputDto): void {
     if (createUserInput.dateOfBirth) {
       isDate(createUserInput.dateOfBirth, User.DATE_OF_BIRTH);
@@ -51,7 +50,6 @@ export class CreateUserInputDto extends DtoInput {
     isNotEmptyString(createUserInput.userName, User.USER_NAME);
   }
 
-  //* Added
   toInstance(value: CreateUserInputDto): CreateUserInputDto {
     const dto = new CreateUserInputDto();
 
