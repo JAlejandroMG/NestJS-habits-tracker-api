@@ -13,16 +13,20 @@ import {
 } from '@nestjs/common';
 
 import { ValidateUlidPipe } from 'src/utils/pipes/validate-ulid.pipe';
-import { ValidateDtoInputPipe } from 'src/utils/pipes/validate-dto-input.pipe';
+// import { ValidateDtoInputPipe } from 'src/utils/pipes/validate-dto-input.pipe';
 import { /*User,*/ USERS } from 'src/utils/constants';
 
 import { UsersService } from '../services/users.service';
 import { UserDto } from './dto/user.dto';
-import { CreateUserInputDto } from './dto/create-user-input.dto';
+import {
+  CreateUserInputDto,
+  createUserSchema,
+} from './dto/create-user-input.dto';
 import { UpdateUserInputDto } from './dto/update-user-input.dto';
 import { mapUserDomainToUserDto } from './mappers/map-user-domain-to-user-dto';
 import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-input-dto-to-input-domain';
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
+import { ValidateZodSchemaPipe } from 'src/utils/pipes/validate-zod-schema.pipe';
 
 @Controller(USERS)
 export class UsersController {
@@ -30,7 +34,10 @@ export class UsersController {
 
   @Post()
   async createUser(
-    @Body(ValidateDtoInputPipe) createUserInputDto: CreateUserInputDto,
+    // @Body(ValidateDtoInputPipe) createUserInputDto: CreateUserInputDto,
+    //* Modified
+    @Body(new ValidateZodSchemaPipe(createUserSchema))
+    createUserInputDto: CreateUserInputDto,
   ): Promise<UserDto> {
     console.log('controller create input dto', createUserInputDto);
     const user = await this.usersService.createUser(

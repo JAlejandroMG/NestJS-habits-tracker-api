@@ -1,4 +1,6 @@
-import { User } from 'src/utils/constants';
+import z from 'zod';
+
+/*import { User } from 'src/utils/constants';
 import { DtoInput } from 'src/utils/dto/dto-input';
 import {
   isDate,
@@ -6,11 +8,24 @@ import {
   isNotEmptyString,
   isRequired,
   isString,
-} from 'src/utils/http-input-validation';
+} from 'src/utils/http-input-validation';*/
+
+//* This replaces the class CreateUserInputDto
+export const createUserSchema = z.object({
+  dateOfBirth: z.coerce.date().optional(),
+  email: z.email(),
+  firstName: z.string().nonempty(),
+  lastName: z.string().nonempty(),
+  middleName: z.string().optional(),
+  password: z.string().min(8),
+  userName: z.string().nonempty(),
+});
+
+export type CreateUserInputDto = z.infer<typeof createUserSchema>;
 
 //~ Made it Class
 //~ to extend abstract DtoInput and implement method
-export class CreateUserInputDto extends DtoInput {
+/*export class CreateUserInputDto extends DtoInput {
   dateOfBirth?: string | Date;
   email: string;
   firstName: string;
@@ -65,4 +80,4 @@ export class CreateUserInputDto extends DtoInput {
 
     return dto;
   }
-}
+}*/

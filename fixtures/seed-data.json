@@ -89,6 +89,18 @@
       "updatedAt": "2025-10-07T13:02:51.010Z",
       "userId": "01K6ZC8Y42CFP9PJMEMECP8HYA",
       "id": 1759842171012
+    },
+    {
+      "dateOfBirth": "1990-03-25T00:00:00.000Z",
+      "email": "glolo@test.com",
+      "firstName": "Gloria",
+      "lastName": "López Huerta",
+      "password": "abcd1234",
+      "userName": "Gloria",
+      "createdAt": "2025-10-07T19:33:16.199Z",
+      "updatedAt": "2025-10-07T19:33:16.199Z",
+      "userId": "01K702KT97HFSZHA1STRK2P7CF",
+      "id": 1759865596199
     }
   ]
 }
