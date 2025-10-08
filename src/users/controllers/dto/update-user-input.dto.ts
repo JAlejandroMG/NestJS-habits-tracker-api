@@ -8,8 +8,6 @@ import {
   MinLength,
 } from 'class-validator';
 
-//* Change it to class in orderto be used by ValidateClassPipe
-// export interface UpdateUserInputDto {
 export class UpdateUserInputDto {
   @IsDate()
   @IsOptional()

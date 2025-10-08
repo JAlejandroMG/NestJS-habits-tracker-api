@@ -96,7 +96,6 @@ export class UsersController {
   @Patch(':id')
   async updateUser(
     @Param('id', ValidateUlidPipe) id: string,
-    //* Added - UpdateUserInputDto has to be a class
     @Body(ValidateClassPipe) updateUserInput: UpdateUserInputDto,
   ): Promise<UserDto | undefined> {
     const user = await this.usersService.updateUser(
