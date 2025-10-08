@@ -27,6 +27,7 @@ import { mapUserDomainToUserDto } from './mappers/map-user-domain-to-user-dto';
 import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-input-dto-to-input-domain';
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
 import { ValidateZodSchemaPipe } from 'src/utils/pipes/validate-zod-schema.pipe';
+import { ValidateClassPipe } from 'src/utils/pipes/validate-class.pipe';
 
 @Controller(USERS)
 export class UsersController {
@@ -95,7 +96,8 @@ export class UsersController {
   @Patch(':id')
   async updateUser(
     @Param('id', ValidateUlidPipe) id: string,
-    @Body() updateUserInput: UpdateUserInputDto,
+    //* Added - UpdateUserInputDto has to be a class
+    @Body(ValidateClassPipe) updateUserInput: UpdateUserInputDto,
   ): Promise<UserDto | undefined> {
     const user = await this.usersService.updateUser(
       mapUpdateUserInputDtoToInputDomain(id, updateUserInput),
