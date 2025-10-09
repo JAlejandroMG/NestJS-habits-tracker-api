@@ -13,7 +13,6 @@ async function bootstrap() {
     }),
   );
 
-  //* Added
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,

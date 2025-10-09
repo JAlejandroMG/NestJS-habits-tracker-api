@@ -15,15 +15,6 @@ export class UsersService {
   ) {}
 
   createUser(createUserInput: CreateUserInputDomain): SyncOrAsync<UserDomain> {
-    console.log('dateOfBirth', createUserInput.dateOfBirth);
-    //* The user was born in the year
-    if (typeof createUserInput.dateOfBirth === 'object') {
-      console.log(
-        `The user was born in the year
-          ${createUserInput.dateOfBirth.getFullYear()}`,
-      );
-    }
-
     return this.usersRepository.createUser(createUserInput);
   }
 
