@@ -10,6 +10,10 @@ import { mapCreateHabitDomainToCreateEntity } from './mappers/map-mdb-create-inp
 import { CreateHabitInputDomain } from 'src/habits/services/models/create-habit-input.domain';
 import { mapUpdateHabitDomainToUpdateEntityInput } from './mappers/map-update-habit-input-to-update-entity';
 import { UpdateHabitInputDomain } from 'src/habits/services/models/update-habit-input.domain';
+import { MongoServerError } from 'mongodb';
+import { ValidationError } from 'src/utils/exceptions/validation-error';
+
+const MONGO_DUPLICATE_KEY_ERROR = 11000;
 
 @Injectable()
 export class MongoHabitsRepository implements AbstractHabitsRepository {
@@ -18,11 +22,26 @@ export class MongoHabitsRepository implements AbstractHabitsRepository {
   async createHabit(
     createHabitInput: CreateHabitInputDomain,
   ): Promise<HabitDomain> {
-    const habitEntity = await this.mDbRepository.create(
-      mapCreateHabitDomainToCreateEntity(createHabitInput),
-    );
+    //* Modified
+    try {
+      const habitEntity = await this.mDbRepository.create(
+        mapCreateHabitDomainToCreateEntity(createHabitInput),
+      );
 
-    return mapHabitEntityToHabitDomain(habitEntity)!;
+      return mapHabitEntityToHabitDomain(habitEntity)!;
+    } catch (error) {
+      if (
+        error instanceof MongoServerError &&
+        error.code === MONGO_DUPLICATE_KEY_ERROR
+      ) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        const duplicateField = Object.keys(error.keyValue)[0];
+        throw new ValidationError(
+          `Habit with ${duplicateField} already exists`,
+        );
+      }
+      throw error;
+    }
   }
 
   async findAllHabits(query: findAllHabitDomainQuery): Promise<HabitDomain[]> {
