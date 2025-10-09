@@ -75,7 +75,6 @@ export class HabitsController {
 
   @Post()
   async create(@Body() createHabitInput: CreateHabitDto): Promise<HabitDto> {
-    //* Modified
     try {
       const habit = await this.habitsService.create(
         mapCreateHabitDtoToCreateHabitInput(createHabitInput),

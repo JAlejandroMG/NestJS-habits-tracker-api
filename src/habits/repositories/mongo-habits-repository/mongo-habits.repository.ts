@@ -22,7 +22,6 @@ export class MongoHabitsRepository implements AbstractHabitsRepository {
   async createHabit(
     createHabitInput: CreateHabitInputDomain,
   ): Promise<HabitDomain> {
-    //* Modified
     try {
       const habitEntity = await this.mDbRepository.create(
         mapCreateHabitDomainToCreateEntity(createHabitInput),
