@@ -36,7 +36,6 @@ export class UsersController {
     @Body()
     createUserInputDto: CreateUserInputDto,
   ): Promise<UserDto> {
-    //* Added nad modified
     try {
       const user = await this.usersService.createUser(
         mapCreateUserInputDtoToInputDomain(createUserInputDto),

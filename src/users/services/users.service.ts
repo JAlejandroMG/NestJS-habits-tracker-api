@@ -1,4 +1,4 @@
-import { /*BadRequestException,*/ Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { SyncOrAsync } from 'src/utils/commonTypes/sync-or-async.type';
 import { UserDomain } from './models/user.domain';
 import { Undefinable } from 'src/utils/commonTypes/undefinable.type';
@@ -18,12 +18,9 @@ export class UsersService {
   ) {}
 
   createUser(createUserInput: CreateUserInputDomain): SyncOrAsync<UserDomain> {
-    //* Added
     const passwordStrength = getPasswordStrength(createUserInput.password);
 
     if (passwordStrength === PasswordStrengthEnum.WEAK) {
-      //   throw new Error('Pasword too weak!');
-      //   throw new BadRequestException('Pasword too weak!');
       throw new ValidationError('Pasword too weak!');
     }
 
