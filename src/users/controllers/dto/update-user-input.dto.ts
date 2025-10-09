@@ -15,11 +15,8 @@ export class UpdateUserInputDto {
   //~ to transform this property
   @Type(() => Date)
   dateOfBirth?: Date;
-  //   dateOfBirth?: string | Date;
 
-  @IsString()
   @IsEmail()
-  @IsNotEmpty()
   @IsOptional()
   email?: string;
 

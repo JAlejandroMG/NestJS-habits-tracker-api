@@ -102,6 +102,18 @@
       "updatedAt": "2025-10-06T04:14:04.473Z",
       "userId": "01K6VVM05S2MH3X0BPXX4GK4FY",
       "id": 1759724044474
+    },
+    {
+      "dateOfBirth": "1984-10-08T00:00:00.000Z",
+      "email": "let@test.com",
+      "firstName": "Leticia",
+      "lastName": "Espíndola Tamez",
+      "password": "abcd1234",
+      "userName": "Lety",
+      "createdAt": "2025-10-08T20:38:47.779Z",
+      "updatedAt": "2025-10-08T20:38:47.779Z",
+      "userId": "01K72RRGQ39ME1SH9JS3TYEVV0",
+      "id": 1759955927779
     }
   ]
 }
