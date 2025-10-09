@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { /*BadRequestException,*/ Injectable } from '@nestjs/common';
 import { SyncOrAsync } from 'src/utils/commonTypes/sync-or-async.type';
 import { UserDomain } from './models/user.domain';
 import { Undefinable } from 'src/utils/commonTypes/undefinable.type';
@@ -6,6 +6,9 @@ import { AbstractUsersRepository } from './users.repository';
 import { AppConfigService } from 'src/app-config/app-config.service';
 import { CreateUserInputDomain } from './models/create-user-input.domain';
 import { UpdatedUserInputDomain } from './models/update-user-input.domain';
+import { getPasswordStrength } from 'src/utils/password-strength/get-password-strength';
+import { PasswordStrengthEnum } from 'src/utils/password-strength/password-strength.enum';
+import { ValidationError } from 'src/utils/exceptions/validation-error';
 
 @Injectable()
 export class UsersService {
@@ -15,6 +18,15 @@ export class UsersService {
   ) {}
 
   createUser(createUserInput: CreateUserInputDomain): SyncOrAsync<UserDomain> {
+    //* Added
+    const passwordStrength = getPasswordStrength(createUserInput.password);
+
+    if (passwordStrength === PasswordStrengthEnum.WEAK) {
+      //   throw new Error('Pasword too weak!');
+      //   throw new BadRequestException('Pasword too weak!');
+      throw new ValidationError('Pasword too weak!');
+    }
+
     return this.usersRepository.createUser(createUserInput);
   }
 

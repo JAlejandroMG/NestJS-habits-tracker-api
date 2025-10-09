@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -24,6 +25,7 @@ import { mapUserDomainToUserDto } from './mappers/map-user-domain-to-user-dto';
 import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-input-dto-to-input-domain';
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
 import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
+import { ValidationError } from 'src/utils/exceptions/validation-error';
 
 @Controller(USERS)
 export class UsersController {
@@ -34,12 +36,20 @@ export class UsersController {
     @Body()
     createUserInputDto: CreateUserInputDto,
   ): Promise<UserDto> {
-    console.log('controller createUserInputDto', createUserInputDto);
-    const user = await this.usersService.createUser(
-      mapCreateUserInputDtoToInputDomain(createUserInputDto),
-    );
+    //* Added nad modified
+    try {
+      const user = await this.usersService.createUser(
+        mapCreateUserInputDtoToInputDomain(createUserInputDto),
+      );
 
-    return mapUserDomainToUserDto(user)!;
+      return mapUserDomainToUserDto(user)!;
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        throw new BadRequestException(error.message);
+      }
+
+      throw error;
+    }
   }
 
   @Get()
