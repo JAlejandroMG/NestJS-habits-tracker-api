@@ -29,7 +29,6 @@ import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
 import { ValidationError } from 'src/utils/exceptions/validation-error';
 import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-response.interceptor';
 
-//* Added
 @UseInterceptors(RedactResponseInterceptor)
 @Controller(USERS)
 export class UsersController {
@@ -61,7 +60,6 @@ export class UsersController {
     query: FindAllUsersQueryDto,
   ): Promise<UserDto[]> {
     const users = await this.usersService.findAllUsers({
-      //* Modified
       limit: query.limit,
       sortBy: query.sortBy,
     });
@@ -105,7 +103,6 @@ export class UsersController {
   @Patch(':id')
   async updateUser(
     @Param('id', ValidateUlidPipe) id: string,
-    //* Added
     //~ Built-in NestJS Validation Pipe
     @Body(ValidationPipe) updateUserInput: UpdateUserInputDto,
   ): Promise<UserDto | undefined> {
