@@ -1,7 +1,5 @@
 import { Expose, Type } from 'class-transformer';
 
-//* Modified
-// export interface UserDomain {
 //~ We need to use a class in order to use class-transformer
 export class UserDomain {
   @Expose()

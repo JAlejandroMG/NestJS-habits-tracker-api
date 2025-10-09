@@ -9,7 +9,6 @@ export const mapUserDomainToUserDto = (
     return undefined;
   }
 
-  //* Modified
   return plainToInstance(
     UserDto,
     {
