@@ -11,6 +11,7 @@ import {
   Patch,
   Post,
   Query,
+  UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
 
@@ -26,7 +27,10 @@ import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-in
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
 import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
 import { ValidationError } from 'src/utils/exceptions/validation-error';
+import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-response.interceptor';
 
+//* Added
+@UseInterceptors(RedactResponseInterceptor)
 @Controller(USERS)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
