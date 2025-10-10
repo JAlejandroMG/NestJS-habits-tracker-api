@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -11,6 +12,7 @@ import {
   Patch,
   Post,
   Query,
+  SerializeOptions,
   UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
@@ -28,8 +30,21 @@ import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-in
 import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
 import { ValidationError } from 'src/utils/exceptions/validation-error';
 import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-response.interceptor';
+// import { SerializeDtoInterceptor } from 'src/utils/interceptors/serialize-dto.interceptor';
 
-@UseInterceptors(RedactResponseInterceptor)
+@UseInterceptors(
+  RedactResponseInterceptor,
+  //* Added
+  //   new SerializeDtoInterceptor(UserDto),
+  //* Added NestJS Serializer Interceptor
+  //* by default uses users model (domain)
+  //* so it needs additional serializer options.
+  ClassSerializerInterceptor,
+)
+@SerializeOptions({
+  type: UserDto,
+  excludeExtraneousValues: true,
+})
 @Controller(USERS)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -83,7 +98,13 @@ export class UsersController {
       throw new NotFoundException(`User with id: '${id}' has not been found`);
     }
 
-    return mapUserDomainToUserDto(user);
+    // return mapUserDomainToUserDto(user);
+    //* Added
+    //* If we forgot to use the mapper this wouldn't work
+    //* because user domain does not have id like user dto expects.
+    //* If dto chenges and sets id as optional and add userId
+    //* than TypeScript wouldn't be able to help us.
+    return user;
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)

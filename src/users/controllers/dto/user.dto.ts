@@ -12,11 +12,12 @@ export class UserDto {
   @Expose()
   firstName: string;
 
+  //* Optional temporary for serialize-dto interceptor example
   @Expose()
-  id: string;
+  id?: string;
 
   //~ This is not exposed, only needed inside the controller
-  isActive: boolean;
+  //   isActive: boolean;
 
   @Expose()
   lastName: string;
@@ -29,4 +30,7 @@ export class UserDto {
 
   @Expose()
   userName: string;
+
+  //* Temporary
+  userId: string;
 }
