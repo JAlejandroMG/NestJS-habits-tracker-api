@@ -51,6 +51,26 @@
       "responseTime": 15,
       "timestamp": "2025-10-11T02:28:32.000Z",
       "id": 1760149712000
+    },
+    {
+      "controller": "UsersController",
+      "handler": "createUser",
+      "method": "POST",
+      "statusCode": 400,
+      "responseTime": 11,
+      "error": "Pasword too weak!",
+      "timestamp": "2025-10-11T03:25:05.835Z",
+      "id": 1760153105835
+    },
+    {
+      "controller": "UsersController",
+      "handler": "createUser",
+      "method": "POST",
+      "statusCode": 400,
+      "responseTime": 11,
+      "error": "Password too weak!",
+      "timestamp": "2025-10-11T03:25:44.455Z",
+      "id": 1760153144455
     }
   ],
   "users": [

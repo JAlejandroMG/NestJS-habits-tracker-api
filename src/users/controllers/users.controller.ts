@@ -12,6 +12,7 @@ import {
   Post,
   Query,
   SerializeOptions,
+  //   UseFilters,
   UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
@@ -28,7 +29,11 @@ import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-in
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
 import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
 import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-response.interceptor';
+// import { ValidationErrorFilter } from 'src/utils/filters/validation-error.filter';
 
+//* Added
+//* Will be implemented Globally
+// @UseFilters(ValidationErrorFilter)
 @UseInterceptors(RedactResponseInterceptor, ClassSerializerInterceptor)
 @SerializeOptions({
   type: UserDto,

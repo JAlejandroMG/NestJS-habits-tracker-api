@@ -7,9 +7,10 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { DbType } from './utils/constants';
 import { CoreModule } from './core/core.module';
 import { UsersModule } from './users/users.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { AnalyticsInterceptor } from './utils/interceptors/analytics.interceptor';
-import { ValidationErrorInterceptor } from './utils/interceptors/validation-error.interceptor';
+import { ValidationErrorFilter } from './utils/filters/validation-error.filter';
+// import { ValidationErrorInterceptor } from './utils/interceptors/validation-error.interceptor';
 
 @Module({
   imports: [AnalyticsModule],
@@ -23,10 +24,16 @@ import { ValidationErrorInterceptor } from './utils/interceptors/validation-erro
       provide: APP_INTERCEPTOR,
       useClass: AnalyticsInterceptor,
     },
+    //* Won't need this with the ValidationErrorFilter
     //~ Even with the same token, NestJS will apply different Interceptors
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: ValidationErrorInterceptor,
+    // },
+    //* Added
     {
-      provide: APP_INTERCEPTOR,
-      useClass: ValidationErrorInterceptor,
+      provide: APP_FILTER,
+      useClass: ValidationErrorFilter,
     },
   ],
 })

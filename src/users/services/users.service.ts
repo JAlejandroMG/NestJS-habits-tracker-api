@@ -21,7 +21,7 @@ export class UsersService {
     const passwordStrength = getPasswordStrength(createUserInput.password);
 
     if (passwordStrength === PasswordStrengthEnum.WEAK) {
-      throw new ValidationError('Pasword too weak!');
+      throw new ValidationError('Password too weak!');
     }
 
     return this.usersRepository.createUser(createUserInput);
