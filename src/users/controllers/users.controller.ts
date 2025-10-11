@@ -1,5 +1,5 @@
 import {
-  BadRequestException,
+  //   BadRequestException,
   Body,
   ClassSerializerInterceptor,
   Controller,
@@ -28,7 +28,7 @@ import { mapUserDomainToUserDto } from './mappers/map-user-domain-to-user-dto';
 import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-input-dto-to-input-domain';
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
 import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
-import { ValidationError } from 'src/utils/exceptions/validation-error';
+// import { ValidationError } from 'src/utils/exceptions/validation-error';
 import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-response.interceptor';
 
 @UseInterceptors(RedactResponseInterceptor, ClassSerializerInterceptor)
@@ -45,7 +45,9 @@ export class UsersController {
     @Body()
     createUserInputDto: CreateUserInputDto,
   ): Promise<UserDto> {
-    try {
+    //* Removed
+    //* This try/catch will be replaced by the ValidationErrorInterceptor
+    /*try {
       const user = await this.usersService.createUser(
         mapCreateUserInputDtoToInputDomain(createUserInputDto),
       );
@@ -56,8 +58,12 @@ export class UsersController {
         throw new BadRequestException(error.message);
       }
 
-      throw error;
-    }
+      throw error;*/
+    const user = await this.usersService.createUser(
+      mapCreateUserInputDtoToInputDomain(createUserInputDto),
+    );
+
+    return mapUserDomainToUserDto(user)!;
   }
 
   @Get()

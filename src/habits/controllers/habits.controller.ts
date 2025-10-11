@@ -1,5 +1,5 @@
 import {
-  BadRequestException,
+  //   BadRequestException,
   Body,
   Controller,
   Delete,
@@ -20,7 +20,7 @@ import { UpdateHabitDto } from './dto/update-habit.dto';
 import { mapHabitDomainToHabitDto } from './mappers/map-habit-domain-to-habit-dto';
 import { mapUpdateHabitDtoToUpdateHabitInput } from './mappers/map-update-habit-dto-to-update-habit-input';
 import { mapCreateHabitDtoToCreateHabitInput } from './mappers/map-create-habit-dto-create-to-habit-input';
-import { ValidationError } from 'src/utils/exceptions/validation-error';
+// import { ValidationError } from 'src/utils/exceptions/validation-error';
 
 @Controller(HABITS)
 export class HabitsController {
@@ -75,7 +75,9 @@ export class HabitsController {
 
   @Post()
   async create(@Body() createHabitInput: CreateHabitDto): Promise<HabitDto> {
-    try {
+    //* Removed
+    //* This try/catch will be replaced by the ValidationError Interceptor
+    /*try {
       const habit = await this.habitsService.create(
         mapCreateHabitDtoToCreateHabitInput(createHabitInput),
       );
@@ -87,6 +89,11 @@ export class HabitsController {
       }
 
       throw error;
-    }
+    }*/
+    const habit = await this.habitsService.create(
+      mapCreateHabitDtoToCreateHabitInput(createHabitInput),
+    );
+
+    return mapHabitDomainToHabitDto(habit)!;
   }
 }

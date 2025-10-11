@@ -42,6 +42,15 @@
       "message": "Hello from the AppController",
       "timestamp": "2025-09-18T04:18:51.182Z",
       "id": 1758169131182
+    },
+    {
+      "controller": "UsersController",
+      "handler": "createUser",
+      "method": "POST",
+      "statusCode": 201,
+      "responseTime": 15,
+      "timestamp": "2025-10-11T02:28:32.000Z",
+      "id": 1760149712000
     }
   ],
   "users": [
@@ -114,6 +123,18 @@
       "updatedAt": "2025-10-08T20:38:47.779Z",
       "userId": "01K72RRGQ39ME1SH9JS3TYEVV0",
       "id": 1759955927779
+    },
+    {
+      "dateOfBirth": "1994-02-28T00:00:00.000Z",
+      "email": "loflo@test.com",
+      "firstName": "Lourdes",
+      "lastName": "Flores Posos",
+      "password": "abcd1234",
+      "userName": "Lula",
+      "createdAt": "2025-10-11T02:28:31.985Z",
+      "updatedAt": "2025-10-11T02:28:31.985Z",
+      "userId": "01K78HJB3HRVH484G96WZS7NX4",
+      "id": 1760149711986
     }
   ]
 }

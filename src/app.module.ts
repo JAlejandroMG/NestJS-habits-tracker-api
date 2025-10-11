@@ -7,11 +7,30 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { DbType } from './utils/constants';
 import { CoreModule } from './core/core.module';
 import { UsersModule } from './users/users.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { AnalyticsInterceptor } from './utils/interceptors/analytics.interceptor';
+import { ValidationErrorInterceptor } from './utils/interceptors/validation-error.interceptor';
 
 @Module({
   imports: [AnalyticsModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    //* Added
+    //~ this allows to inject dependencies in the Interceptors
+    //~ NestJS will take care of injecting AnalyticsService
+    //~ that comes from AnalyticsModule
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AnalyticsInterceptor,
+    },
+    //* Added
+    //~ Even with the same token, NestJS will apply different Interceptors
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ValidationErrorInterceptor,
+    },
+  ],
 })
 export class AppModule {
   static register(options: {
