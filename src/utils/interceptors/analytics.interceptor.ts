@@ -25,10 +25,6 @@ export class AnalyticsInterceptor implements NestInterceptor {
         const endTime = Date.now();
         const responseTime = endTime - statTime;
 
-        console.log('Context', context);
-        console.log('Request', request);
-        console.log('Response', response);
-
         this.analyticsService.saveAnalytics({
           controller: context.getClass().name,
           handler: context.getHandler().name,

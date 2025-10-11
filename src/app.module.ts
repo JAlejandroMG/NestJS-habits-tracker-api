@@ -16,7 +16,6 @@ import { ValidationErrorInterceptor } from './utils/interceptors/validation-erro
   controllers: [AppController],
   providers: [
     AppService,
-    //* Added
     //~ this allows to inject dependencies in the Interceptors
     //~ NestJS will take care of injecting AnalyticsService
     //~ that comes from AnalyticsModule
@@ -24,7 +23,6 @@ import { ValidationErrorInterceptor } from './utils/interceptors/validation-erro
       provide: APP_INTERCEPTOR,
       useClass: AnalyticsInterceptor,
     },
-    //* Added
     //~ Even with the same token, NestJS will apply different Interceptors
     {
       provide: APP_INTERCEPTOR,
