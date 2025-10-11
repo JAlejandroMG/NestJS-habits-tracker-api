@@ -30,7 +30,6 @@ import { ValidationErrorFilter } from './utils/filters/validation-error.filter';
     //   provide: APP_INTERCEPTOR,
     //   useClass: ValidationErrorInterceptor,
     // },
-    //* Added
     {
       provide: APP_FILTER,
       useClass: ValidationErrorFilter,
