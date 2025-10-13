@@ -12,7 +12,6 @@ import {
   Post,
   Query,
   SerializeOptions,
-  //   SetMetadata,
   UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
@@ -31,9 +30,6 @@ import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
 import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-response.interceptor';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
-//* Added
-//* Applied to the whole Controller
-// @SetMetadata('is-public', true)
 @UseInterceptors(RedactResponseInterceptor, ClassSerializerInterceptor)
 @SerializeOptions({
   type: UserDto,
@@ -55,11 +51,6 @@ export class UsersController {
     return mapUserDomainToUserDto(user)!;
   }
 
-  //* Added
-  //* Applied to this only handler
-  //* To use this in several places,
-  //* it would be better to have it in a decorator
-  //   @SetMetadata('is-public', true)
   @IsPublic(true)
   @Get()
   async findAllUsers(
