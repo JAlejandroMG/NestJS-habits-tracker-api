@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AnalyticsService } from './analytics/analytics.service';
+import { IsPublic } from './auth/decorators/is-public.decorator';
 
 @Controller()
 export class AppController {
@@ -9,6 +10,8 @@ export class AppController {
     private readonly appService: AppService,
   ) {}
 
+  //* Added
+  @IsPublic(true)
   @Get()
   getHello(): string {
     this.analyticsService.saveAnalytics({

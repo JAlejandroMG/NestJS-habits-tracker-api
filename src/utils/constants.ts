@@ -38,3 +38,7 @@ export enum User {
   PASSWORD = 'password',
   USER_NAME = 'userName',
 }
+
+//*Added
+//~ Metadata
+export const IS_PUBLIC_METADATA_KEY = 'is-public';
