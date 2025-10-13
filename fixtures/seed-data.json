@@ -71,6 +71,25 @@
       "error": "Password too weak!",
       "timestamp": "2025-10-11T03:25:44.455Z",
       "id": 1760153144455
+    },
+    {
+      "controller": "UsersController",
+      "handler": "findAllUsers",
+      "method": "GET",
+      "statusCode": 200,
+      "responseTime": 17,
+      "timestamp": "2025-10-12T17:18:55.861Z",
+      "id": 1760289535861
+    },
+    {
+      "controller": "UsersController",
+      "handler": "findAllUsers",
+      "method": "GET",
+      "statusCode": 401,
+      "responseTime": 8,
+      "error": "Invalid API key",
+      "timestamp": "2025-10-12T17:20:36.920Z",
+      "id": 1760289636920
     }
   ],
   "users": [

@@ -11,6 +11,8 @@ import { AppConfigService } from './app-config.service';
   imports: [
     ConfigModule.forRoot({
       validationSchema: Joi.object({
+        //~ Authorization API Key
+        AUTHORIZATION_API_KEY: Joi.string().optional().default('1234567890'),
         DEFAULT_LIMIT: Joi.number().optional().integer().positive().default(10),
         MONGO_URI: Joi.string() /*.required(),*/
           .optional()
@@ -23,8 +25,8 @@ import { AppConfigService } from './app-config.service';
         ORM_HOST: Joi.string(),
         ORM_PASSWORD: Joi.string(),
         ORM_PORT: Joi.number().positive().default(5432),
-        //* True will automatically update the schema with code changes
-        //* This better be done through migrations
+        //~ True will automatically update the schema with code changes
+        //~ This better be done through migrations
         ORM_SYNCHRONIZE: Joi.boolean().default(false),
         ORM_TYPE: Joi.string().valid('postgres', 'mysql').default('postgres'),
         ORM_USERNAME: Joi.string(),
