@@ -6,7 +6,6 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 export class AppConfigService {
   constructor(private readonly configService: ConfigService) {}
 
-  //* Added
   get authorizationApiKey(): string | undefined {
     return this.configService.get<string>('AUTHORIZATION_API_KEY');
   }

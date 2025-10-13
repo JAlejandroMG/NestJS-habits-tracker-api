@@ -7,17 +7,13 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { DbType } from './utils/constants';
 import { CoreModule } from './core/core.module';
 import { UsersModule } from './users/users.module';
-import { APP_FILTER, /* APP_GUARD,*/ APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { AnalyticsInterceptor } from './utils/interceptors/analytics.interceptor';
 import { ValidationErrorFilter } from './utils/filters/validation-error.filter';
-// import { ApiKeyAuthorizationGuard } from './auth/guards/api-key-authorization/api-key-authorization.guard';
-// import { AppConfigModule } from './app-config/app-config.module';
-// import { ValidationErrorInterceptor } from './utils/interceptors/validation-error.interceptor';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  //* Added
-  imports: [AnalyticsModule, AuthModule /*, AppConfigModule*/],
+  imports: [AnalyticsModule, AuthModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -38,12 +34,6 @@ import { AuthModule } from './auth/auth.module';
       provide: APP_FILTER,
       useClass: ValidationErrorFilter,
     },
-    //* Added
-    //* Could also be applied Globally in an independent module auth.mod
-    /*{
-      provide: APP_GUARD,
-      useClass: ApiKeyAuthorizationGuard,
-    },*/
   ],
 })
 export class AppModule {

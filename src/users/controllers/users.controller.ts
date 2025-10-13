@@ -11,10 +11,7 @@ import {
   Patch,
   Post,
   Query,
-  //   Req,
   SerializeOptions,
-  //   UnauthorizedException,
-  //   UseGuards,
   UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
@@ -31,12 +28,7 @@ import { mapCreateUserInputDtoToInputDomain } from './mappers/map-create-user-in
 import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-input-dto-to-input-domain';
 import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
 import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-response.interceptor';
-// import { Request } from 'express';
-// import { ApiKeyAuthorizationGuard } from 'src/auth/guards/api-key-authorization/api-key-authorization.guard';
 
-//* Added
-//* Could be applied Globally at maint.ts
-// @UseGuards(ApiKeyAuthorizationGuard)
 @UseInterceptors(RedactResponseInterceptor, ClassSerializerInterceptor)
 @SerializeOptions({
   type: UserDto,
@@ -58,26 +50,11 @@ export class UsersController {
     return mapUserDomainToUserDto(user)!;
   }
 
-  //* Added
-  //* Could be applied at Controller level
-  //   @UseGuards(ApiKeyAuthorizationGuard)
   @Get()
   async findAllUsers(
-    //*Added
-    // @Request()
-    //~ Could use either one
-    /*@Req()
-    request: Request,*/
     @Query()
     query: FindAllUsersQueryDto,
   ): Promise<UserDto[]> {
-    //* Added
-    /*const headers = request.headers;
-
-    if (headers['x-api-key'] !== '1234567890') {
-      throw new UnauthorizedException('Invalid API key');
-    }*/
-
     const users = await this.usersService.findAllUsers({
       limit: query.limit,
       sortBy: query.sortBy,

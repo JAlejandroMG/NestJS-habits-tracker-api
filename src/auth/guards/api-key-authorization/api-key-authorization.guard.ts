@@ -10,7 +10,7 @@ import { AppConfigService } from 'src/app-config/app-config.service';
 
 @Injectable()
 export class ApiKeyAuthorizationGuard implements CanActivate {
-  //* This is injected through the App Module importing AppSonfigModule
+  //~ This is injected through the App Module importing AppSonfigModule
   constructor(private readonly appConfigService: AppConfigService) {}
 
   canActivate(
