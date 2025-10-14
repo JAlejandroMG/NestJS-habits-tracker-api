@@ -8,7 +8,6 @@ import { AdminAuthGuard } from './guards/admin-auth.guard';
 @Module({
   imports: [AppConfigModule],
   providers: [
-    //*Removed
     /*{
       provide: APP_GUARD,
       useClass: ApiKeyAuthorizationGuard,
@@ -17,7 +16,6 @@ import { AdminAuthGuard } from './guards/admin-auth.guard';
       provide: APP_GUARD,
       useClass: AdminAuthorizationGuard,
     },*/
-    //*Added
     {
       provide: APP_GUARD,
       useClass: AdminAuthGuard,

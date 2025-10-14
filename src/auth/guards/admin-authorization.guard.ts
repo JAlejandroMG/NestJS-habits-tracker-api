@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { AccessLevelEnum } from '../utils/acess-level.enum';
 import { AppConfigService } from '../../app-config/app-config.service';
 import { Reflector } from '@nestjs/core';
-// import { GRANT_ACCESS_METADATA_KEY } from 'src/utils/constants';
 import { Request } from 'express';
 import { GrantAccess } from '../decorators/grant-access.decorator';
 
@@ -39,9 +38,8 @@ export class AdminAuthorizationGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const accessLevel: AccessLevelEnum =
-      //* Modified
-      //* No longer neede because of the createDecorator method
-      //* in grant-access.decorator.ts
+      //~ No longer neede because of the createDecorator method
+      //~ in grant-access.decorator.ts
       //   this.reflector.getAllAndOverride(GRANT_ACCESS_METADATA_KEY, [
       this.reflector.getAllAndOverride(GrantAccess, [
         context.getHandler(),

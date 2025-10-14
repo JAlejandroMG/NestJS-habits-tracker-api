@@ -41,7 +41,6 @@ import { AccessLevelEnum } from 'src/auth/utils/acess-level.enum';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  //* Added
   @GrantAccess(AccessLevelEnum.SYSTEM_USER)
   @Post()
   async createUser(
@@ -69,7 +68,6 @@ export class UsersController {
     return users.map((user) => mapUserDomainToUserDto(user)!);
   }
 
-  //* Added
   @GrantAccess(AccessLevelEnum.SUPPORT_USER)
   @Get(':id')
   async findOneUser(
@@ -90,7 +88,6 @@ export class UsersController {
     return mapUserDomainToUserDto(user);
   }
 
-  //* Added
   @GrantAccess(AccessLevelEnum.SUPER_USER)
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
@@ -106,7 +103,6 @@ export class UsersController {
     return mapUserDomainToUserDto(user);
   }
 
-  //* Added
   @GrantAccess(AccessLevelEnum.SUPER_USER)
   @Patch(':id')
   async updateUser(

@@ -1,5 +1,4 @@
 import * as Joi from 'joi';
-// import z from 'zod';
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -14,15 +13,12 @@ import { AppConfigService } from './app-config.service';
         //~ Authorization API Key
         AUTHORIZATION_API_KEY: Joi.string().optional().default('1234567890'),
         //~ Authentication API Key
-        //* Added
         AUTHENTICATE_SUPER_USER_API_KEY: Joi.string()
           .optional()
           .default('ABCDEFGHIJ'),
-        //* Added
         AUTHENTICATE_SUPPORT_USER_API_KEY: Joi.string()
           .optional()
           .default('abcde12345'),
-        //* Added
         AUTHENTICATE_SYSTEM_USER_API_KEY: Joi.string()
           .optional()
           .default('ABCDE12345'),

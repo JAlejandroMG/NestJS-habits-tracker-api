@@ -17,7 +17,6 @@ export class AdminAuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    //* Brought from api-key-authorization.guard.ts
     //~ First parameter is the Metadata property name, and te second is an array
     const isPublic: boolean = this.reflector.getAllAndOverride(
       IS_PUBLIC_METADATA_KEY,
@@ -25,12 +24,10 @@ export class AdminAuthGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     );
 
-    //* Brought from api-key-authorization.guard.ts
     if (isPublic) {
       return true;
     }
 
-    // return true;
     return (
       this.authenticationGuard.canActivate(context) &&
       this.authorizationGuard.canActivate(context)

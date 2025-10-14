@@ -6,17 +6,14 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 export class AppConfigService {
   constructor(private readonly configService: ConfigService) {}
 
-  //* Added
   get authenticationSuperUserApiKey(): string | undefined {
     return this.configService.get<string>('AUTHENTICATE_SUPER_USER_API_KEY');
   }
 
-  //* Added
   get authenticationSupportUserApiKey(): string | undefined {
     return this.configService.get<string>('AUTHENTICATE_SUPPORT_USER_API_KEY');
   }
 
-  //* Added
   get authenticationSystemUserApiKey(): string | undefined {
     return this.configService.get<string>('AUTHENTICATE_SYSTEM_USER_API_KEY');
   }

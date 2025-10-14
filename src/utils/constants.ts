@@ -40,7 +40,4 @@ export enum User {
 }
 
 //~ Metadata
-//* Removed
-//* No longer neede because of the createDecorator method.
-// export const GRANT_ACCESS_METADATA_KEY = 'grant-access';
 export const IS_PUBLIC_METADATA_KEY = 'is-public';
