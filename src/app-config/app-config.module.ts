@@ -13,6 +13,20 @@ import { AppConfigService } from './app-config.service';
       validationSchema: Joi.object({
         //~ Authorization API Key
         AUTHORIZATION_API_KEY: Joi.string().optional().default('1234567890'),
+        //~ Authentication API Key
+        //* Added
+        AUTHENTICATE_SUPER_USER_API_KEY: Joi.string()
+          .optional()
+          .default('ABCDEFGHIJ'),
+        //* Added
+        AUTHENTICATE_SUPPORT_USER_API_KEY: Joi.string()
+          .optional()
+          .default('abcde12345'),
+        //* Added
+        AUTHENTICATE_SYSTEM_USER_API_KEY: Joi.string()
+          .optional()
+          .default('ABCDE12345'),
+        //~
         DEFAULT_LIMIT: Joi.number().optional().integer().positive().default(10),
         MONGO_URI: Joi.string() /*.required(),*/
           .optional()

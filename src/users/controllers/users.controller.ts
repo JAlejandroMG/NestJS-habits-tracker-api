@@ -29,6 +29,8 @@ import { mapUpdateUserInputDtoToInputDomain } from './mappers/map-update-user-in
 import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
 import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-response.interceptor';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
+import { GrantAccess } from 'src/auth/decorators/grant-access.decorator';
+import { AccessLevelEnum } from 'src/auth/utils/acess-level.enum';
 
 @UseInterceptors(RedactResponseInterceptor, ClassSerializerInterceptor)
 @SerializeOptions({
@@ -39,6 +41,8 @@ import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  //* Added
+  @GrantAccess(AccessLevelEnum.SYSTEM_USER)
   @Post()
   async createUser(
     @Body()
@@ -65,6 +69,8 @@ export class UsersController {
     return users.map((user) => mapUserDomainToUserDto(user)!);
   }
 
+  //* Added
+  @GrantAccess(AccessLevelEnum.SUPPORT_USER)
   @Get(':id')
   async findOneUser(
     //~ This Pipe will return the value processed.
@@ -84,6 +90,8 @@ export class UsersController {
     return mapUserDomainToUserDto(user);
   }
 
+  //* Added
+  @GrantAccess(AccessLevelEnum.SUPER_USER)
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   async removeUser(
@@ -98,6 +106,8 @@ export class UsersController {
     return mapUserDomainToUserDto(user);
   }
 
+  //* Added
+  @GrantAccess(AccessLevelEnum.SUPER_USER)
   @Patch(':id')
   async updateUser(
     @Param('id', ValidateUlidPipe) id: string,
