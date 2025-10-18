@@ -11,7 +11,6 @@ import {
   Patch,
   Post,
   Query,
-  //   Request,
   SerializeOptions,
   UseInterceptors,
   ValidationPipe,
@@ -34,11 +33,6 @@ import { GrantAccess } from 'src/auth/decorators/grant-access.decorator';
 import { AccessLevelEnum } from 'src/auth/models/acess-level.enum';
 import { AdminUserDomainModel } from 'src/auth/models/admin-user-domain.model';
 import { AdminUser } from '../../auth/decorators/admin-user.decorator';
-
-//* Added
-// type RequestWithAdminUser = Request & {
-//   adminUser: AdminUserDomainModel;
-// };
 
 @UseInterceptors(RedactResponseInterceptor, ClassSerializerInterceptor)
 @SerializeOptions({
@@ -101,14 +95,9 @@ export class UsersController {
   @Delete(':id')
   async removeUser(
     @Param('id', ValidateUlidPipe) id: string,
-    //* Added
-    // @Request() req: RequestWithAdminUser,
-    //* Added
     @AdminUser() adminUser: AdminUserDomainModel,
   ): Promise<UserDto | undefined> {
     const user = await this.usersService.removeUser(id);
-    //* Added
-    // const adminUser = req.adminUser;
     console.log('adminUser', adminUser);
 
     if (!user) {

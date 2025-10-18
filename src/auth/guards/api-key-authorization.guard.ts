@@ -4,16 +4,9 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-// import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
-// import { AdminUserDomainModel } from '../models/admin-user-domain.model';
 import { RequestWithAdminUser } from 'src/utils/commonTypes/requestWithAdminUser.type';
-
-//* Added
-/*type RequestWithAdminUser = Request & {
-  adminUser: AdminUserDomainModel;
-};*/
 
 @Injectable()
 export class ApiKeyAuthorizationGuard implements CanActivate {
@@ -22,8 +15,6 @@ export class ApiKeyAuthorizationGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    // const request = context.switchToHttp().getRequest<Request>();
-    //* Modified
     const request = context.switchToHttp().getRequest<RequestWithAdminUser>();
     const headers = request.headers;
     const apiKey = headers['x-api-key'];
