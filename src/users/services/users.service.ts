@@ -9,22 +9,40 @@ import { UpdatedUserInputDomain } from './models/update-user-input.domain';
 import { getPasswordStrength } from 'src/utils/password-strength/get-password-strength';
 import { PasswordStrengthEnum } from 'src/utils/password-strength/password-strength.enum';
 import { ValidationError } from 'src/utils/exceptions/validation-error';
+import { HashingService } from 'src/hashing/hashing.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     private readonly usersRepository: AbstractUsersRepository,
     private readonly appConfigService: AppConfigService,
+    private readonly hashingService: HashingService,
   ) {}
 
-  createUser(createUserInput: CreateUserInputDomain): SyncOrAsync<UserDomain> {
+  //* Modified
+  //   createUser(createUserInput: CreateUserInputDomain): SyncOrAsync<UserDomain> {
+  async createUser(
+    createUserInput: CreateUserInputDomain,
+  ): Promise<UserDomain> {
+    //* DRY should move to a private methode
     const passwordStrength = getPasswordStrength(createUserInput.password);
 
+    //* DRY should move to a private methode
     if (passwordStrength === PasswordStrengthEnum.WEAK) {
       throw new ValidationError('Password too weak!');
     }
 
-    return this.usersRepository.createUser(createUserInput);
+    //* Added
+    const hashedPassword = await this.hashingService.hash(
+      createUserInput.password,
+    );
+
+    //* Modified
+    // return this.usersRepository.createUser(createUserInput);
+    return this.usersRepository.createUser({
+      ...createUserInput,
+      password: hashedPassword,
+    });
   }
 
   findAllUsers(query: {
@@ -45,9 +63,34 @@ export class UsersService {
     return this.usersRepository.removeUser(userId);
   }
 
-  updateUser(
+  //* Modified
+  //   updateUser(
+  async updateUser(
     updateUserInput: UpdatedUserInputDomain,
-  ): SyncOrAsync<Undefinable<UserDomain>> {
+    //* Modified
+    //   ): SyncOrAsync<Undefinable<UserDomain>> {
+  ): Promise<Undefinable<UserDomain>> {
+    //* Added
+    if (updateUserInput.password) {
+      //* DRY should move to a private methode
+      const passwordStrength = getPasswordStrength(updateUserInput.password);
+
+      //* DRY should move to a private methode
+      if (passwordStrength === PasswordStrengthEnum.WEAK) {
+        throw new ValidationError('Password too weak!');
+      }
+
+      const hashedPassword = await this.hashingService.hash(
+        updateUserInput.password,
+      );
+
+      return this.usersRepository.updateUser({
+        ...updateUserInput,
+        password: hashedPassword,
+      });
+    }
+
+    //* Modified
     return this.usersRepository.updateUser(updateUserInput);
   }
 }

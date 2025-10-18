@@ -5,10 +5,12 @@ import { UsersService } from './services/users.service';
 import { UsersRepositoryModule } from './repositories/users-repository.module';
 import { DbType } from 'src/utils/constants';
 import { AppConfigModule } from 'src/app-config/app-config.module';
+import { HashingModule } from 'src/hashing/hashing.module';
 
 @Module({
   controllers: [UsersController],
-  imports: [AppConfigModule],
+  //* Added
+  imports: [AppConfigModule, HashingModule],
   providers: [UsersService],
 })
 export class UsersModule {
