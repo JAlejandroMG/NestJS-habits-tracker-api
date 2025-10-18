@@ -14,11 +14,6 @@ import adminUsersConfig from 'src/auth/config/admin-users.config';
       validationSchema: Joi.object({
         //~ Authorization API Key
         AUTHORIZATION_API_KEY: Joi.string().optional().default('1234567890'),
-        //* Moved to admin-users.config.ts
-        //~ Authentication API Key
-        /*SUPER_USER_API_KEY: Joi.string().optional().default('ABCDEFGHIJ'),
-        SUPPORT_USER_API_KEY: Joi.string().optional().default('abcde12345'),
-        SYSTEM_USER_API_KEY: Joi.string().optional().default('ABCDE12345'),*/
         //~
         DEFAULT_LIMIT: Joi.number().optional().integer().positive().default(10),
         MONGO_URI: Joi.string() /*.required(),*/

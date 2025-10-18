@@ -39,11 +39,6 @@ export class AppConfigService {
     return this.configService.get<string>('SEED_DATA_FILE_PATH')!;
   }
 
-  //* Removed
-  /*get superUserApiKey(): string | undefined {
-    return this.configService.get<string>('SUPER_USER_API_KEY');
-  }*/
-
   get superUser(): AdminUserDomainModel {
     const apiKey = this.configService.get<string>(
       'SUPER_USER_API_KEY',
@@ -59,11 +54,6 @@ export class AppConfigService {
     };
   }
 
-  //* Removed
-  /*get supportUserApiKey(): string | undefined {
-    return this.configService.get<string>('SUPPORT_USER_API_KEY');
-  }*/
-
   get supportUser(): AdminUserDomainModel {
     const apiKey = this.configService.get<string>(
       'SUPPORT_USER_API_KEY',
@@ -78,11 +68,6 @@ export class AppConfigService {
       username,
     };
   }
-
-  //* Removed
-  /*get systemUserApiKey(): string | undefined {
-    return this.configService.get<string>('SYSTEM_USER_API_KEY');
-  }*/
 
   get systemUser(): AdminUserDomainModel {
     const apiKey = this.configService.get<string>(
