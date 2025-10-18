@@ -1,5 +1,4 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-// import { Observable } from 'rxjs';
 import { ApiKeyAuthorizationGuard } from './api-key-authorization.guard';
 import { AdminAuthorizationGuard } from './admin-authorization.guard';
 import { Reflector } from '@nestjs/core';
@@ -14,13 +13,7 @@ export class AdminAuthGuard implements CanActivate {
     private readonly reflector: Reflector,
   ) {}
 
-  //* Modified
-  //   canActivate(
-  async canActivate(
-    context: ExecutionContext,
-    //* Modified
-    //   ): boolean | Promise<boolean> | Observable<boolean> {
-  ): Promise<boolean> {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     //~ First parameter is the Metadata property name, and te second is an array
     const isPublic: boolean = this.reflector.getAllAndOverride(
       IS_PUBLIC_METADATA_KEY,
@@ -32,16 +25,9 @@ export class AdminAuthGuard implements CanActivate {
       return true;
     }
 
-    //* Added
     const isAuthenticated = await this.authenticationGuard.canActivate(context);
-    //* Added
     const isAuthorized = await this.authorizationGuard.canActivate(context);
 
-    //* Modified
-    /*return (
-      this.authenticationGuard.canActivate(context) &&
-      this.authorizationGuard.canActivate(context)
-    );*/
     return isAuthenticated && isAuthorized;
   }
 }

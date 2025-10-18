@@ -8,7 +8,6 @@ import { AuthService } from './auth.service';
 import { HashingModule } from 'src/hashing/hashing.module';
 
 @Module({
-  //* Modified
   imports: [AppConfigModule, HashingModule],
   providers: [
     /*{
