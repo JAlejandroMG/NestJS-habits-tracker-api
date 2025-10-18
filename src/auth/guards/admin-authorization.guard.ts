@@ -4,7 +4,7 @@ import {
   ForbiddenException,
   Injectable,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import { AccessLevelEnum } from '../models/acess-level.enum';
 import { AppConfigService } from '../../app-config/app-config.service';
 import { Reflector } from '@nestjs/core';
@@ -20,9 +20,13 @@ export class AdminAuthorizationGuard implements CanActivate {
     private readonly reflector: Reflector,
   ) {}
 
-  canActivate(
+  //* Modified
+  //   canActivate(
+  async canActivate(
     context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+    //* Modified
+    //   ): boolean | Promise<boolean> | Observable<boolean> {
+  ): Promise<boolean> {
     const accessLevel: AccessLevelEnum | undefined =
       //~ No longer neede because of the createDecorator method
       //~ in grant-access.decorator.ts
@@ -33,7 +37,11 @@ export class AdminAuthorizationGuard implements CanActivate {
       ]) ?? AccessLevelEnum.SUPER_USER;
     const request = context.switchToHttp().getRequest<Request>();
     const apiKey = request.headers['x-api-key'];
-    const adminUser = this.authService.getAdminUserByApiKey(apiKey as string);
+    //* Modified
+    // const adminUser = this.authService.getAdminUserByApiKey(apiKey as string);
+    const adminUser = await this.authService.getAdminUserByApiKey(
+      apiKey as string,
+    );
     const isAuthorized =
       adminUser && this.hasRequiredAccess(adminUser.accessLevel, accessLevel);
 

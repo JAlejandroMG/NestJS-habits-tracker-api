@@ -4,7 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { RequestWithAdminUser } from 'src/utils/commonTypes/requestWithAdminUser.type';
 
@@ -12,13 +12,21 @@ import { RequestWithAdminUser } from 'src/utils/commonTypes/requestWithAdminUser
 export class ApiKeyAuthorizationGuard implements CanActivate {
   constructor(private readonly authService: AuthService) {}
 
-  canActivate(
+  //* Modified
+  //   canActivate(
+  async canActivate(
     context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+    //* Modified
+    //   ): boolean | Promise<boolean> | Observable<boolean> {
+  ): Promise<boolean> {
     const request = context.switchToHttp().getRequest<RequestWithAdminUser>();
     const headers = request.headers;
     const apiKey = headers['x-api-key'];
-    const adminUser = this.authService.getAdminUserByApiKey(apiKey as string);
+    //* Modified
+    // const adminUser = this.authService.getAdminUserByApiKey(apiKey as string);
+    const adminUser = await this.authService.getAdminUserByApiKey(
+      apiKey as string,
+    );
 
     if (!adminUser) {
       throw new UnauthorizedException('Invalid API Keysss');

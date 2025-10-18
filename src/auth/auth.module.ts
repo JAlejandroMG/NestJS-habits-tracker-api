@@ -5,9 +5,11 @@ import { ApiKeyAuthorizationGuard } from './guards/api-key-authorization.guard';
 import { AdminAuthorizationGuard } from './guards/admin-authorization.guard';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { AuthService } from './auth.service';
+import { HashingModule } from 'src/hashing/hashing.module';
 
 @Module({
-  imports: [AppConfigModule],
+  //* Modified
+  imports: [AppConfigModule, HashingModule],
   providers: [
     /*{
       provide: APP_GUARD,
