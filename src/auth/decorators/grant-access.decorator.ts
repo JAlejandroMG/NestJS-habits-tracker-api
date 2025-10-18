@@ -1,5 +1,5 @@
 // import { SetMetadata } from '@nestjs/common';
-import { AccessLevelEnum } from '../utils/acess-level.enum';
+import { AccessLevelEnum } from '../models/acess-level.enum';
 // import { GRANT_ACCESS_METADATA_KEY } from 'src/utils/constants';
 import { Reflector } from '@nestjs/core';
 

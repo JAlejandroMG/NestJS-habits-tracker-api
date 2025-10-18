@@ -30,7 +30,7 @@ import { FindAllUsersQueryDto } from './dto/find-all-users-query.dto';
 import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-response.interceptor';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 import { GrantAccess } from 'src/auth/decorators/grant-access.decorator';
-import { AccessLevelEnum } from 'src/auth/utils/acess-level.enum';
+import { AccessLevelEnum } from 'src/auth/models/acess-level.enum';
 
 @UseInterceptors(RedactResponseInterceptor, ClassSerializerInterceptor)
 @SerializeOptions({

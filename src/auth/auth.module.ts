@@ -4,6 +4,7 @@ import { AppConfigModule } from 'src/app-config/app-config.module';
 import { ApiKeyAuthorizationGuard } from './guards/api-key-authorization.guard';
 import { AdminAuthorizationGuard } from './guards/admin-authorization.guard';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
+import { AuthService } from './auth.service';
 
 @Module({
   imports: [AppConfigModule],
@@ -22,6 +23,7 @@ import { AdminAuthGuard } from './guards/admin-auth.guard';
     },
     AdminAuthorizationGuard,
     ApiKeyAuthorizationGuard,
+    AuthService,
   ],
 })
 export class AuthModule {}

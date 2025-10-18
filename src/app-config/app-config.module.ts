@@ -4,24 +4,21 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { AppConfigService } from './app-config.service';
+import adminUsersConfig from 'src/auth/config/admin-users.config';
 
 @Module({
   exports: [AppConfigService],
   imports: [
     ConfigModule.forRoot({
+      load: [adminUsersConfig],
       validationSchema: Joi.object({
         //~ Authorization API Key
         AUTHORIZATION_API_KEY: Joi.string().optional().default('1234567890'),
+        //* Moved to admin-users.config.ts
         //~ Authentication API Key
-        AUTHENTICATE_SUPER_USER_API_KEY: Joi.string()
-          .optional()
-          .default('ABCDEFGHIJ'),
-        AUTHENTICATE_SUPPORT_USER_API_KEY: Joi.string()
-          .optional()
-          .default('abcde12345'),
-        AUTHENTICATE_SYSTEM_USER_API_KEY: Joi.string()
-          .optional()
-          .default('ABCDE12345'),
+        /*SUPER_USER_API_KEY: Joi.string().optional().default('ABCDEFGHIJ'),
+        SUPPORT_USER_API_KEY: Joi.string().optional().default('abcde12345'),
+        SYSTEM_USER_API_KEY: Joi.string().optional().default('ABCDE12345'),*/
         //~
         DEFAULT_LIMIT: Joi.number().optional().integer().positive().default(10),
         MONGO_URI: Joi.string() /*.required(),*/
