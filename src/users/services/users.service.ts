@@ -19,26 +19,21 @@ export class UsersService {
     private readonly hashingService: HashingService,
   ) {}
 
-  //* Modified
-  //   createUser(createUserInput: CreateUserInputDomain): SyncOrAsync<UserDomain> {
   async createUser(
     createUserInput: CreateUserInputDomain,
   ): Promise<UserDomain> {
-    //* DRY should move to a private methode
+    //- TODO: should move to a private methode
     const passwordStrength = getPasswordStrength(createUserInput.password);
 
-    //* DRY should move to a private methode
+    //- TODO: should move to a private methode
     if (passwordStrength === PasswordStrengthEnum.WEAK) {
       throw new ValidationError('Password too weak!');
     }
 
-    //* Added
     const hashedPassword = await this.hashingService.hash(
       createUserInput.password,
     );
 
-    //* Modified
-    // return this.usersRepository.createUser(createUserInput);
     return this.usersRepository.createUser({
       ...createUserInput,
       password: hashedPassword,
@@ -63,19 +58,14 @@ export class UsersService {
     return this.usersRepository.removeUser(userId);
   }
 
-  //* Modified
-  //   updateUser(
   async updateUser(
     updateUserInput: UpdatedUserInputDomain,
-    //* Modified
-    //   ): SyncOrAsync<Undefinable<UserDomain>> {
   ): Promise<Undefinable<UserDomain>> {
-    //* Added
     if (updateUserInput.password) {
-      //* DRY should move to a private methode
+      //- TODO: should move to a private methode
       const passwordStrength = getPasswordStrength(updateUserInput.password);
 
-      //* DRY should move to a private methode
+      //- TODO: should move to a private methode
       if (passwordStrength === PasswordStrengthEnum.WEAK) {
         throw new ValidationError('Password too weak!');
       }
@@ -90,7 +80,6 @@ export class UsersService {
       });
     }
 
-    //* Modified
     return this.usersRepository.updateUser(updateUserInput);
   }
 }
