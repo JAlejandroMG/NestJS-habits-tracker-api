@@ -119,6 +119,35 @@
       "responseTime": 4,
       "timestamp": "2025-10-18T03:15:21.108Z",
       "id": 1760757321108
+    },
+    {
+      "adminUserEmail": "systemuser@example.common",
+      "controller": "UsersController",
+      "handler": "createUser",
+      "method": "POST",
+      "statusCode": 201,
+      "responseTime": 78,
+      "timestamp": "2025-10-21T20:04:34.773Z",
+      "id": 1761077074773
+    },
+    {
+      "controller": "AuthController",
+      "handler": "login",
+      "method": "POST",
+      "statusCode": 201,
+      "responseTime": 57,
+      "timestamp": "2025-10-21T20:13:53.188Z",
+      "id": 1761077633188
+    },
+    {
+      "controller": "AuthController",
+      "handler": "login",
+      "method": "POST",
+      "statusCode": 401,
+      "responseTime": 64,
+      "error": "Invaild credentials",
+      "timestamp": "2025-10-21T20:15:00.515Z",
+      "id": 1761077700515
     }
   ],
   "users": [
@@ -204,6 +233,18 @@
       "updatedAt": "2025-10-14T00:41:46.205Z",
       "userId": "01K7G2N0EXNKQ3ZTCFCR2A3Z56",
       "id": 1760402506207
+    },
+    {
+      "dateOfBirth": "1984-10-08T00:00:00.000Z",
+      "email": "agono@test.com",
+      "firstName": "Marco",
+      "lastName": "Polo",
+      "password": "$2b$10$udaFCQqATIpk09mYIkpiie6awibb.eERNNAPR8LzMd5ZWMmwxHpE2",
+      "userName": "MarcoPolo",
+      "createdAt": "2025-10-21T20:04:34.765Z",
+      "updatedAt": "2025-10-21T20:04:34.765Z",
+      "userId": "01K845Z6TDWT1FP4GXGS2QVXVV",
+      "id": 1761077074770
     }
   ]
 }

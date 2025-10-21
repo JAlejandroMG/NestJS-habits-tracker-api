@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AccessLevelEnum } from 'src/auth/models/acess-level.enum';
-import { AdminUserDomainModel } from 'src/auth/models/admin-user-domain.model';
+import { AdminUserDomainModel } from 'src/auth/models/domain/admin-user-domain.model';
 
 @Injectable()
 export class AppConfigService {

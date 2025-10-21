@@ -9,6 +9,8 @@ import { HashingModule } from 'src/hashing/hashing.module';
 
 @Module({
   controllers: [UsersController],
+  //* Added
+  exports: [UsersService],
   imports: [AppConfigModule, HashingModule],
   providers: [UsersService],
 })

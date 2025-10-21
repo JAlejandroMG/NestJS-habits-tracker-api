@@ -1,4 +1,4 @@
-import { AccessLevelEnum } from './acess-level.enum';
+import { AccessLevelEnum } from '../acess-level.enum';
 
 export class AdminUserDomainModel {
   accessLevel: AccessLevelEnum;

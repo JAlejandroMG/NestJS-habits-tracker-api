@@ -40,6 +40,13 @@ export class InMemoryUsersRepository implements AbstractUsersRepository {
     return mapUserEntityToUserDomain(userEntity);
   }
 
+  //* Added
+  findUserByUsername(userName: string): UserDomain | undefined {
+    const userEntity = this.userInMemoryDb.findOneBy({ userName });
+
+    return mapUserEntityToUserDomain(userEntity);
+  }
+
   removeUser(userId: string): UserDomain | undefined {
     const userEntity = this.userInMemoryDb.deleteOneBy({
       userId,

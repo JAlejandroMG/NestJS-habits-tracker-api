@@ -31,7 +31,7 @@ import { RedactResponseInterceptor } from 'src/utils/interceptors/redact-respons
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 import { GrantAccess } from 'src/auth/decorators/grant-access.decorator';
 import { AccessLevelEnum } from 'src/auth/models/acess-level.enum';
-import { AdminUserDomainModel } from 'src/auth/models/admin-user-domain.model';
+import { AdminUserDomainModel } from 'src/auth/models/domain/admin-user-domain.model';
 import { AdminUser } from '../../auth/decorators/admin-user.decorator';
 
 @UseInterceptors(RedactResponseInterceptor, ClassSerializerInterceptor)

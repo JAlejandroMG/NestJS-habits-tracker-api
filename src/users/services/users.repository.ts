@@ -16,6 +16,11 @@ export abstract class AbstractUsersRepository {
 
   abstract findUserById(id: string): SyncOrAsync<Undefinable<UserDomain>>;
 
+  //* Added
+  abstract findUserByUsername(
+    userName: string,
+  ): SyncOrAsync<Undefinable<UserDomain>>;
+
   abstract removeUser(id: string): SyncOrAsync<Undefinable<UserDomain>>;
 
   abstract updateUser(
