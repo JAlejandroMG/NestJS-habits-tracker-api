@@ -11,7 +11,6 @@ export class AuthService {
   constructor(
     private readonly appConfigService: AppConfigService,
     private readonly hashingService: HashingService,
-    //* Added
     private readonly usersService: UsersService,
   ) {}
 
@@ -39,7 +38,6 @@ export class AuthService {
     return adminUser;
   }
 
-  //* Added
   async loginUser(
     loginDto: UserLoginDtoModel,
   ): Promise<UserLoginSuccessDtoModel> {
@@ -59,7 +57,7 @@ export class AuthService {
       throw authError;
     }
 
-    //* FIXME: Generae real access token
+    //! FIXME: Generate real access token
     return {
       accessToken: 'fake-access-token',
     };

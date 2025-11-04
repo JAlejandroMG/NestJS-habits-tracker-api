@@ -13,8 +13,7 @@ import { ValidationErrorFilter } from './utils/filters/validation-error.filter';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  //* Modified
-  imports: [AnalyticsModule /*, AuthModule*/],
+  imports: [AnalyticsModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -45,17 +44,13 @@ export class AppModule {
     const { analyticsDataDb, appDataDb } = options;
     const dbTypes = Array.from(new Set([analyticsDataDb, appDataDb]));
 
-    //* Added
     const usersModule = UsersModule.register({ dbType: appDataDb });
 
     return {
       imports: [
-        //* Added
         AuthModule.withUsersModule(usersModule),
         CoreModule.forRoot({ dbTypes }),
         HabitsModule.register({ dbType: appDataDb }),
-        //* Modified
-        // UsersModule.register({ dbType: appDataDb }),
         usersModule,
       ],
       module: AppModule,

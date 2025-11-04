@@ -29,7 +29,6 @@ import { AuthController } from './auth.controller';
   ],
   controllers: [AuthController],
 })
-//* Added
 export class AuthModule {
   static withUsersModule(usersModule: Type | DynamicModule) {
     return {

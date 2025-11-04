@@ -54,7 +54,6 @@ export class UsersService {
     return this.usersRepository.findUserById(userId);
   }
 
-  //* Added
   findUserByUsername(userName: string): SyncOrAsync<Undefinable<UserDomain>> {
     return this.usersRepository.findUserByUsername(userName);
   }
