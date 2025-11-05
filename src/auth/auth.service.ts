@@ -5,12 +5,15 @@ import { HashingService } from 'src/hashing/hashing.service';
 import { UsersService } from 'src/users/services/users.service';
 import { UserLoginDtoModel } from './models/dto/user-login-dto.model';
 import { UserLoginSuccessDtoModel } from './models/dto/user-login-success-dto.model';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly appConfigService: AppConfigService,
     private readonly hashingService: HashingService,
+    //* Added
+    private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
   ) {}
 
@@ -57,9 +60,16 @@ export class AuthService {
       throw authError;
     }
 
+    //* Added
+    const accessToken = await this.jwtService.signAsync({
+      username: user.userName,
+    });
+
     //! FIXME: Generate real access token
     return {
-      accessToken: 'fake-access-token',
+      //* Modified
+      //   accessToken: 'fake-access-token',
+      accessToken,
     };
   }
 }

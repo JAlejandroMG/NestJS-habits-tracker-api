@@ -1,6 +1,13 @@
 {
   "habits": [
     {
+      "name": "Test 101",
+      "createdAt": "2025-09-15T01:57:12.087Z",
+      "habitId": "01K55HE98QWW8X73EVZ1YCE7FM",
+      "updatedAt": "2025-09-15T01:57:12.087Z",
+      "id": 1757901432087
+    },
+    {
       "id": "a",
       "habitId": 1,
       "name": "drink water",
@@ -21,20 +28,6 @@
       "name": "walk 5K",
       "createdAt": "2025-02-10T00:00:00.000Z",
       "updatedAt": "2025-02-11T00:00:00.000Z"
-    },
-    {
-      "name": "Test 101",
-      "createdAt": "2025-09-15T01:57:12.087Z",
-      "habitId": "01K55HE98QWW8X73EVZ1YCE7FM",
-      "updatedAt": "2025-09-15T01:57:12.087Z",
-      "id": 1757901432087
-    },
-    {
-      "name": "Test 301",
-      "createdAt": "2025-09-18T04:19:09.418Z",
-      "habitId": "01K5DGRBZAMTJPE41X8NY3YRYG",
-      "updatedAt": "2025-09-18T04:19:09.418Z",
-      "id": 1758169149420
     }
   ],
   "analytics": [
@@ -148,6 +141,51 @@
       "error": "Invaild credentials",
       "timestamp": "2025-10-21T20:15:00.515Z",
       "id": 1761077700515
+    },
+    {
+      "controller": "AuthController",
+      "handler": "login",
+      "method": "POST",
+      "statusCode": 201,
+      "responseTime": 64,
+      "timestamp": "2025-11-05T15:45:31.109Z",
+      "id": 1762357531109
+    },
+    {
+      "controller": "HabitsController",
+      "handler": "findAll",
+      "method": "GET",
+      "statusCode": 200,
+      "responseTime": 3,
+      "timestamp": "2025-11-05T20:21:07.559Z",
+      "id": 1762374067559
+    },
+    {
+      "controller": "HabitsController",
+      "handler": "findAll",
+      "method": "GET",
+      "statusCode": 200,
+      "responseTime": 0,
+      "timestamp": "2025-11-05T20:27:33.010Z",
+      "id": 1762374453010
+    },
+    {
+      "controller": "HabitsController",
+      "handler": "findAll",
+      "method": "GET",
+      "statusCode": 200,
+      "responseTime": 0,
+      "timestamp": "2025-11-05T20:27:49.520Z",
+      "id": 1762374469520
+    },
+    {
+      "controller": "HabitsController",
+      "handler": "findAll",
+      "method": "GET",
+      "statusCode": 200,
+      "responseTime": 0,
+      "timestamp": "2025-11-05T20:28:50.014Z",
+      "id": 1762374530014
     }
   ],
   "users": [

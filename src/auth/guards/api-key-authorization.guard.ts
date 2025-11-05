@@ -26,7 +26,7 @@ export class ApiKeyAuthorizationGuard implements CanActivate {
     //~ Now that we have the adminUser data, we can add it to
     //~ the Request Object, so the other elements down the Request Cycle
     //~ will be able to get access to the adminUser data.
-    //- This creates a coupling with admin-authorization.guars.ts
+    //- This creates a coupling with admin-authorization.guard.ts
     request.adminUser = adminUser;
 
     return true;

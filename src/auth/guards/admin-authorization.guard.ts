@@ -30,6 +30,7 @@ export class AdminAuthorizationGuard implements CanActivate {
       ]) ?? AccessLevelEnum.SUPER_USER;
     const request = context.switchToHttp().getRequest<Request>();
     const apiKey = request.headers['x-api-key'];
+    //- This breakes the coupling with api-key-authorization.guard.ts
     const adminUser = await this.authService.getAdminUserByApiKey(
       apiKey as string,
     );
