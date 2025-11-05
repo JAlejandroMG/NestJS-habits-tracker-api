@@ -21,11 +21,7 @@ export class UserAuthGuard implements CanActivate {
     private readonly userService: UsersService,
   ) {}
 
-  //   canActivate(
-  async canActivate(
-    context: ExecutionContext,
-    //   ): boolean | Promise<boolean> | Observable<boolean> {
-  ): Promise<boolean> {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const isPublic = this.reflector.getAllAndOverride(IS_PUBLIC_METADATA_KEY, [
       context.getHandler(),
       context.getClass(),

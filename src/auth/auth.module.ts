@@ -18,7 +18,6 @@ import { UserAuthGuard } from './guards/user-auth.guard';
   imports: [
     AppConfigModule,
     HashingModule,
-    //* Added
     JwtModule.registerAsync({
       imports: [ConfigModule.forFeature(jwtOptionsConfig)],
       useFactory: (jwtOptions: ConfigType<typeof jwtOptionsConfig>) => {

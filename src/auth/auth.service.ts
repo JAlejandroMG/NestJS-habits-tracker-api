@@ -12,7 +12,6 @@ export class AuthService {
   constructor(
     private readonly appConfigService: AppConfigService,
     private readonly hashingService: HashingService,
-    //* Added
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
   ) {}
