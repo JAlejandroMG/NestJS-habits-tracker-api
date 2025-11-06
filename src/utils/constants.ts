@@ -40,4 +40,5 @@ export enum User {
 }
 
 //~ Metadata
-export const IS_PUBLIC_METADATA_KEY = 'is-public';
+//* Removed
+// export const IS_PUBLIC_METADATA_KEY = 'is-public';

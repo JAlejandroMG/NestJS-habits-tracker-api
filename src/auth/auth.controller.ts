@@ -9,7 +9,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   //~ This is so it won't require API Key
-  @IsPublic(true)
+  //   @IsPublic(true)
+  //* Modified
+  @IsPublic()
   //~ Subpath
   @Post('login')
   login(

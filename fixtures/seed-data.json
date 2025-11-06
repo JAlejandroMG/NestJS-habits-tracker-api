@@ -186,6 +186,15 @@
       "responseTime": 0,
       "timestamp": "2025-11-05T20:28:50.014Z",
       "id": 1762374530014
+    },
+    {
+      "controller": "HabitsController",
+      "handler": "findAll",
+      "method": "GET",
+      "statusCode": 200,
+      "responseTime": 2,
+      "timestamp": "2025-11-06T03:35:45.071Z",
+      "id": 1762400145071
     }
   ],
   "users": [

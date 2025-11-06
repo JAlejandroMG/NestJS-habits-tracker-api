@@ -9,7 +9,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/services/users.service';
-import { IS_PUBLIC_METADATA_KEY } from 'src/utils/constants';
+// import { IS_PUBLIC_METADATA_KEY } from 'src/utils/constants';
 
 @Injectable()
 export class UserAuthGuard implements CanActivate {
@@ -22,14 +22,15 @@ export class UserAuthGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const isPublic = this.reflector.getAllAndOverride(IS_PUBLIC_METADATA_KEY, [
+    //* Removed
+    /*const isPublic = this.reflector.getAllAndOverride(IS_PUBLIC_METADATA_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
 
     if (isPublic) {
       return true;
-    }
+    }*/
 
     const request = context.switchToHttp().getRequest();
     const authorizationHeader: string = request.headers.authorization;

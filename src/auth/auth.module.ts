@@ -5,7 +5,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AppConfigModule } from 'src/app-config/app-config.module';
 import { ApiKeyAuthorizationGuard } from './guards/api-key-authorization.guard';
 import { AdminAuthorizationGuard } from './guards/admin-authorization.guard';
-// import { AdminAuthGuard } from './guards/admin-auth.guard';
+import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { AuthService } from './auth.service';
 import { HashingModule } from 'src/hashing/hashing.module';
 import { AuthController } from './auth.controller';
@@ -13,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import jwtOptionsConfig from './config/jwt-options.config';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { UserAuthGuard } from './guards/user-auth.guard';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 @Module({
   imports: [
@@ -44,11 +45,15 @@ import { UserAuthGuard } from './guards/user-auth.guard';
       provide: APP_GUARD,
       //   useClass: AdminAuthGuard,
       //* Modified to try out UserAuthGuard
-      useClass: UserAuthGuard,
+      //   useClass: UserAuthGuard,
+      //* Modified for the overall guard
+      useClass: AuthGuard,
     },
     AdminAuthorizationGuard,
+    AdminAuthGuard,
     ApiKeyAuthorizationGuard,
     AuthService,
+    UserAuthGuard,
   ],
   controllers: [AuthController],
 })

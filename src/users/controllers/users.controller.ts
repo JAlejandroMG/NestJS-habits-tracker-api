@@ -56,7 +56,9 @@ export class UsersController {
     return mapUserDomainToUserDto(user)!;
   }
 
-  @IsPublic(true)
+  //   @IsPublic(true)
+  //* Modified
+  @IsPublic()
   @Get()
   async findAllUsers(
     @Query()

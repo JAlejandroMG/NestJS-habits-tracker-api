@@ -59,15 +59,11 @@ export class AuthService {
       throw authError;
     }
 
-    //* Added
     const accessToken = await this.jwtService.signAsync({
       username: user.userName,
     });
 
-    //! FIXME: Generate real access token
     return {
-      //* Modified
-      //   accessToken: 'fake-access-token',
       accessToken,
     };
   }

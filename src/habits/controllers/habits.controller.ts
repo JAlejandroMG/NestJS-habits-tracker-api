@@ -19,7 +19,12 @@ import { UpdateHabitDto } from './dto/update-habit.dto';
 import { mapHabitDomainToHabitDto } from './mappers/map-habit-domain-to-habit-dto';
 import { mapUpdateHabitDtoToUpdateHabitInput } from './mappers/map-update-habit-dto-to-update-habit-input';
 import { mapCreateHabitDtoToCreateHabitInput } from './mappers/map-create-habit-dto-create-to-habit-input';
+import { SetAuthStrategy } from 'src/auth/decorators/set-auth-strategy.decorator';
+import { AuthStrategyEnum } from 'src/auth/models/auth-strategy.enum';
 
+//* Added
+//~ This requires users to be logged with a JWT valid token
+@SetAuthStrategy(AuthStrategyEnum.USERT_JWT)
 @Controller(HABITS)
 export class HabitsController {
   constructor(private readonly habitsService: HabitsService) {}
