@@ -1,7 +1,11 @@
+import * as cors from 'cors';
+import helmet from 'helmet';
+
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
+
 import { AppModule } from './app.module';
 import { DbType } from './utils/constants';
-import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const appDataDb = (process.env.APP_DATA_DB as DbType) ?? DbType.IN_MEMORY;
@@ -11,7 +15,28 @@ async function bootstrap() {
       analyticsDataDb: DbType.IN_MEMORY,
       appDataDb,
     }),
+    //* Added
+    {
+      //cors: true,
+      /*cors: {
+        origin: 'http//localhost:3000',
+      },*/
+    },
   );
+
+  //* Added
+  //   app.enableCors();
+  /*app.enableCors({
+    origin: 'http//localhost:3000',
+  });*/
+
+  //* Added
+  /*app.use(cors());
+  app.use(helmet());*/
+  //~ The order they appear, is the same
+  //~ they will be run in the Request cycle
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  app.use(cors(), helmet());
 
   app.useGlobalPipes(
     new ValidationPipe({
