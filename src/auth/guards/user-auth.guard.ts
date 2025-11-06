@@ -22,7 +22,6 @@ export class UserAuthGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    //* Removed
     /*const isPublic = this.reflector.getAllAndOverride(IS_PUBLIC_METADATA_KEY, [
       context.getHandler(),
       context.getClass(),

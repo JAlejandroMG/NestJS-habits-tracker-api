@@ -10,8 +10,6 @@ export class AppController {
     private readonly appService: AppService,
   ) {}
 
-  //   @IsPublic(true)
-  //* Modified
   @IsPublic()
   @Get()
   getHello(): string {

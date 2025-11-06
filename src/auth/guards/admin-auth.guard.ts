@@ -9,13 +9,11 @@ export class AdminAuthGuard implements CanActivate {
   constructor(
     private readonly authenticationGuard: ApiKeyAuthorizationGuard,
     private readonly authorizationGuard: AdminAuthorizationGuard,
-    //* Removed
     //~ This service allows to get access to the metadata inside all classes
     // private readonly reflector: Reflector,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    //* Removed
     //~ First parameter is the Metadata property name, and te second is an array
     /*const isPublic: boolean = this.reflector.getAllAndOverride(
       IS_PUBLIC_METADATA_KEY,
@@ -23,7 +21,6 @@ export class AdminAuthGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     );*/
 
-    //* Removed
     /*if (isPublic) {
       return true;
     }*/

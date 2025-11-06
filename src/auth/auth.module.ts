@@ -43,10 +43,6 @@ import { AuthGuard } from './guards/auth/auth.guard';
     },*/
     {
       provide: APP_GUARD,
-      //   useClass: AdminAuthGuard,
-      //* Modified to try out UserAuthGuard
-      //   useClass: UserAuthGuard,
-      //* Modified for the overall guard
       useClass: AuthGuard,
     },
     AdminAuthorizationGuard,

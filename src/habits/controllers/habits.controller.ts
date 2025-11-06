@@ -22,7 +22,6 @@ import { mapCreateHabitDtoToCreateHabitInput } from './mappers/map-create-habit-
 import { SetAuthStrategy } from 'src/auth/decorators/set-auth-strategy.decorator';
 import { AuthStrategyEnum } from 'src/auth/models/auth-strategy.enum';
 
-//* Added
 //~ This requires users to be logged with a JWT valid token
 @SetAuthStrategy(AuthStrategyEnum.USERT_JWT)
 @Controller(HABITS)
@@ -32,6 +31,7 @@ export class HabitsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   remove(@Param('id') id: string): void | Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.habitsService.remove(id);
   }
 
