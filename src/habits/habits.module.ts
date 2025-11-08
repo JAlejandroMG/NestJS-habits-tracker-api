@@ -19,7 +19,6 @@ import { catchMaliciousInput } from 'src/utils/middleware/catch-malicious-input.
   providers: [HabitsService],
 })
 export class HabitsModule implements NestModule {
-  //* Added
   configure(consumer: MiddlewareConsumer) {
     //~ Indicates the middleware is for endpoints startind with HABITS
     // consumer.apply(catchMaliciousInput).forRoutes(HABITS);
