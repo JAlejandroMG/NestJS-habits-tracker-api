@@ -1,11 +1,13 @@
 import * as cors from 'cors';
 import helmet from 'helmet';
+import { json } from 'express';
 
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 
 import { AppModule } from './app.module';
 import { DbType } from './utils/constants';
+import { catchMaliciousInput } from './utils/middleware/catch-malicious-input.middleware';
 
 async function bootstrap() {
   const appDataDb = (process.env.APP_DATA_DB as DbType) ?? DbType.IN_MEMORY;
@@ -18,9 +20,16 @@ async function bootstrap() {
   );
 
   //~ The order they appear, is the same
-  //~ they will be run in the Request cycle
+  //~ they will be run in the Request cycle.
+  //* Added
+  //~ For custom middleware
+  //~ When the Request first arrives to the NestJS application
+  //~ there is no body property in the Request object
+  //~ because the data is received in form of a stream
+  //~ that needs to be converted into a json object
+  //* Modified
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  app.use(cors(), helmet());
+  app.use(cors(), helmet(), json(), catchMaliciousInput);
 
   app.useGlobalPipes(
     new ValidationPipe({
