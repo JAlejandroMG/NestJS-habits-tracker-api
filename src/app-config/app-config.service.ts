@@ -16,7 +16,6 @@ export class AppConfigService {
     return this.configService.get<number>('DEFAULT_LIMIT')!;
   }
 
-  //* Added
   get maxBodySize(): number {
     return this.configService.get<number>('MAX_BODY_SIZE') || 1024 * 1024;
   }

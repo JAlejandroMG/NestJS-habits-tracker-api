@@ -20,7 +20,6 @@ import { AppConfigService } from 'src/app-config/app-config.service';
   providers: [HabitsService],
 })
 export class HabitsModule implements NestModule {
-  //* Added
   constructor(private readonly appConfigService: AppConfigService) {}
 
   configure(consumer: MiddlewareConsumer) {
@@ -29,8 +28,6 @@ export class HabitsModule implements NestModule {
     //~ Indicates the middleware only applies for the root defined
     //~ inside the HabitsController
     consumer
-      //   .apply(catchMaliciousInput)
-      //* Modified
       // To pass param to the factory function
       .apply(catchMaliciousInput(this.appConfigService.maxBodySize))
       //~ For GET request in the habits endpoint, middleware will be ignored

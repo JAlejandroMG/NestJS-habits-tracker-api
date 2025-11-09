@@ -3,9 +3,6 @@ import { hasExceededMaxSize } from './has-exceeded-max-size';
 import { HttpStatus } from '@nestjs/common';
 import { hasSuspiciousPatterns } from './has-suspicious-patterns';
 
-//* Modified
-//* Convert this to a factory middleware in order to inject dependencies
-// export const catchMaliciousInput = (
 export const catchMaliciousInput =
   (maxBodySize: number) =>
   (
@@ -18,11 +15,6 @@ export const catchMaliciousInput =
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { body } = req;
-    //   console.log('Body\n', body);
-    //* Removed
-    //* With the factory function, we don't need this
-    //   const maxBodySize = 1024 * 1024; //+ 1MB
-    //   const maxBodySize = 1; //+ 1byte for testing
 
     if (hasExceededMaxSize(body, maxBodySize)) {
       console.log('Max body size', maxBodySize);
