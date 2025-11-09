@@ -16,15 +16,20 @@ export class AppConfigService {
     return this.configService.get<number>('DEFAULT_LIMIT')!;
   }
 
+  //* Added
+  get maxBodySize(): number {
+    return this.configService.get<number>('MAX_BODY_SIZE') || 1024 * 1024;
+  }
+
   get mongoUri(): string {
     return this.configService.get<string>('MONGO_URI')!;
   }
 
   get ormOptions(): TypeOrmModuleOptions {
     return {
-      //* When a new TypeORM entity is declared,
-      //* this allows it to be injected automatically.
-      //* Otherwise should be listed manually.
+      //~ When a new TypeORM entity is declared,
+      //~ this allows it to be injected automatically.
+      //~ Otherwise should be listed manually.
       autoLoadEntities: true,
       host: this.configService.get<string>('ORM_HOST'),
       password: this.configService.get<string>('ORM_PASSWORD'),

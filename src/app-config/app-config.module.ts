@@ -32,6 +32,11 @@ import adminUsersConfig from 'src/auth/config/admin-users.config';
         ORM_SYNCHRONIZE: Joi.boolean().default(false),
         ORM_TYPE: Joi.string().valid('postgres', 'mysql').default('postgres'),
         ORM_USERNAME: Joi.string(),
+        //* Added
+        //~ Middleware
+        MAX_BODY_SIZE: Joi.number()
+          .optional()
+          .default(1024 * 1024),
       }),
     }),
   ],
