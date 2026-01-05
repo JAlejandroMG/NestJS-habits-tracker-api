@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { createMock } from '@golevelup/ts-jest';
 import {
   createRequest,
   createResponse,
@@ -9,23 +10,41 @@ import {
 import { HttpStatus } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
-import { AppConfigModule } from 'src/app-config/app-config.module';
+// import { AppConfigModule } from 'src/app-config/app-config.module';
 import { AppConfigService } from 'src/app-config/app-config.service';
 import { CatchMaliciousInput } from './catch-malicious-input.middleware';
 
 describe('CatchMaliciousInput', () => {
-  let appConfigService: AppConfigService;
+  //* Modified
+  //   let appConfigService: AppConfigService;
+  /*const appConfigService = {
+    maxBodySize: 10,
+  };*/
+  const appConfigService = createMock<AppConfigService>({
+    get maxBodySize() {
+      return 10;
+    },
+  });
   let middleware: CatchMaliciousInput;
 
   beforeEach(async () => {
     //~ In order to get a valid module reference needs to call compile fn
     const moduleRef = await Test.createTestingModule({
       //~ By doing this NestJS will load all depencencies for AppConfigService
-      imports: [AppConfigModule],
-      providers: [CatchMaliciousInput],
+      //* Removed
+      //   imports: [AppConfigModule],
+      providers: [
+        CatchMaliciousInput,
+        //* Added
+        {
+          provide: AppConfigService,
+          useValue: appConfigService,
+        },
+      ],
     }).compile();
 
-    appConfigService = moduleRef.get<AppConfigService>(AppConfigService);
+    //* Removed
+    // appConfigService = moduleRef.get<AppConfigService>(AppConfigService);
     middleware = moduleRef.get<CatchMaliciousInput>(CatchMaliciousInput);
 
     jest.resetAllMocks();
@@ -43,7 +62,8 @@ describe('CatchMaliciousInput', () => {
 
       beforeEach(() => {
         //~ Arrange
-        jest.spyOn(appConfigService, 'maxBodySize', 'get').mockReturnValue(10);
+        //* Removed
+        // jest.spyOn(appConfigService, 'maxBodySize', 'get').mockReturnValue(10);
 
         request = createRequest({
           body: { description: 'a', name: 'test' },
