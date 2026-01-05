@@ -10,16 +10,10 @@ import {
 import { HttpStatus } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
-// import { AppConfigModule } from 'src/app-config/app-config.module';
 import { AppConfigService } from 'src/app-config/app-config.service';
 import { CatchMaliciousInput } from './catch-malicious-input.middleware';
 
 describe('CatchMaliciousInput', () => {
-  //* Modified
-  //   let appConfigService: AppConfigService;
-  /*const appConfigService = {
-    maxBodySize: 10,
-  };*/
   const appConfigService = createMock<AppConfigService>({
     get maxBodySize() {
       return 10;
@@ -31,11 +25,8 @@ describe('CatchMaliciousInput', () => {
     //~ In order to get a valid module reference needs to call compile fn
     const moduleRef = await Test.createTestingModule({
       //~ By doing this NestJS will load all depencencies for AppConfigService
-      //* Removed
-      //   imports: [AppConfigModule],
       providers: [
         CatchMaliciousInput,
-        //* Added
         {
           provide: AppConfigService,
           useValue: appConfigService,
@@ -43,8 +34,6 @@ describe('CatchMaliciousInput', () => {
       ],
     }).compile();
 
-    //* Removed
-    // appConfigService = moduleRef.get<AppConfigService>(AppConfigService);
     middleware = moduleRef.get<CatchMaliciousInput>(CatchMaliciousInput);
 
     jest.resetAllMocks();
@@ -62,9 +51,6 @@ describe('CatchMaliciousInput', () => {
 
       beforeEach(() => {
         //~ Arrange
-        //* Removed
-        // jest.spyOn(appConfigService, 'maxBodySize', 'get').mockReturnValue(10);
-
         request = createRequest({
           body: { description: 'a', name: 'test' },
           method: 'POST',
