@@ -7,6 +7,7 @@ import { AbstractUsersRepository as UsersRepository } from './users.repository';
 import { UsersService } from './users.service';
 import { CreateUserInputDto } from '../controllers/dto/create-user-input.dto';
 import { UserDomain } from './models/user.domain';
+import { ValidationError } from 'src/utils/exceptions/validation-error';
 // import { ValidationError } from 'class-validator';
 
 describe('UsersService', () => {
@@ -105,13 +106,14 @@ describe('UsersService', () => {
       usersRepository.createUser.mockResolvedValue(createdUser);
 
       //~ Act & Assert
+      //+ This only checks the Error Type
+      await expect(userService.createUser(createUserDto)).rejects.toThrow(
+        ValidationError,
+      );
+      //+ This checks for the Error message
       await expect(userService.createUser(createUserDto)).rejects.toThrow(
         'Password too weak!',
       );
-      //+ This only checks the Error Type
-      //   await expect(userService.createUser(createUserDto)).rejects.toThrow(
-      //     ValidationError,
-      //   );
     });
   });
 });
