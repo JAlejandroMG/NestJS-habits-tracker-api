@@ -43,7 +43,7 @@ export class AuthService {
   async loginUser(
     loginDto: UserLoginDtoModel,
   ): Promise<UserLoginSuccessDtoModel> {
-    const authError = new UnauthorizedException('Invaild credentials');
+    const authError = new UnauthorizedException('Invalid credentials');
     const user = await this.usersService.findUserByUsername(loginDto.username);
 
     if (!user) {
