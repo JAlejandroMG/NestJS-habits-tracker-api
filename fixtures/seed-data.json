@@ -292,6 +292,17 @@
       "updatedAt": "2025-10-21T20:04:34.765Z",
       "userId": "01K845Z6TDWT1FP4GXGS2QVXVV",
       "id": 1761077074770
+    },
+    {
+      "email": "poly@test.com",
+      "firstName": "Pomodoro",
+      "lastName": "Trifecta",
+      "password": "$2b$10$O4mw0iIbXGcksK3YLRoTkOE9gdYIZyncTmHXct0NMVb7yC6AyprK6",
+      "userName": "Poly",
+      "createdAt": "2026-01-07T20:53:54.371Z",
+      "updatedAt": "2026-01-07T20:53:54.371Z",
+      "userId": "01KED3SK2346AZ2N115DXP21R9",
+      "id": 1767819234373
     }
   ]
 }
